@@ -1,0 +1,16 @@
+export const PAGE_URLS = {
+  HOME: "/",
+  ABOUT: "/about",
+  SERVICES: "/services",
+  WHAT_WE_DO: "/services",
+  APPLICATION_DEV: "/services/application-development",
+  ARTIFICIAL_INTELLIGENCE: "/services/artificial-intelligence",
+  DATA_ANALYTICS: "/services/data-engineering-analytics",
+  DEVSECOPS: "/services/devsecops",
+  DATA_ENGINEERING_ANALYTICS: "/services/data-engineering-analytics",
+  MOBILE_APPLICATION_DEV: "/services/mobile-application-development",
+  UI_UX_DESIGN: "/services/ui-ux-design-and-digital-experience",
+  QUALITY_ENGINEERING: "/services/quality-engineering-and-software-testing",
+  GLOBAL_CAPABILITY_CENTERS: "/services/global-capability-centers",
+  CONTACT: "/contact-us",
+} as const;

@@ -1,0 +1,59 @@
+@import "../styles/globals.css";
+@import "../styles/global.scss";
+
+/* Lenis smooth scrolling rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.sec_padding {
+  padding: 100px 0;
+
+  @media all and (max-width: 1200px) {
+    padding: 80px 0;
+  }
+
+  @media all and (max-width: 767px) {
+    padding: 40px 0;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1380px !important;
+  padding: 0 60px !important;
+}
+
+@media all and (min-width: 1024px) and (max-width: 1279px) {
+  .container {
+    padding: 0 40px !important;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 30px !important;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .container {
+    padding: 0 16px !important;
+  }
+  br {
+    display: none;
+  }
+}

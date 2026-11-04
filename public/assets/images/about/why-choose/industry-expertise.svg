@@ -1,0 +1,21 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="why_choose_grad_1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#291F5F" />
+      <stop offset="50%" stop-color="#2772B8" />
+      <stop offset="100%" stop-color="#33A7DE" />
+    </linearGradient>
+  </defs>
+  <!-- 3 Stars on top -->
+  <path d="M18 3L19.2 6.5H23L20 8.7L21.2 12.2L18 10L14.8 12.2L16 8.7L13 6.5H16.8L18 3Z" fill="url(#why_choose_grad_1)" />
+  <path d="M9.5 6L10.4 8.6H13.1L10.9 10.2L11.8 12.8L9.5 11.1L7.2 12.8L8.1 10.2L5.9 8.6H8.6L9.5 6Z" fill="url(#why_choose_grad_1)" />
+  <path d="M26.5 6L27.4 8.6H30.1L27.9 10.2L28.8 12.8L26.5 11.1L24.2 12.8L25.1 10.2L22.9 8.6H25.6L26.5 6Z" fill="url(#why_choose_grad_1)" />
+  <!-- Medal Seal -->
+  <circle cx="18" cy="21" r="8" stroke="url(#why_choose_grad_1)" stroke-width="2.2" fill="none" />
+  <circle cx="18" cy="21" r="5.2" fill="none" stroke="url(#why_choose_grad_1)" stroke-width="1.2" stroke-dasharray="1.5 1.5" />
+  <!-- Checkmark inside -->
+  <path d="M15.5 21L17.2 22.8L20.8 18.8" stroke="url(#why_choose_grad_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Ribbons at bottom -->
+  <path d="M13.5 27.5L11.5 33L15 31.5L18 33" stroke="url(#why_choose_grad_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M22.5 27.5L24.5 33L21 31.5L18 33" stroke="url(#why_choose_grad_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

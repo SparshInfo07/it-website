@@ -1,0 +1,36 @@
+<svg width="240" height="56" viewBox="0 0 240 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sparshGrad1" x1="4" y1="6" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#14B8A6" />
+      <stop offset="50%" stop-color="#0D9488" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="sparshGrad2" x1="48" y1="6" x2="8" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0D9488" />
+    </linearGradient>
+    <linearGradient id="sparshBadge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D9488" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Geometric S-Spark Emblem -->
+  <g transform="translate(4, 4)">
+    <!-- Outer rounded tech frame -->
+    <rect x="2" y="2" width="44" height="44" rx="12" fill="#061826" stroke="url(#sparshGrad1)" stroke-width="2" />
+    <!-- Dynamic Top S Wing -->
+    <path d="M33 13H20.5C16.9101 13 14 15.9101 14 19.5C14 22.7207 16.3458 25.3941 19.4238 25.9102L28.5762 27.4453C30.0085 27.6855 31 28.9255 31 30.3779C31 32.0221 29.6671 33.355 28.0229 33.355H15" stroke="url(#sparshGrad1)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Accent Spark Node -->
+    <circle cx="33.5" cy="13" r="3" fill="#22D3EE" />
+    <circle cx="14.5" cy="33.5" r="3" fill="#14B8A6" />
+  </g>
+
+  <!-- Wordmark: SPARSH (White for dark header) -->
+  <text x="62" y="36" fill="#FFFFFF" font-family="Manrope, system-ui, -apple-system, sans-serif" font-size="25" font-weight="800" letter-spacing="0.04em">SPARSH</text>
+
+  <!-- IT Accent Pill -->
+  <rect x="176" y="14" width="40" height="28" rx="8" fill="url(#sparshBadge)" />
+  <text x="196" y="34" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" letter-spacing="0.06em">IT</text>
+</svg>
+

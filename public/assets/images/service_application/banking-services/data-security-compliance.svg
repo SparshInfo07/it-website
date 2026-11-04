@@ -1,0 +1,64 @@
+<svg width="420" height="260" viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Glow -->
+    <radialGradient id="cardGlow4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.3" />
+      <stop offset="70%" stop-color="#2563EB" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#1E194A" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Main Cyan-Blue Gradients -->
+    <linearGradient id="neonGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67E8F9" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <linearGradient id="fillGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.08" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Backdrop Glow -->
+  <circle cx="210" cy="130" r="120" fill="url(#cardGlow4)" />
+
+  <!-- Floating Background Card Silhouette 1 (Left) -->
+  <rect x="60" y="70" width="120" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#60A5FA" stroke-opacity="0.15" stroke-width="1.5" />
+  
+  <!-- Floating Background Card Silhouette 2 (Right) -->
+  <rect x="240" y="50" width="130" height="110" rx="14" fill="white" fill-opacity="0.04" stroke="#60A5FA" stroke-opacity="0.2" stroke-width="1.5" />
+
+  <!-- Main Window Container -->
+  <rect x="110" y="45" width="200" height="145" rx="12" fill="url(#fillGrad4)" stroke="url(#neonGrad4)" stroke-width="2" />
+
+  <!-- Window Header Bar -->
+  <line x1="110" y1="70" x2="310" y2="70" stroke="url(#neonGrad4)" stroke-opacity="0.4" stroke-width="1.5" />
+  <!-- Window 3 Control Dots -->
+  <circle cx="125" cy="58" r="3" fill="#67E8F9" />
+  <circle cx="135" cy="58" r="3" fill="#38BDF8" />
+  <circle cx="145" cy="58" r="3" fill="#60A5FA" />
+
+  <!-- Vault / Cryptographic Security inside window -->
+  <!-- Encrypted Data Matrix Lines -->
+  <rect x="135" y="86" width="65" height="12" rx="3" fill="url(#neonGrad4)" fill-opacity="0.25" />
+  <rect x="135" y="104" width="80" height="12" rx="3" fill="url(#neonGrad4)" fill-opacity="0.25" />
+  <rect x="135" y="122" width="55" height="12" rx="3" fill="url(#neonGrad4)" fill-opacity="0.25" />
+
+  <!-- Central Security Shield inside window -->
+  <g transform="translate(250, 115)">
+    <path d="M0 -22L18 -12V3C18 15 10 23 0 27C-10 23 -18 15 -18 3V-12L0 -22Z" fill="url(#fillGrad4)" stroke="url(#neonGrad4)" stroke-width="2" stroke-linejoin="round" />
+    <!-- Lock Inside Shield -->
+    <rect x="-7" y="-2" width="14" height="12" rx="2.5" fill="url(#neonGrad4)" />
+    <path d="M-4 -2V-6C-4 -8.5 -2 -10 0 -10C2 -10 4 -8.5 4 -6V-2" stroke="#67E8F9" stroke-width="1.8" fill="none" />
+  </g>
+
+  <!-- Overlapping Compliance Badge Hub (Bottom Right) -->
+  <g transform="translate(290, 160)">
+    <circle cx="0" cy="0" r="32" fill="#1E194A" fill-opacity="0.85" />
+    <circle cx="0" cy="0" r="30" fill="url(#fillGrad4)" stroke="url(#neonGrad4)" stroke-width="2.5" />
+    <!-- Verified Compliance Checkmark -->
+    <circle cx="0" cy="0" r="16" fill="url(#neonGrad4)" fill-opacity="0.25" stroke="#38BDF8" stroke-width="1.8" />
+    <path d="M-6 0L-2 4L7 -5" stroke="#67E8F9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+</svg>

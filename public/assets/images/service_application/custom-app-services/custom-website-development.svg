@@ -1,0 +1,20 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="c_icon_1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#291F5F" />
+      <stop offset="50%" stop-color="#2772B8" />
+      <stop offset="100%" stop-color="#33A7DE" />
+    </linearGradient>
+  </defs>
+  <rect x="3" y="6" width="28" height="22" rx="4" stroke="url(#c_icon_1)" stroke-width="2.2" fill="none" />
+  <line x1="3" y1="12" x2="31" y2="12" stroke="url(#c_icon_1)" stroke-width="1.8" />
+  <circle cx="7" cy="9" r="1.2" fill="url(#c_icon_1)" />
+  <circle cx="11" cy="9" r="1.2" fill="url(#c_icon_1)" />
+  <circle cx="15" cy="9" r="1.2" fill="url(#c_icon_1)" />
+  <path d="M11 17L8 20L11 23" stroke="url(#c_icon_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M23 17L26 20L23 23" stroke="url(#c_icon_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="18.5" y1="16.5" x2="15.5" y2="23.5" stroke="url(#c_icon_1)" stroke-width="2" stroke-linecap="round" />
+  <circle cx="28" cy="27" r="7" fill="white" />
+  <circle cx="28" cy="27" r="3.2" stroke="url(#c_icon_1)" stroke-width="2" fill="none" />
+  <path d="M28 20.5V22M28 32V33.5M21.5 27H23M33 27H34.5M23.5 22.5L24.5 23.5M31.5 30.5L32.5 31.5M23.5 31.5L24.5 30.5M31.5 23.5L32.5 22.5" stroke="url(#c_icon_1)" stroke-width="2.2" stroke-linecap="round" />
+</svg>

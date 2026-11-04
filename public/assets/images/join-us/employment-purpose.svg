@@ -1,0 +1,13 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- radiant lines -->
+  <path d="M24 3V7M13 7.5L15.8 10.3M35 7.5L32.2 10.3M5 18H9M39 18H43" stroke="#2778B8" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- person head -->
+  <circle cx="24" cy="18" r="5.5" stroke="#100C26" stroke-width="2.2"/>
+  <!-- person body -->
+  <path d="M13 36C13 30 17.5 26.5 23.5 26.5C25.5 26.5 27.2 27 28.8 28" stroke="#100C26" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- briefcase in hand -->
+  <rect x="27.5" y="29.5" width="13.5" height="10" rx="1.8" stroke="#100C26" stroke-width="2.2"/>
+  <path d="M31.5 29.5V27.5C31.5 26.5 32.2 26 33.2 26H35.2C36.2 26 37 26.5 37 27.5V29.5" stroke="#100C26" stroke-width="1.8"/>
+  <line x1="27.5" y1="33.5" x2="41" y2="33.5" stroke="#100C26" stroke-width="1.8"/>
+</svg>
+

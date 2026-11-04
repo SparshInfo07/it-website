@@ -1,0 +1,10 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- radiant rays -->
+  <path d="M24 3V7M15.5 6.5L18 9.5M32.5 6.5L30 9.5" stroke="#2778B8" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- coin with dollar -->
+  <circle cx="24" cy="15.5" r="6" stroke="#100C26" stroke-width="2.2"/>
+  <path d="M24 12V19M22.5 13H25C25.6 13 26 13.4 26 14C26 14.6 25.6 15 25 15H23C22.4 15 22 15.4 22 16C22 16.6 22.4 17 23 17H25.5" stroke="#2778B8" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- hand -->
+  <path d="M9 32C12 31 16 28 19 29L26 31C28 31.5 30 30.5 31 28.5L31.5 27.5C32.2 26 34 25.5 35.5 26.2C36.8 26.8 37.3 28.3 36.8 29.6L34 36C32.5 39.5 28.5 41 24.5 40L14 38L9 35V32Z" stroke="#100C26" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

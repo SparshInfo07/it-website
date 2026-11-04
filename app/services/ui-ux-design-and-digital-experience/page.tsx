@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import UiUxDesignAndDigitalExperience from "@/components/Pages/ServicePages/UiUxDesignAndDigitalExperience";
+import { getMetatags } from "@/utils/seo.utils";
+import { uiUxDesignSeo } from "@/data/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = process.env.BASE_URL || "https://sparshit.com";
+  return getMetatags(uiUxDesignSeo, baseUrl);
+}
+
+export default function UiUxDesignAndDigitalExperiencePage() {
+  return <UiUxDesignAndDigitalExperience />;
+}

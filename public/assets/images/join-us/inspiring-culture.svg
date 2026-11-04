@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- radiant rays -->
+  <path d="M24 3V7M13 7.5L15.8 10.3M35 7.5L32.2 10.3M5 18H9M39 18H43" stroke="#2778B8" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- bulb body -->
+  <path d="M17 21C17 17.13 20.13 14 24 14C27.87 14 31 17.13 31 21C31 24.2 29.2 26.5 27.5 28.5C26.8 29.3 26.5 30.2 26.5 31H21.5C21.5 30.2 21.2 29.3 20.5 28.5C18.8 26.5 17 24.2 17 21Z" stroke="#100C26" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- bulb base -->
+  <path d="M21 35H27M22 38.5H26" stroke="#100C26" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- filament -->
+  <path d="M22 21L24 18L26 21" stroke="#2778B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
