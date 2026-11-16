@@ -253,6 +253,35 @@ export default function CuratedMasterHomepage() {
     });
 
     // 5. Interactive Capabilities Watermark Stage (From 01_Contemporary_Blue.html)
+    const philoTabs = $$<HTMLButtonElement>("[data-philo-tab]");
+    const philoCards = $$<HTMLElement>("[data-philo-card]");
+    const activatePhilo = (idx: number) => {
+      philoTabs.forEach((t, i) => t.classList.toggle("active", i === idx));
+      philoCards.forEach((c, i) => c.classList.toggle("active", i === idx));
+    };
+    philoTabs.forEach((t, i) => t.addEventListener("click", () => activatePhilo(i)));
+    philoCards.forEach((c, i) => {
+      c.addEventListener("mouseenter", () => activatePhilo(i));
+      c.addEventListener("click", () => activatePhilo(i));
+      c.addEventListener("focus", () => activatePhilo(i));
+    });
+    $$<HTMLElement>(".philo-bar-fill").forEach((bar) => {
+      const targetW = bar.dataset.barWidth || "80%";
+      gsap.fromTo(
+        bar,
+        { width: "0%" },
+        {
+          width: targetW,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#philosophy",
+            start: "top 78%",
+            once: true,
+          },
+        }
+      );
+    });
     const capsData = [
       [
         "Websites that work harder.",
@@ -481,68 +510,128 @@ export default function CuratedMasterHomepage() {
         })
       );
     }
-    const header = $<HTMLElement>("#header");
     const onHeaderScroll = () => {
-      header?.classList.toggle("scrolled", window.scrollY > 30);
+      const sy = window.scrollY || document.documentElement.scrollTop || 0;
+      $<HTMLElement>("#header")?.classList.toggle("scrolled", sy > 30);
     };
     window.addEventListener("scroll", onHeaderScroll, { passive: true });
     onHeaderScroll();
 
-    // 11. Draggable Feature Showcase (From 03_Editorial_Drag_Gallery.html)
+    // 11. Auto-Scrolling + Draggable Feature Showcase (No Arrows)
+    const featSection = $<HTMLElement>("#featured");
     const v = $<HTMLElement>("#featureViewport");
     const track = $<HTMLElement>("#featureTrack");
     const cards = track ? $$<HTMLElement>(".feature-card", track) : [];
     const cur = $<HTMLElement>("#dragCursor");
+    const progFill = $<HTMLElement>("#featProgressFill");
     let onResizeFeature: (() => void) | undefined;
+    let onWinPointerMove: ((e: PointerEvent) => void) | undefined;
+    let onWinPointerUp: ((e: PointerEvent) => void) | undefined;
 
-    if (v && track && cards.length) {
-      const left = () => Math.max(0, track.scrollWidth - v.clientWidth);
-      let x = 0;
+    if (featSection && v && track && cards.length) {
+      const getMaxScroll = () => Math.max(0, track.scrollWidth - v.clientWidth + 32);
+      let currentX = 0;
       let drag = false;
-      let start = 0;
-      let origin = 0;
+      let startX = 0;
+      let lastX = 0;
+      let velocityX = 0;
+      let originX = 0;
       let started = false;
-      const clamp = (n: number) => Math.max(-left(), Math.min(0, n));
-      const setX = (n: number, animate = true) => {
-        x = clamp(n);
+
+      const clamp = (n: number) => Math.max(-getMaxScroll(), Math.min(0, n));
+
+      const updateProgress = (xVal: number) => {
+        if (!progFill) return;
+        const max = getMaxScroll();
+        const pct = max > 0 ? Math.min(100, Math.max(0, (-xVal / max) * 100)) : 0;
+        progFill.style.width = `${pct.toFixed(1)}%`;
+      };
+
+      const setTrackX = (n: number, animate = false) => {
+        currentX = clamp(n);
+        updateProgress(currentX);
         if (animate) {
-          gsap.to(track, { x, duration: 0.65, ease: "power3.out", overwrite: true });
+          gsap.to(track, {
+            x: currentX,
+            duration: 0.55,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
         } else {
-          gsap.set(track, { x });
+          gsap.set(track, { x: currentX });
         }
       };
-      const moveBtn = (d: number) => {
-        const item = cards[0].getBoundingClientRect().width + 23;
-        setX(x - d * item, true);
-      };
-      $("#featPrev")?.addEventListener("click", () => moveBtn(-1));
-      $("#featNext")?.addEventListener("click", () => moveBtn(1));
+
+      // Automatic horizontal glide when scrolling vertically through #featured
+      ScrollTrigger.create({
+        trigger: featSection,
+        start: "top 76px",
+        end: () => `+=${Math.max(750, getMaxScroll())}`,
+        pin: true,
+        scrub: 0.5,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (!drag) {
+            setTrackX(-self.progress * getMaxScroll(), false);
+          }
+        },
+      });
+
+      // Smooth pointer drag anywhere on the viewport/cards
       v.addEventListener("pointerdown", (e) => {
         if (e.pointerType === "mouse" && e.button !== 0) return;
         drag = true;
         started = false;
-        start = e.clientX;
-        origin = x;
-        v.setPointerCapture(e.pointerId);
+        startX = e.clientX;
+        lastX = e.clientX;
+        velocityX = 0;
+        originX = currentX;
+        v.classList.add("is-dragging");
         gsap.killTweensOf(track);
       });
-      v.addEventListener("pointermove", (e) => {
+
+      onWinPointerMove = (e: PointerEvent) => {
+        if (cur && window.matchMedia("(pointer:fine)").matches) {
+          cur.style.left = e.clientX + "px";
+          cur.style.top = e.clientY + "px";
+          cur.textContent = drag ? "MOVE ↔" : "DRAG ↔";
+        }
         if (!drag) return;
-        const delta = e.clientX - start;
+        const delta = e.clientX - startX;
+        velocityX = e.clientX - lastX;
+        lastX = e.clientX;
         if (Math.abs(delta) > 4) started = true;
-        setX(origin + delta, false);
-      });
-      const finish = (e: PointerEvent) => {
+        setTrackX(originX + delta, false);
+      };
+
+      onWinPointerUp = () => {
         if (!drag) return;
         drag = false;
+        v.classList.remove("is-dragging");
         if (started) {
-          setX(x + (e.clientX - start) * 0.14, true);
+          setTrackX(currentX + velocityX * 5, true);
           v.dataset.moved = "true";
-          setTimeout(() => delete v.dataset.moved, 80);
+          setTimeout(() => delete v.dataset.moved, 90);
         }
       };
-      v.addEventListener("pointerup", finish);
-      v.addEventListener("pointercancel", finish);
+
+      window.addEventListener("pointermove", onWinPointerMove, { passive: true });
+      window.addEventListener("pointerup", onWinPointerUp);
+      window.addEventListener("pointercancel", onWinPointerUp);
+
+      // Also support horizontal two-finger trackpad swipe directly on viewport
+      v.addEventListener(
+        "wheel",
+        (e) => {
+          if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) {
+            e.preventDefault();
+            setTrackX(currentX - e.deltaX, false);
+          }
+        },
+        { passive: false }
+      );
+
       cards.forEach((card, i) => {
         card.addEventListener("click", () => {
           if (v.dataset.moved) return;
@@ -553,20 +642,20 @@ export default function CuratedMasterHomepage() {
             "Local-to-Digital Storefront Transformation",
           ];
           const desc =
-            "Interactive concept engineered by Sparsh IT. Drag the showcase or request a tailored project scope to see how we adapt this architecture for your business.";
+            "Interactive concept engineered by Sparsh IT. Scroll or drag the showcase, or request a tailored project scope to see how we adapt this architecture for your business.";
           showInfo(titles[i], desc, "SPARSH IT · INTERACTIVE CONCEPT");
         });
       });
-      onResizeFeature = () => setX(x, false);
+
+      onResizeFeature = () => {
+        setTrackX(currentX, false);
+        ScrollTrigger.refresh();
+      };
       window.addEventListener("resize", onResizeFeature);
+
       if (window.matchMedia("(pointer:fine)").matches && cur) {
         v.addEventListener("pointerenter", () => cur.classList.add("is-on"));
         v.addEventListener("pointerleave", () => cur.classList.remove("is-on"));
-        v.addEventListener("pointermove", (e) => {
-          cur.style.left = e.clientX + "px";
-          cur.style.top = e.clientY + "px";
-          cur.textContent = drag ? "MOVE ↔" : "DRAG ↔";
-        });
       }
     }
 
@@ -635,8 +724,9 @@ export default function CuratedMasterHomepage() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const sy = window.scrollY;
+        const sy = window.scrollY || document.documentElement.scrollTop || 0;
         const vh = window.innerHeight || 800;
+        $<HTMLElement>("#header")?.classList.toggle("scrolled", sy > 30);
 
         // Hero B 3D stack fan-out on scroll
         const panelB = $<HTMLElement>("#hero-panel-b");
@@ -708,6 +798,11 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
+      if (onWinPointerMove) window.removeEventListener("pointermove", onWinPointerMove);
+      if (onWinPointerUp) {
+        window.removeEventListener("pointerup", onWinPointerUp);
+        window.removeEventListener("pointercancel", onWinPointerUp);
+      }
       ScrollTrigger.getAll().forEach((st) => st.kill());
       body.classList.remove("orbit", "atelier", "blueprint", "lock", "gsap-ready");
     };
@@ -715,6 +810,7 @@ export default function CuratedMasterHomepage() {
 
   return (
     <div
+      key={CURATED_HOMEPAGE_MARKUP.length}
       ref={rootRef}
       className="sparsh-curated-root"
       dangerouslySetInnerHTML={{ __html: CURATED_HOMEPAGE_MARKUP }}
