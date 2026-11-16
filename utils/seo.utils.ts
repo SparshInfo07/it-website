@@ -38,6 +38,11 @@ export function getMetatags(seoData?: SeoData, baseUrl?: string): Metadata {
   const metadata: Metadata = {
     title: seoData?.title,
     description: seoData?.description,
+    icons: {
+      icon: "/sparshlogo_short.svg",
+      shortcut: "/sparshlogo_short.svg",
+      apple: "/sparshlogo_short.svg",
+    },
     robots: {
       index,
       follow,

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "Sparsh IT | Engineering What's Next",
   description:
     "Strategy, software, cloud, data, AI and design-engineered into digital products that move businesses forward.",
+  icons: {
+    icon: "/sparshlogo_short.svg",
+    shortcut: "/sparshlogo_short.svg",
+    apple: "/sparshlogo_short.svg",
+  },
 };
 
 export default function RootLayout({
