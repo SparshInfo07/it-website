@@ -356,51 +356,148 @@ export default function CuratedMasterHomepage() {
         }
       );
     });
-    const capsData = [
-      [
-        "Websites that work harder.",
-        "Brand-first, responsive sites built for search discovery, enterprise credibility, and customer enquiries.",
-        "WEB",
-      ],
-      [
-        "Digital catalogues & commerce.",
-        "Structured product pages, bulk RFQ pricing requests, online checkout, and practical selling workflows.",
-        "SELL",
-      ],
-      [
-        "CMS, admin & enquiry systems.",
-        "Manage products, high-res media, website content, and buyer conversations without calling a developer.",
-        "CMS",
-      ],
-      [
-        "Custom web & mobile apps.",
-        "Build scalable MVPs, internal operations dashboards, and customer-facing portals around your workflow.",
-        "APP",
-      ],
-      [
-        "AI & business automation.",
-        "Automate repetitive operations, intelligent lead routing, quotation drafting, and customer support.",
-        "AUTO",
-      ],
+    const cap3Items = [
+      {
+        badge: "WEB ARCHITECTURE",
+        title: "Websites that work harder.",
+        desc: "Brand-first, high-performance websites built for search discovery, enterprise credibility, and qualified customer enquiries.",
+        pipe: [
+          ["INPUT", "Search & Brand Discovery"],
+          ["ENGINE", "Next.js 16 + GSAP UX"],
+          ["OUTCOME", "Qualified Lead Inbox"],
+        ],
+        deliv: [
+          "Custom UI/UX Design System",
+          "99/100 Core Web Vitals",
+          "Technical SEO & Schema",
+          "WhatsApp & RFQ Lead Capture",
+        ],
+        stat: "+3.4× Enquiries",
+        sub: "Average conversion lift post-launch",
+      },
+      {
+        badge: "DIGITAL COMMERCE",
+        title: "Digital catalogues & commerce.",
+        desc: "Product pages, technical specification filters, bulk RFQ quotation workflows, and online payment checkout.",
+        pipe: [
+          ["INPUT", "Multi-SKU Exploration"],
+          ["ENGINE", "RFQ Cart & Checkout"],
+          ["OUTCOME", "Approved Bulk Orders"],
+        ],
+        deliv: [
+          "Category & Spec Filters",
+          "Multi-Item RFQ Builder",
+          "Payment Gateway Sync",
+          "Inventory & Stock Rules",
+        ],
+        stat: "4.2× Faster",
+        sub: "Buyer lookup to quotation speed",
+      },
+      {
+        badge: "OWNER WORKSPACE",
+        title: "CMS, admin & enquiry systems.",
+        desc: "Update products, high-res images, website copy, and respond to buyer quotations from one intuitive workspace.",
+        pipe: [
+          ["INPUT", "Owner Content Edits"],
+          ["ENGINE", "Self-Service CMS Core"],
+          ["OUTCOME", "Instant Live Publishing"],
+        ],
+        deliv: [
+          "Visual Product & Page CMS",
+          "Centralized Enquiry CRM",
+          "1-Click Quote Approvals",
+          "Role-Based Team Access",
+        ],
+        stat: "100% Autonomy",
+        sub: "Zero developer dependency for edits",
+      },
+      {
+        badge: "PRODUCT STUDIO",
+        title: "Custom web & mobile apps.",
+        desc: "Build scalable SaaS MVPs, internal operations portals, and native iOS/Android applications around your business.",
+        pipe: [
+          ["INPUT", "Custom Business Logic"],
+          ["ENGINE", "Cloud API + Mobile SDK"],
+          ["OUTCOME", "Scalable Digital Product"],
+        ],
+        deliv: [
+          "Web & Native Mobile Apps",
+          "REST / GraphQL API Layer",
+          "Secure Cloud Deployment",
+          "Real-Time Analytics",
+        ],
+        stat: "99.98% Uptime",
+        sub: "Enterprise-grade cloud reliability",
+      },
+      {
+        badge: "AI AUTOMATION",
+        title: "AI & business automation.",
+        desc: "Connect repetitive tasks, smart lead qualification, automated quotation drafting, and ERP/CRM synchronization.",
+        pipe: [
+          ["INPUT", "Inbound Customer Event"],
+          ["ENGINE", "AI Agent & Workflow"],
+          ["OUTCOME", "Automated Execution"],
+        ],
+        deliv: [
+          "AI Product Finder & Chat",
+          "Automated Quote Drafting",
+          "WhatsApp / Email Triggers",
+          "Bi-Directional ERP Sync",
+        ],
+        stat: "-68% Overhead",
+        sub: "Reduction in manual admin work",
+      },
     ];
+
+    let activeCapIdx = 0;
     const setCap = (i: number) => {
-      $$<HTMLElement>(".cap-item").forEach((e, j) => e.classList.toggle("active", j === i));
-      const right = $<HTMLElement>("#capRight");
-      const hl = $<HTMLElement>("#capHeadline");
-      const desc = $<HTMLElement>("#capDesc");
-      const wm = $<HTMLElement>("#capWatermark");
-      if (right && capsData[i]) {
-        right.dataset.active = String(i);
-        if (hl) hl.textContent = capsData[i][0];
-        if (desc) desc.textContent = capsData[i][1];
-        if (wm) wm.textContent = capsData[i][2];
+      if (i === activeCapIdx || !cap3Items[i]) return;
+      activeCapIdx = i;
+      $$<HTMLElement>("[data-cap-tile]").forEach((e, j) => e.classList.toggle("active", j === i));
+      const d = cap3Items[i];
+      const badgeEl = $<HTMLElement>("#inspBadge");
+      const titleEl = $<HTMLElement>("#inspTitle");
+      const descEl = $<HTMLElement>("#inspDesc");
+      const statEl = $<HTMLElement>("#inspStat");
+      const subEl = $<HTMLElement>("#inspStatSub");
+      const pipeEl = $<HTMLElement>("#inspPipe");
+      const delivEl = $<HTMLElement>("#inspDeliv");
+      const inspEl = $<HTMLElement>("#capInspector");
+
+      if (badgeEl) badgeEl.textContent = d.badge;
+      if (titleEl) titleEl.textContent = d.title;
+      if (descEl) descEl.textContent = d.desc;
+      if (statEl) statEl.textContent = d.stat;
+      if (subEl) subEl.textContent = d.sub;
+      if (pipeEl) {
+        pipeEl.innerHTML = d.pipe
+          .map((p) => `<div class="pipe-node"><small>${p[0]}</small><b>${p[1]}</b></div>`)
+          .join("");
+      }
+      if (delivEl) {
+        delivEl.innerHTML = d.deliv
+          .map((x) => `<div class="deliv-item"><i></i>${x}</div>`)
+          .join("");
+      }
+      if (inspEl) {
+        gsap.fromTo(
+          inspEl,
+          { scale: 0.985, opacity: 0.85 },
+          { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out", overwrite: "auto" }
+        );
       }
     };
-    $$<HTMLElement>(".cap-item").forEach((b, i) => {
-      b.addEventListener("mouseenter", () => setCap(i));
-      b.addEventListener("focus", () => setCap(i));
-      b.addEventListener("click", () => setCap(i));
-    });
+    const onCapInteract = (e: Event) => {
+      const target = e.target as Element | null;
+      if (!target) return;
+      const tile = target.closest<HTMLElement>("[data-cap-tile]");
+      if (tile) {
+        setCap(Number(tile.dataset.capTile || 0));
+      }
+    };
+    root.addEventListener("pointerover", onCapInteract);
+    root.addEventListener("click", onCapInteract);
+    root.addEventListener("focusin", onCapInteract);
 
     // 6. Pinned 4-Chapter Digital Transformation Story (From FUSION_STUDIO_STANDALONE.html)
     let chapter = 0;
@@ -874,6 +971,9 @@ export default function CuratedMasterHomepage() {
       root.removeEventListener("pointerover", onPhiloInteract);
       root.removeEventListener("click", onPhiloInteract);
       root.removeEventListener("focusin", onPhiloInteract);
+      root.removeEventListener("pointerover", onCapInteract);
+      root.removeEventListener("click", onCapInteract);
+      root.removeEventListener("focusin", onCapInteract);
       document.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
