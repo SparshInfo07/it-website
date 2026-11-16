@@ -565,8 +565,8 @@ export default function CuratedMasterHomepage() {
       // Automatic horizontal glide when scrolling vertically through #featured
       ScrollTrigger.create({
         trigger: featSection,
-        start: "top 76px",
-        end: () => `+=${Math.max(750, getMaxScroll())}`,
+        start: () => (window.innerWidth < 768 ? "top 64px" : "top 76px"),
+        end: () => `+=${Math.max(600, getMaxScroll())}`,
         pin: true,
         scrub: 0.5,
         anticipatePin: 1,
