@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CURATED_HOMEPAGE_MARKUP } from "@/data/HomePage/curatedHomepageMarkup";
 
 export default function CuratedMasterHomepage() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const markupObj = useMemo(() => ({ __html: CURATED_HOMEPAGE_MARKUP }), []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -145,12 +146,12 @@ export default function CuratedMasterHomepage() {
       const bar = $<HTMLElement>("#wizardBar");
       const brief = $<HTMLElement>("#wizardBrief");
       if (backBtn) {
-        backBtn.textContent = "← Back";
+        backBtn.textContent = "Back";
         backBtn.style.visibility = wizStep === 0 ? "hidden" : "visible";
       }
       if (bar) bar.style.width = ((wizStep + 1) / 3) * 100 + "%";
       if (nextBtn) {
-        nextBtn.textContent = wizStep === 2 ? "Generate brief ↗" : "Continue ↗";
+        nextBtn.textContent = wizStep === 2 ? "Generate brief" : "Continue";
         nextBtn.disabled = false;
       }
       brief?.classList.remove("show");
@@ -226,8 +227,8 @@ export default function CuratedMasterHomepage() {
       }
       const backBtn = $<HTMLButtonElement>("#wizardBack");
       const nextBtn = $<HTMLButtonElement>("#wizardNext");
-      if (backBtn) backBtn.textContent = "Copy brief ↗";
-      if (nextBtn) nextBtn.textContent = "Copy brief ↗";
+      if (backBtn) backBtn.textContent = "Copy brief";
+      if (nextBtn) nextBtn.textContent = "Copy brief";
       toast("Brief generated — click to copy");
     });
 
@@ -252,19 +253,92 @@ export default function CuratedMasterHomepage() {
       safeCopy(txt);
     });
 
-    // 5. Interactive Capabilities Watermark Stage (From 01_Contemporary_Blue.html)
-    const philoTabs = $$<HTMLButtonElement>("[data-philo-tab]");
-    const philoCards = $$<HTMLElement>("[data-philo-card]");
+    // 5. Interactive Philosophy Tabs & Cards + Capabilities Watermark Stage
+    const philoBannerData = [
+      {
+        kicker: "COMMERCIAL ARCHITECTURE",
+        title:
+          "We don't hand you a complex codebase and walk away. We engineer revenue-first systems that accelerate quotations and sales.",
+        stats: [
+          ["4.2×", "Faster enquiry-to-quote velocity"],
+          ["-68%", "Reduction in manual admin work"],
+          ["100%", "Custom-scoped around your ROI"],
+        ],
+      },
+      {
+        kicker: "HUMAN-CENTRIC EXPERIENCE",
+        title:
+          "Every buyer journey, product catalogue filter, and admin screen is crafted for zero confusion and instant adoption.",
+        stats: [
+          ["0.4s", "Instant catalogue search & filter"],
+          ["3-Click", "Streamlined buyer RFQ journey"],
+          ["Zero", "Developer dependency for daily edits"],
+        ],
+      },
+      {
+        kicker: "MODULAR FUTURE-PROOF STACK",
+        title:
+          "Launch lean with what your business needs today, then plug in CMS, payments, inventory, and AI automation without rebuilding.",
+        stats: [
+          ["3-Stage", "Upgrade path (Silver → Gold → Premium)"],
+          ["99.9%", "Production-grade cloud uptime"],
+          ["Modular", "Ready for ERP, CRM & AI sync"],
+        ],
+      },
+    ];
+
+    let currentPhiloIdx = 0;
     const activatePhilo = (idx: number) => {
-      philoTabs.forEach((t, i) => t.classList.toggle("active", i === idx));
-      philoCards.forEach((c, i) => c.classList.toggle("active", i === idx));
+      if (idx === currentPhiloIdx) return;
+      currentPhiloIdx = idx;
+      const cards = $$<HTMLElement>("[data-philo-card]");
+      cards.forEach((c, i) => c.classList.toggle("active", i === idx));
+
+      const activeCard = cards[idx];
+      if (activeCard) {
+        gsap.fromTo(
+          activeCard,
+          { scale: 0.98 },
+          { scale: 1, duration: 0.35, ease: "power2.out", overwrite: "auto" }
+        );
+      }
+
+      const bData = philoBannerData[idx];
+      const banner = $<HTMLElement>(".philo-bottom-banner");
+      if (bData && banner) {
+        const kickerEl = $<HTMLElement>(".philo-banner-kicker", banner);
+        const h4El = $<HTMLElement>("h4", banner);
+        const statItems = $$<HTMLElement>(".philo-stat-item", banner);
+        if (kickerEl) kickerEl.textContent = bData.kicker;
+        if (h4El) h4El.textContent = bData.title;
+        statItems.forEach((item, sIdx) => {
+          const st = bData.stats[sIdx];
+          if (!st) return;
+          const strEl = $<HTMLElement>("strong", item);
+          const spEl = $<HTMLElement>("span", item);
+          if (strEl) strEl.textContent = st[0];
+          if (spEl) spEl.textContent = st[1];
+        });
+        gsap.fromTo(
+          banner,
+          { opacity: 0.82, y: 4 },
+          { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" }
+        );
+      }
     };
-    philoTabs.forEach((t, i) => t.addEventListener("click", () => activatePhilo(i)));
-    philoCards.forEach((c, i) => {
-      c.addEventListener("mouseenter", () => activatePhilo(i));
-      c.addEventListener("click", () => activatePhilo(i));
-      c.addEventListener("focus", () => activatePhilo(i));
-    });
+
+    const onPhiloInteract = (e: Event) => {
+      const target = e.target as Element | null;
+      if (!target) return;
+      const cardEl = target.closest<HTMLElement>("[data-philo-card]");
+      if (cardEl && !target.closest(".open-quote")) {
+        activatePhilo(Number(cardEl.dataset.philoCard || 0));
+      }
+    };
+    root.addEventListener("pointerover", onPhiloInteract);
+    root.addEventListener("click", onPhiloInteract);
+    root.addEventListener("focusin", onPhiloInteract);
+
     $$<HTMLElement>(".philo-bar-fill").forEach((bar) => {
       const targetW = bar.dataset.barWidth || "80%";
       gsap.fromTo(
@@ -387,39 +461,42 @@ export default function CuratedMasterHomepage() {
         float: "BUILD / SHIP ↗",
       },
     };
-    $$<HTMLElement>("[data-industry]").forEach((b) =>
-      b.addEventListener("click", () => {
-        const key = b.dataset.industry || "";
-        const d = industryData[key];
-        if (!d) return;
-        $$<HTMLElement>("[data-industry]").forEach((x) => {
-          x.classList.toggle("active", x === b);
-          x.setAttribute("aria-selected", String(x === b));
-        });
-        const tag = $("#indTag");
-        const title = $("#indTitle");
-        const desc = $("#indDesc");
-        const flt = $("#indFloat");
-        if (tag) tag.textContent = d.tag;
-        if (title) title.textContent = d.title;
-        if (desc) desc.textContent = d.desc;
-        d.rows.forEach((v, i) => {
-          const rEl = $("#indRow" + (i + 1));
-          const pEl = $("#indPill" + (i + 1));
-          if (rEl) rEl.textContent = v;
-          if (pEl) pEl.textContent = d.pills[i];
-        });
-        if (flt) flt.textContent = d.float;
-        const p = $("#industryPreview");
-        if (p) {
-          gsap.fromTo(
-            p,
-            { scale: 0.97, opacity: 0.72 },
-            { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out" }
-          );
-        }
-      })
-    );
+    const activateIndustry = (b: HTMLElement) => {
+      const key = b.dataset.industry || "";
+      const d = industryData[key];
+      if (!d || b.classList.contains("active")) return;
+      $$<HTMLElement>("[data-industry]").forEach((x) => {
+        x.classList.toggle("active", x === b);
+        x.setAttribute("aria-selected", String(x === b));
+      });
+      const tag = $("#indTag");
+      const title = $("#indTitle");
+      const desc = $("#indDesc");
+      const flt = $("#indFloat");
+      if (tag) tag.textContent = d.tag;
+      if (title) title.textContent = d.title;
+      if (desc) desc.textContent = d.desc;
+      d.rows.forEach((v, i) => {
+        const rEl = $("#indRow" + (i + 1));
+        const pEl = $("#indPill" + (i + 1));
+        if (rEl) rEl.textContent = v;
+        if (pEl) pEl.textContent = d.pills[i];
+      });
+      if (flt) flt.textContent = d.float;
+      const p = $("#industryPreview");
+      if (p) {
+        gsap.fromTo(
+          p,
+          { scale: 0.97, opacity: 0.72 },
+          { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", overwrite: "auto" }
+        );
+      }
+    };
+    $$<HTMLElement>("[data-industry]").forEach((b) => {
+      b.addEventListener("mouseenter", () => activateIndustry(b));
+      b.addEventListener("focus", () => activateIndustry(b));
+      b.addEventListener("click", () => activateIndustry(b));
+    });
 
     // 8. FAQ Accordion
     $$<HTMLElement>(".faq-q").forEach((b) =>
@@ -794,6 +871,9 @@ export default function CuratedMasterHomepage() {
 
     return () => {
       if (toastTimer) clearTimeout(toastTimer);
+      root.removeEventListener("pointerover", onPhiloInteract);
+      root.removeEventListener("click", onPhiloInteract);
+      root.removeEventListener("focusin", onPhiloInteract);
       document.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
@@ -806,14 +886,13 @@ export default function CuratedMasterHomepage() {
       ScrollTrigger.getAll().forEach((st) => st.kill());
       body.classList.remove("orbit", "atelier", "blueprint", "lock", "gsap-ready");
     };
-  }, []);
+  }, [markupObj]);
 
   return (
     <div
-      key={CURATED_HOMEPAGE_MARKUP.length}
       ref={rootRef}
       className="sparsh-curated-root"
-      dangerouslySetInnerHTML={{ __html: CURATED_HOMEPAGE_MARKUP }}
+      dangerouslySetInnerHTML={markupObj}
     />
   );
 }
