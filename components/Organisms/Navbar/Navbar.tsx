@@ -124,6 +124,10 @@ export default function Navbar() {
     }, 150);
   };
 
+  if (pathname === "/") {
+    return null;
+  }
+
   return (
     <>
       <header
