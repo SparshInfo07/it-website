@@ -175,6 +175,24 @@ export default function CuratedMasterHomepage() {
         modalOpen("#quoteModal");
       })
     );
+    // Packages staircase: the steps grow up one after another once the section scrolls into view.
+    // Without JS or with reduced motion, the CSS shows the finished staircase straight away.
+    const stStairs = $<HTMLElement>("#stStairs");
+    let stObserver: IntersectionObserver | undefined;
+    if (stStairs && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      stStairs.classList.add("st-armed");
+      stObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((en) => en.isIntersecting)) {
+            stStairs.classList.add("st-in");
+            stObserver?.disconnect();
+          }
+        },
+        { threshold: 0.2 }
+      );
+      stObserver.observe(stStairs);
+    }
+
     $$<HTMLElement>("[data-choice]").forEach((b) =>
       b.addEventListener("click", () => {
         quotePlan = b.dataset.choice || "Gold";
@@ -554,26 +572,88 @@ export default function CuratedMasterHomepage() {
     root.addEventListener("click", onCapInteract);
     root.addEventListener("focusin", onCapInteract);
 
-    // 6. Pinned 4-Chapter Digital Transformation Story (From FUSION_STUDIO_STANDALONE.html)
-    let chapter = 0;
-    let manualUntil = 0;
-    const setChapter = (n: number, manual = false) => {
-      chapter = Math.max(0, Math.min(3, n));
-      $$<HTMLElement>("[data-chapter]").forEach((el) =>
-        el.classList.toggle("active", Number(el.dataset.chapter) === chapter)
-      );
-      $$<HTMLElement>("[data-chapter-target]").forEach((el) =>
-        el.classList.toggle("active", Number(el.dataset.chapterTarget) === chapter)
-      );
-      const vis = $<HTMLElement>("#chapterVisual");
-      if (vis) vis.dataset.step = String(chapter);
-      if (manual) manualUntil = Date.now() + 1800;
-    };
-    $("#prevChapter")?.addEventListener("click", () => setChapter(chapter - 1, true));
-    $("#nextChapter")?.addEventListener("click", () => setChapter(chapter + 1, true));
-    $$<HTMLElement>("[data-chapter-target]").forEach((b) =>
-      b.addEventListener("click", () => setChapter(Number(b.dataset.chapterTarget), true))
-    );
+    // 6. Transformation story: cinematic zoom
+    // The stage pins full-screen and you zoom through four chapter views: each one grows to fill
+    // the screen, then flies past the viewer while the next comes up from behind it.
+    // Reduced-motion visitors get the chapters as a plain list (the CSS default without .zm-live).
+    const zmSec = $<HTMLElement>("#transformation");
+    const zmStage = $<HTMLElement>("#zmStage");
+    const zmSlides = zmStage ? $$<HTMLElement>(".zm-slide", zmStage) : [];
+    const zmNum = $<HTMLElement>("#zmNum");
+    const zmMM = gsap.matchMedia();
+
+    if (zmSec && zmStage && zmSlides.length) {
+      const zmLayers = zmSlides.map((s) => $<HTMLElement>(".zm-layer", s));
+      const zmTexts = zmSlides.map((s) => $<HTMLElement>(".zm-ch", s));
+      const last = zmSlides.length - 1;
+      let zmCur = -1;
+
+      const zmRender = (p: number) => {
+        const pos = p * (last + 0.2) - 0.1; // 0 … last, with a short hold at both ends
+        zmSlides.forEach((slide, i) => {
+          const layer = zmLayers[i];
+          const d = i - pos; // > 0: still to come (small, behind) · < 0: passed (flies past the viewer)
+          let scale: number;
+          let opacity: number;
+          if (d >= 0) {
+            const t = Math.min(1, d);
+            scale = 1 - 0.42 * t;
+            opacity = 1 - t;
+            slide.style.zIndex = String(10 - i);
+          } else {
+            const t = Math.min(1, -d);
+            scale = 1 + 1.1 * t * t;
+            opacity = 1 - t * 1.25;
+            slide.style.zIndex = String(20 + i);
+          }
+          opacity = Math.max(0, Math.min(1, opacity));
+          slide.style.visibility = opacity <= 0.01 ? "hidden" : "visible";
+          if (layer) {
+            layer.style.transform = `scale(${scale.toFixed(4)})`;
+            layer.style.opacity = opacity.toFixed(3);
+            layer.style.setProperty("--inner", (1 + Math.max(0, Math.min(1, d)) * 0.12).toFixed(3));
+          }
+        });
+        const idx = Math.max(0, Math.min(last, Math.round(pos)));
+        if (idx !== zmCur) {
+          zmCur = idx;
+          zmTexts.forEach((t, k) => t?.classList.toggle("on", k === idx));
+          if (zmNum) zmNum.textContent = String(idx + 1).padStart(2, "0");
+        }
+      };
+
+      zmMM.add("(prefers-reduced-motion: no-preference)", () => {
+        zmSec.classList.add("zm-live");
+        const zoom = { p: 0 };
+        zmCur = -1;
+        zmRender(0);
+        gsap.to(zoom, {
+          p: 1,
+          ease: "none",
+          onUpdate: () => zmRender(zoom.p),
+          scrollTrigger: {
+            trigger: zmStage,
+            // Measured after the showcase and How We Work pins above it (both created later in this file).
+            refreshPriority: -2,
+            start: "top top",
+            end: () => `+=${Math.round(window.innerHeight * (last + 0.2))}`,
+            pin: true,
+            scrub: 0.8,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        return () => {
+          zmSec.classList.remove("zm-live");
+          zmSlides.forEach((slide, i) => {
+            slide.style.removeProperty("z-index");
+            slide.style.removeProperty("visibility");
+            zmLayers[i]?.removeAttribute("style");
+            zmTexts[i]?.classList.add("on");
+          });
+        };
+      });
+    }
 
     // 7. Interactive Industry Live Dashboard Switcher (From 01_Storefront_Transformation.html)
     const industryData: Record<
@@ -650,13 +730,21 @@ export default function CuratedMasterHomepage() {
       b.addEventListener("click", () => activateIndustry(b));
     });
 
-    // 8. FAQ Accordion
-    $$<HTMLElement>(".faq-q").forEach((b) =>
+    // 8. FAQ Accordion: only one answer open at a time
+    const faqButtons = $$<HTMLElement>(".faq-q");
+    faqButtons.forEach((b) =>
       b.addEventListener("click", () => {
         const x = b.closest(".faq-item");
         if (!x) return;
-        x.classList.toggle("open");
-        b.setAttribute("aria-expanded", String(x.classList.contains("open")));
+        const willOpen = !x.classList.contains("open");
+        faqButtons.forEach((other) => {
+          const item = other.closest(".faq-item");
+          if (!item || item === x) return;
+          item.classList.remove("open");
+          other.setAttribute("aria-expanded", "false");
+        });
+        x.classList.toggle("open", willOpen);
+        b.setAttribute("aria-expanded", String(willOpen));
       })
     );
 
@@ -739,6 +827,62 @@ export default function CuratedMasterHomepage() {
         })
       );
     }
+    // Navbar dropdown menus: hover to open on desktop, click/keyboard everywhere, one open at a time.
+    const navDds = $$<HTMLElement>(".nav-dd .dd");
+    let ddCloseTimer: ReturnType<typeof setTimeout> | undefined;
+    const setDd = (target: HTMLElement | null) => {
+      navDds.forEach((dd) => {
+        const on = dd === target;
+        dd.classList.toggle("open", on);
+        $<HTMLElement>(".dd-btn", dd)?.setAttribute("aria-expanded", String(on));
+      });
+    };
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    navDds.forEach((dd) => {
+      const ddBtn = $<HTMLElement>(".dd-btn", dd);
+      ddBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setDd(dd.classList.contains("open") ? null : dd);
+      });
+      if (finePointer) {
+        dd.addEventListener("mouseenter", () => {
+          if (ddCloseTimer) clearTimeout(ddCloseTimer);
+          setDd(dd);
+        });
+        dd.addEventListener("mouseleave", () => {
+          if (ddCloseTimer) clearTimeout(ddCloseTimer);
+          ddCloseTimer = setTimeout(() => {
+            if (dd.classList.contains("open")) setDd(null);
+          }, 180);
+        });
+      }
+      // Choosing any link closes the menu.
+      $$<HTMLElement>(".dd-panel a", dd).forEach((a) => a.addEventListener("click", () => setDd(null)));
+      // List + preview menus: the hovered/focused item drives the preview image.
+      const listLinks = $$<HTMLElement>(".dd-list a[data-i]", dd);
+      const figures = $$<HTMLElement>(".dd-preview figure", dd);
+      listLinks.forEach((a) => {
+        const activate = () => {
+          listLinks.forEach((x) => x.classList.toggle("on", x === a));
+          figures.forEach((f, i) => f.classList.toggle("on", String(i) === a.dataset.i));
+        };
+        a.addEventListener("mouseenter", activate);
+        a.addEventListener("focus", activate);
+      });
+    });
+    const onDdDocClick = (e: MouseEvent) => {
+      if (!(e.target as Element | null)?.closest(".nav-dd .dd")) setDd(null);
+    };
+    const onDdKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      const openDd = navDds.find((dd) => dd.classList.contains("open"));
+      if (!openDd) return;
+      setDd(null);
+      $<HTMLElement>(".dd-btn", openDd)?.focus();
+    };
+    document.addEventListener("click", onDdDocClick);
+    document.addEventListener("keydown", onDdKey);
+
     const onHeaderScroll = () => {
       const sy = window.scrollY || document.documentElement.scrollTop || 0;
       $<HTMLElement>("#header")?.classList.toggle("scrolled", sy > 30);
@@ -952,6 +1096,8 @@ export default function CuratedMasterHomepage() {
           onUpdate: () => render(journey.p),
           scrollTrigger: {
             trigger: jrSec,
+            // Measured after the showcase pin above it.
+            refreshPriority: -1,
             start: "top top",
             end: () => `+=${Math.round(distance() / (1 - HOLD))}`,
             pin: true,
@@ -1081,17 +1227,6 @@ export default function CuratedMasterHomepage() {
           }
         });
 
-        // Transformation 4-Chapter scroll progression
-        const shiftSec = $<HTMLElement>("#transformation");
-        if (shiftSec && Date.now() > manualUntil) {
-          const r = shiftSec.getBoundingClientRect();
-          if (r.top < vh * 0.55 && r.bottom > vh * 0.35) {
-            const prog = Math.max(0, Math.min(0.99, (vh * 0.55 - r.top) / Math.max(1, r.height * 0.85)));
-            const idx = Math.min(3, Math.floor(prog * 4));
-            if (idx !== chapter) setChapter(idx, false);
-          }
-        }
-
         ticking = false;
       });
     };
@@ -1112,6 +1247,11 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
       jrMM.revert();
+      zmMM.revert();
+      stObserver?.disconnect();
+      if (ddCloseTimer) clearTimeout(ddCloseTimer);
+      document.removeEventListener("click", onDdDocClick);
+      document.removeEventListener("keydown", onDdKey);
       ScrollTrigger.getAll().forEach((st) => st.kill());
       body.classList.remove("orbit", "atelier", "blueprint", "lock", "gsap-ready");
     };
