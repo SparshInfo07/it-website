@@ -817,6 +817,108 @@ export default function CuratedMasterHomepage() {
       });
     }
 
+    // 11b. How We Work: horizontal journey
+    // On wider screens the section pins and the four stages slide sideways as you scroll down,
+    // while a dot travels a curved path between the step numbers and a 4-part bar fills.
+    // Phones and reduced-motion visitors get a plain vertical list (handled in CSS).
+    const jrSec = $<HTMLElement>("#process");
+    const jrHead = $<HTMLElement>(".jr-head", root);
+    const jrTrack = $<HTMLElement>("#jrTrack");
+    const jrSvg = $<SVGSVGElement>("#jrSvg");
+    const jrBase = $<SVGPathElement>("#jrBase");
+    const jrDone = $<SVGPathElement>("#jrDone");
+    const jrDot = $<SVGCircleElement>("#jrDot");
+    const jrRing = $<SVGCircleElement>("#jrRing");
+    const jrPanels = jrTrack ? $$<HTMLElement>(".jr-panel", jrTrack) : [];
+    const jrBars = $$<HTMLElement>(".jr-progress b");
+    const jrMM = gsap.matchMedia();
+
+    if (jrSec && jrHead && jrTrack && jrSvg && jrBase && jrDone && jrDot && jrRing && jrPanels.length) {
+      let pathLen = 0;
+      const HOLD = 0.18; // last stretch of the pin where the finished journey stays on screen
+
+      const distance = () => Math.max(0, jrTrack.scrollWidth - window.innerWidth);
+
+      // Line the first stage up with the heading's left edge.
+      const alignTrack = () => {
+        const left = jrHead.getBoundingClientRect().left;
+        jrTrack.style.paddingLeft = `${Math.round(left)}px`;
+        jrTrack.style.paddingRight = `${Math.round(left)}px`;
+      };
+
+      // A wave through points just above each step number, drawn in the track's own coordinates.
+      const buildPath = () => {
+        const w = jrTrack.scrollWidth;
+        const h = jrTrack.offsetHeight;
+        jrSvg.setAttribute("width", String(w));
+        jrSvg.setAttribute("height", String(h));
+        jrSvg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        const pts = jrPanels.map((p) => [p.offsetLeft + 6, p.offsetTop + (p.classList.contains("jr-high") ? 0 : 88) - 22]);
+        let d = `M ${pts[0][0] - 80} ${pts[0][1]}`;
+        pts.forEach(([x, y], i) => {
+          const [px, py] = i === 0 ? [pts[0][0] - 80, pts[0][1]] : pts[i - 1];
+          const mx = (px + x) / 2;
+          d += ` C ${mx} ${py}, ${mx} ${y}, ${x} ${y}`;
+        });
+        const last = pts[pts.length - 1];
+        d += ` L ${last[0] + 360} ${last[1]}`;
+        jrBase.setAttribute("d", d);
+        jrDone.setAttribute("d", d);
+        pathLen = jrDone.getTotalLength();
+        jrDone.style.strokeDasharray = String(pathLen);
+      };
+
+      const render = (p: number) => {
+        const k = Math.min(1, p / (1 - HOLD)); // journey progress, finished before the pin releases
+        jrTrack.style.transform = `translate3d(${(-k * distance()).toFixed(1)}px, 0, 0)`;
+        const at = k * pathLen;
+        jrDone.style.strokeDashoffset = (pathLen - at).toFixed(1);
+        const pt = jrDone.getPointAtLength(at);
+        jrDot.setAttribute("cx", pt.x.toFixed(1));
+        jrDot.setAttribute("cy", pt.y.toFixed(1));
+        jrRing.setAttribute("cx", pt.x.toFixed(1));
+        jrRing.setAttribute("cy", pt.y.toFixed(1));
+        const seg = k * jrPanels.length;
+        jrPanels.forEach((el, i) => el.classList.toggle("on", i === 0 || seg >= i + 0.1));
+        jrBars.forEach((b, i) => {
+          b.style.width = `${(Math.max(0, Math.min(1, seg - i)) * 100).toFixed(1)}%`;
+        });
+      };
+
+      jrMM.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+        jrSec.classList.add("jr-live");
+        const journey = { p: 0 };
+        alignTrack();
+        buildPath();
+        render(0);
+        gsap.to(journey, {
+          p: 1,
+          ease: "none",
+          onUpdate: () => render(journey.p),
+          scrollTrigger: {
+            trigger: jrSec,
+            start: "top top",
+            end: () => `+=${Math.round(distance() / (1 - HOLD))}`,
+            pin: true,
+            scrub: 0.8,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onRefresh: () => {
+              alignTrack();
+              buildPath();
+              render(journey.p);
+            },
+          },
+        });
+        return () => {
+          jrSec.classList.remove("jr-live");
+          jrTrack.style.removeProperty("transform");
+          jrTrack.style.removeProperty("padding-left");
+          jrTrack.style.removeProperty("padding-right");
+        };
+      });
+    }
+
     // 12. Bottom Curation Source File Filter Dock
     const filterBtns = $$<HTMLButtonElement>("[data-filter-src]");
     const filterSecs = $$<HTMLElement>("[data-src-file]");
@@ -935,15 +1037,6 @@ export default function CuratedMasterHomepage() {
           }
         }
 
-        // Process Line scroll scrub (0% -> 100%)
-        const procSec = $<HTMLElement>("#process");
-        const procLine = $<HTMLElement>("#processLine");
-        if (procSec && procLine) {
-          const r = procSec.getBoundingClientRect();
-          const prog = Math.max(0, Math.min(1, (vh * 0.82 - r.top) / Math.max(1, r.height * 0.75)));
-          procLine.style.width = `${(prog * 100).toFixed(1)}%`;
-        }
-
         ticking = false;
       });
     };
@@ -963,6 +1056,7 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
+      jrMM.revert();
       ScrollTrigger.getAll().forEach((st) => st.kill());
       body.classList.remove("orbit", "atelier", "blueprint", "lock", "gsap-ready");
     };
