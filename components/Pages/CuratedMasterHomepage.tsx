@@ -232,25 +232,80 @@ export default function CuratedMasterHomepage() {
       toast("Brief generated — click to copy");
     });
 
-    // 4. Contact Form Brief Generator
-    $<HTMLFormElement>("#contactForm")?.addEventListener("submit", (e) => {
+    // 4. Contact form: sends the enquiry to /api/contact-form (emails the team and the visitor)
+    const contactForm = $<HTMLFormElement>("#contactForm");
+    let contactSending = false;
+    contactForm?.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const f = e.currentTarget as HTMLFormElement;
-      if (!f.reportValidity()) return;
-      const d = new FormData(f);
-      const txt = `SPARSH IT — PROJECT ENQUIRY BRIEF\nName: ${d.get("name")}\nEmail: ${d.get("email")}\nBusiness: ${d.get("business") || "Not specified"}\nSolution: ${d.get("need")}\nDetails: ${d.get("message")}`;
-      const brief = $<HTMLElement>("#contactBrief");
-      const copyBtn = $<HTMLElement>("#copyContact");
-      if (brief) {
-        brief.textContent = txt;
-        brief.classList.add("show");
+      if (contactSending || !contactForm.reportValidity()) return;
+      const d = new FormData(contactForm);
+      const val = (k: string) => String(d.get(k) ?? "").trim();
+      const business = val("business");
+      const message = val("message");
+      const payload = {
+        firstName: val("firstName"),
+        lastName: val("lastName"),
+        email: val("email"),
+        phone: val("phone"),
+        referral: val("referral"),
+        service: val("need"),
+        requirement: business ? `Company: ${business}\n\n${message}` : message,
+      };
+
+      const submitBtn = $<HTMLButtonElement>("#contactSubmit", contactForm);
+      const status = $<HTMLElement>("#contactStatus", contactForm);
+      const setStatus = (text: string, isError = false) => {
+        if (!status) return;
+        status.textContent = text;
+        status.classList.toggle("is-error", isError);
+      };
+
+      contactSending = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
       }
-      if (copyBtn) copyBtn.style.display = "flex";
-      toast("Enquiry brief generated ✓");
-    });
-    $("#copyContact")?.addEventListener("click", () => {
-      const txt = $("#contactBrief")?.textContent || "";
-      safeCopy(txt);
+      setStatus("");
+
+      try {
+        const res = await fetch("/api/contact-form", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        if (!res.ok) {
+          // 400 = something the visitor typed; show the server's field message. Anything else stays generic.
+          throw new Error(
+            res.status === 400 && data.error
+              ? data.error
+              : "We couldn't send your enquiry right now. Please try again in a minute, or email info@sparshit.com.",
+          );
+        }
+
+        const done = document.createElement("div");
+        done.className = "contact-done";
+        const title = document.createElement("b");
+        title.textContent = `Thanks, ${payload.firstName}. Your enquiry is on its way.`;
+        const note = document.createElement("span");
+        note.textContent = `We've sent a confirmation to ${payload.email}.`;
+        done.append(title, note);
+        contactForm.replaceChildren(done);
+        toast("Enquiry sent");
+      } catch (err) {
+        setStatus(
+          err instanceof Error && err.message
+            ? err.message
+            : "We couldn't send your enquiry right now. Please try again in a minute, or email info@sparshit.com.",
+          true,
+        );
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send enquiry";
+        }
+      } finally {
+        contactSending = false;
+      }
     });
 
     // 5. Interactive Philosophy Tabs & Cards + Capabilities Watermark Stage
