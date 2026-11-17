@@ -691,146 +691,130 @@ export default function CuratedMasterHomepage() {
     window.addEventListener("scroll", onHeaderScroll, { passive: true });
     onHeaderScroll();
 
-    // 11. Auto-Scrolling + Draggable Feature Showcase (No Arrows)
+    // 11. Scroll-driven 3D concept cylinder
+    // The stage pins full-screen. Cards sit a quarter-turn apart around a vertical cylinder,
+    // each one a step lower than the last, all facing outward. The card in focus faces the
+    // viewer flat in the centre; the previous card is edge-on far left (its back showing),
+    // the next card edge-on far right and lower, and the one after that sits dimmed directly
+    // behind and below. Scrolling turns the cylinder; cards stay where scrolling stops.
     const featSection = $<HTMLElement>("#featured");
     const v = $<HTMLElement>("#featureViewport");
     const track = $<HTMLElement>("#featureTrack");
     const cards = track ? $$<HTMLElement>(".feature-card", track) : [];
-    const cur = $<HTMLElement>("#dragCursor");
-    const progFill = $<HTMLElement>("#featProgressFill");
     let onResizeFeature: (() => void) | undefined;
-    let onWinPointerMove: ((e: PointerEvent) => void) | undefined;
-    let onWinPointerUp: ((e: PointerEvent) => void) | undefined;
 
-    if (featSection && v && track && cards.length) {
-      const getMaxScroll = () => Math.max(0, track.scrollWidth - v.clientWidth + 32);
-      let currentX = 0;
-      let drag = false;
-      let startX = 0;
-      let lastX = 0;
-      let velocityX = 0;
-      let originX = 0;
-      let started = false;
+    if (featSection && v && track && cards.length > 1) {
+      const n = cards.length;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
-      const clamp = (n: number) => Math.max(-getMaxScroll(), Math.min(0, n));
+      v.classList.add("is-ring");
+      if (reduceMotion) v.classList.add("is-static");
 
-      const updateProgress = (xVal: number) => {
-        if (!progFill) return;
-        const max = getMaxScroll();
-        const pct = max > 0 ? Math.min(100, Math.max(0, (-xVal / max) * 100)) : 0;
-        progFill.style.width = `${pct.toFixed(1)}%`;
+      const STEP = 90; // a quarter-turn between neighbouring cards
+      const RADIUS_PER_WIDTH = 1.0; // cylinder radius, in card widths
+      const DROP_PER_HEIGHT = 0.86; // vertical drop per step, in card heights
+
+      let radius = 0;
+      let drop = 0;
+      let activeIdx = -1;
+      const spiral = { pos: 0 };
+
+      const measure = () => {
+        radius = Math.round((cards[0].offsetWidth || 700) * RADIUS_PER_WIDTH);
+        drop = Math.round((cards[0].offsetHeight || 490) * DROP_PER_HEIGHT);
       };
 
-      const setTrackX = (n: number, animate = false) => {
-        currentX = clamp(n);
-        updateProgress(currentX);
-        if (animate) {
-          gsap.to(track, {
-            x: currentX,
-            duration: 0.55,
-            ease: "power3.out",
-            overwrite: "auto",
-          });
-        } else {
-          gsap.set(track, { x: currentX });
-        }
+      const setActive = (idx: number) => {
+        if (idx === activeIdx) return;
+        activeIdx = idx;
+        cards.forEach((card, i) => {
+          const on = i === idx;
+          card.classList.toggle("is-active", on);
+          card.setAttribute("aria-current", on ? "true" : "false");
+          card.tabIndex = on ? 0 : -1;
+        });
       };
 
-      // Automatic horizontal glide when scrolling vertically through #featured
-      ScrollTrigger.create({
-        trigger: featSection,
-        start: () => (window.innerWidth < 768 ? "top 64px" : "top 76px"),
-        end: () => `+=${Math.max(600, getMaxScroll())}`,
-        pin: true,
-        scrub: 0.5,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (!drag) {
-            setTrackX(-self.progress * getMaxScroll(), false);
-          }
-        },
-      });
-
-      // Smooth pointer drag anywhere on the viewport/cards
-      v.addEventListener("pointerdown", (e) => {
-        if (e.pointerType === "mouse" && e.button !== 0) return;
-        drag = true;
-        started = false;
-        startX = e.clientX;
-        lastX = e.clientX;
-        velocityX = 0;
-        originX = currentX;
-        v.classList.add("is-dragging");
-        gsap.killTweensOf(track);
-      });
-
-      onWinPointerMove = (e: PointerEvent) => {
-        if (cur && window.matchMedia("(pointer:fine)").matches) {
-          cur.style.left = e.clientX + "px";
-          cur.style.top = e.clientY + "px";
-          cur.textContent = drag ? "MOVE ↔" : "DRAG ↔";
-        }
-        if (!drag) return;
-        const delta = e.clientX - startX;
-        velocityX = e.clientX - lastX;
-        lastX = e.clientX;
-        if (Math.abs(delta) > 4) started = true;
-        setTrackX(originX + delta, false);
+      const render = (pos: number) => {
+        cards.forEach((card, i) => {
+          const d = i - pos; // < 0: already passed (left, higher) · > 0: coming up (right, lower)
+          const dist = Math.abs(d);
+          const angle = d * STEP;
+          const facing = Math.cos((angle * Math.PI) / 180); // 1 = facing viewer, -1 = directly behind
+          // Move the cylinder back by its radius so the card in focus sits at depth 0, perfectly flat.
+          card.style.transform =
+            `translate3d(0, ${(d * drop).toFixed(1)}px, ${-radius}px) ` +
+            `rotateY(${angle.toFixed(2)}deg) translateZ(${radius}px)`;
+          card.style.setProperty("--ring-dim", Math.min(0.8, (1 - facing) * 0.45 + dist * 0.08).toFixed(3));
+          const opacity = clamp01(3 - dist * 1.2); // fully visible to two steps away, gone by 2.5
+          card.style.opacity = opacity.toFixed(3);
+          card.style.visibility = opacity < 0.02 ? "hidden" : "visible";
+        });
+        setActive(Math.max(0, Math.min(n - 1, Math.round(pos))));
       };
 
-      onWinPointerUp = () => {
-        if (!drag) return;
-        drag = false;
-        v.classList.remove("is-dragging");
-        if (started) {
-          setTrackX(currentX + velocityX * 5, true);
-          v.dataset.moved = "true";
-          setTimeout(() => delete v.dataset.moved, 90);
-        }
+      let spiralTrigger: ScrollTrigger | undefined;
+      const goTo = (idx: number) => {
+        if (!spiralTrigger) return;
+        const top = spiralTrigger.start + (idx / (n - 1)) * (spiralTrigger.end - spiralTrigger.start);
+        window.scrollTo({ top, behavior: "smooth" });
       };
 
-      window.addEventListener("pointermove", onWinPointerMove, { passive: true });
-      window.addEventListener("pointerup", onWinPointerUp);
-      window.addEventListener("pointercancel", onWinPointerUp);
+      if (reduceMotion) {
+        cards.forEach((card) => {
+          card.style.removeProperty("transform");
+          card.style.removeProperty("opacity");
+        });
+      } else {
+        measure();
+        render(0);
+        const tween = gsap.to(spiral, {
+          pos: n - 1,
+          ease: "none",
+          onUpdate: () => render(spiral.pos),
+          scrollTrigger: {
+            trigger: v,
+            start: "top top",
+            end: () => `+=${Math.round(window.innerHeight * 0.9 * (n - 1))}`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            // No snapping: the cards stay exactly where the visitor stops scrolling.
+          },
+        });
+        spiralTrigger = tween.scrollTrigger;
 
-      // Also support horizontal two-finger trackpad swipe directly on viewport
-      v.addEventListener(
-        "wheel",
-        (e) => {
-          if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) {
-            e.preventDefault();
-            setTrackX(currentX - e.deltaX, false);
-          }
-        },
-        { passive: false }
-      );
+        onResizeFeature = () => {
+          measure();
+          render(spiral.pos);
+        };
+        window.addEventListener("resize", onResizeFeature);
+      }
+
+      const titles = [
+        "Digital Showroom & Catalogue Concept",
+        "Unified Admin & Operations Concept",
+        "B2B RFQ Quotation Workflow Concept",
+        "Local-to-Digital Storefront Transformation",
+      ];
+      const desc =
+        "Interactive concept engineered by Sparsh IT. Scroll through the showcase, or request a tailored project scope to see how we adapt this architecture for your business.";
 
       cards.forEach((card, i) => {
+        // A card that isn't in front turns the spiral to itself; the front card opens its details.
         card.addEventListener("click", () => {
-          if (v.dataset.moved) return;
-          const titles = [
-            "Digital Showroom & Catalogue Concept",
-            "Unified Admin & Operations Concept",
-            "B2B RFQ Quotation Workflow Concept",
-            "Local-to-Digital Storefront Transformation",
-          ];
-          const desc =
-            "Interactive concept engineered by Sparsh IT. Scroll or drag the showcase, or request a tailored project scope to see how we adapt this architecture for your business.";
-          showInfo(titles[i], desc, "SPARSH IT · INTERACTIVE CONCEPT");
+          if (!reduceMotion && i !== activeIdx) goTo(i);
+          else showInfo(titles[i] ?? "Sparsh IT Concept", desc, "SPARSH IT · INTERACTIVE CONCEPT");
+        });
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            card.click();
+          }
         });
       });
-
-      onResizeFeature = () => {
-        setTrackX(currentX, false);
-        ScrollTrigger.refresh();
-      };
-      window.addEventListener("resize", onResizeFeature);
-
-      if (window.matchMedia("(pointer:fine)").matches && cur) {
-        v.addEventListener("pointerenter", () => cur.classList.add("is-on"));
-        v.addEventListener("pointerleave", () => cur.classList.remove("is-on"));
-      }
     }
 
     // 12. Bottom Curation Source File Filter Dock
@@ -875,23 +859,24 @@ export default function CuratedMasterHomepage() {
       );
     });
 
-    gsap.fromTo(
-      $$(".feature-card"),
-      { y: 75, rotation: (i) => (i % 2 ? 6 : -5), opacity: 0.5 },
-      {
-        y: 0,
-        rotation: 0,
-        opacity: 1,
-        duration: 1.05,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#featured",
-          start: "top 72%",
-          once: true,
-        },
-      }
-    );
+    // Spiral entrance: fade the stage in (card transforms belong to the spiral above).
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Opacity only: the stage is pinned, so it must not carry its own transform.
+      gsap.fromTo(
+        "#featureViewport",
+        { autoAlpha: 0 },
+        {
+          autoAlpha: 1,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#featured",
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
+    }
 
     let ticking = false;
     const onScrollChoreography = () => {
@@ -978,11 +963,6 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
-      if (onWinPointerMove) window.removeEventListener("pointermove", onWinPointerMove);
-      if (onWinPointerUp) {
-        window.removeEventListener("pointerup", onWinPointerUp);
-        window.removeEventListener("pointercancel", onWinPointerUp);
-      }
       ScrollTrigger.getAll().forEach((st) => st.kill());
       body.classList.remove("orbit", "atelier", "blueprint", "lock", "gsap-ready");
     };
