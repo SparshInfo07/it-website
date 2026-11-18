@@ -70,6 +70,105 @@ export default function CuratedMasterHomepage() {
       });
     });
 
+    // 1b. Hero slot roll: the big word under "We build" rolls letter by letter to the next word.
+    // The line has a fixed height and one font size (fitted to the widest word), so nothing below it moves.
+    const srSlot = $<HTMLElement>("#srSlot");
+    const srLine = $<HTMLElement>("#hero-panel-b .sr-l2");
+    const srStage = $<HTMLElement>("#hero-panel-b .sr-stage");
+    const srButtons = $$<HTMLButtonElement>("#hero-panel-b .sr-idx button");
+    const SR_WORDS = ["WEBSITES", "STORES", "DASHBOARDS", "APPS", "WHAT'S NEXT"];
+    const SR_HOLD = 2600;
+    const srReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let srPrev = "";
+    let srCur = 0;
+    let srTimer: ReturnType<typeof setTimeout> | undefined;
+    let srAlive = true;
+
+    const srFit = () => {
+      if (!srSlot || !srLine || !srStage) return;
+      const m = document.createElement("span");
+      m.className = "sr-fitm";
+      srLine.append(m);
+      let widest = 0;
+      SR_WORDS.forEach((w) => {
+        m.textContent = `${w}.`;
+        widest = Math.max(widest, m.getBoundingClientRect().width);
+      });
+      m.remove();
+      if (!widest) return;
+      const size = Math.min(180, Math.floor(((srStage.clientWidth * 0.98) / widest) * 100));
+      srLine.style.fontSize = `${size}px`;
+      srSlot.style.transition = "none";
+      srSlot.style.width = "auto";
+      srSlot.style.width = `${srSlot.scrollWidth}px`;
+      void srSlot.offsetWidth;
+      srSlot.style.transition = "";
+    };
+
+    const srRender = (word: string) => {
+      if (!srSlot) return;
+      srSlot.style.width = `${srSlot.offsetWidth}px`;
+      srSlot.textContent = "";
+      [...word].forEach((ch, i) => {
+        const cell = document.createElement("span");
+        const sizer = document.createElement("b");
+        const col = document.createElement("span");
+        cell.className = "sr-cell";
+        col.className = "sr-col";
+        sizer.textContent = ch;
+        [srPrev[i] || " ", String.fromCharCode(65 + ((i * 7 + word.length) % 26)), ch].forEach((c) => {
+          const span = document.createElement("span");
+          span.textContent = c;
+          col.append(span);
+        });
+        cell.append(sizer, col);
+        srSlot.append(cell);
+        if (srPrev && !srReduce) {
+          col.animate([{ transform: "translateY(0)" }, { transform: "translateY(-66.666%)" }], {
+            duration: 760,
+            delay: i * 55,
+            easing: "cubic-bezier(.55,1.55,.45,1)",
+            fill: "forwards",
+          });
+        } else {
+          col.style.transform = "translateY(-66.666%)";
+        }
+      });
+      const width = $$<HTMLElement>(".sr-cell", srSlot).reduce((t, c) => t + c.getBoundingClientRect().width, 0);
+      void srSlot.offsetWidth;
+      srSlot.style.width = `${width}px`;
+      srPrev = word;
+    };
+
+    const srGo = (i: number) => {
+      if (!srAlive) return;
+      srCur = i;
+      srRender(SR_WORDS[i]);
+      srButtons.forEach((b, k) => {
+        b.classList.remove("on");
+        b.setAttribute("aria-pressed", String(k === i));
+        b.style.setProperty("--sr-hold", `${SR_HOLD}ms`);
+      });
+      const active = srButtons[i];
+      if (active) {
+        void active.offsetWidth;
+        active.classList.add("on");
+      }
+      if (srTimer) clearTimeout(srTimer);
+      if (!srReduce) srTimer = setTimeout(() => srGo((srCur + 1) % SR_WORDS.length), SR_HOLD);
+    };
+
+    srButtons.forEach((b) => b.addEventListener("click", () => srGo(Number(b.dataset.sr) || 0)));
+    const onSrResize = () => srFit();
+    if (srSlot) {
+      window.addEventListener("resize", onSrResize);
+      document.fonts.ready.then(() => {
+        if (!srAlive) return;
+        srFit();
+        srGo(srReduce ? SR_WORDS.length - 1 : 0);
+      });
+    }
+
     // 2. Toast & Clipboard helpers
     let toastTimer: ReturnType<typeof setTimeout> | undefined;
     const toast = (message: string) => {
@@ -1236,6 +1335,9 @@ export default function CuratedMasterHomepage() {
 
     return () => {
       if (toastTimer) clearTimeout(toastTimer);
+      srAlive = false;
+      if (srTimer) clearTimeout(srTimer);
+      window.removeEventListener("resize", onSrResize);
       root.removeEventListener("pointerover", onPhiloInteract);
       root.removeEventListener("click", onPhiloInteract);
       root.removeEventListener("focusin", onPhiloInteract);
