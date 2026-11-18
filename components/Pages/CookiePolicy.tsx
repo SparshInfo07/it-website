@@ -205,12 +205,8 @@ export default function CookiePolicy() {
         </div>
       </section>
 
-      {/* Footer without duplicate CTA */}
-      <div className="w-full bg-[#f8f9fa] border-t border-slate-200">
-        <div className="max-w-[1440px] mx-auto px-3 sm:px-5 lg:px-8 pt-4 sm:pt-6">
-          <SiteFooter data={siteFooterData} />
-        </div>
-      </div>
+      {/* Same full-width footer as the homepage */}
+      <SiteFooter data={siteFooterData} />
     </>
   );
 }

@@ -1,586 +1,831 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  ChevronDown,
-  ChevronRight,
-  Menu,
-  X,
-  ArrowUpRight,
-  Sparkles,
-  BrainCircuit,
-  ShieldCheck,
-  Code2,
-  Database,
-  Smartphone,
-  Palette,
-  CheckCircle2,
-  Globe,
-  Landmark,
-  HeartPulse,
-  ShoppingBag,
-  Truck,
-  Hotel,
-  GraduationCap,
-} from "lucide-react";
-import { NAVIGATION_DATA } from "@/data/navigation";
-import { ASSETS } from "@/constants/images.constants";
-import Button from "@/components/Atoms/Button";
 
-// Icon dictionary mapped to iconName strings from NAVIGATION_DATA
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  BrainCircuit,
-  ShieldCheck,
-  Code2,
-  Database,
-  Smartphone,
-  Palette,
-  CheckCircle2,
-  Globe,
-  Landmark,
-  HeartPulse,
-  ShoppingBag,
-  Truck,
-  Hotel,
-  GraduationCap,
-};
+const CURATED_SINGLE_ROUTES = new Set([
+  "/",
+  "/showcase",
+  "/transformation",
+  "/packages",
+  "/solutions/silver",
+  "/solutions/gold",
+  "/solutions/premium",
+  "/industries/manufacturers-wholesale",
+  "/industries/service-businesses",
+  "/industries/startups-founders",
+  "/our-philosophy",
+  "/how-we-work",
+  "/selected-work",
+  "/faqs",
+]);
 
-const emptySubscribe = () => () => { };
-
-function useIsMounted() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
+const HOMEPAGE_NAVBAR_CSS = `
+#header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 150 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  padding: 10px 20px 0 !important;
+  transition: padding 0.35s cubic-bezier(0.19, 1, 0.22, 1) !important;
+  font-family: 'Manrope', sans-serif !important;
 }
+#header.scrolled {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  padding: 12px 20px 0 !important;
+}
+#header .nav.container {
+  max-width: 1380px !important;
+  width: 100% !important;
+  height: 68px !important;
+  padding: 0 28px !important;
+  margin: 0 auto !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 36px !important;
+  position: relative !important;
+  transition: max-width 0.38s cubic-bezier(0.19, 1, 0.22, 1),
+              height 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              backdrop-filter 0.35s ease,
+              padding 0.35s ease !important;
+}
+#header.scrolled .nav.container {
+  max-width: 1240px !important;
+  height: 62px !important;
+  padding: 0 24px !important;
+  border-radius: 999px !important;
+  background: rgba(7, 18, 38, 0.9) !important;
+  backdrop-filter: blur(22px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(165%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 14px 40px rgba(2, 8, 23, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+}
+#header .brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.03em !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+  text-decoration: none !important;
+}
+#header .brand .brand-logo-svg {
+  height: 44px !important;
+  width: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+#header.scrolled .brand .brand-logo-svg {
+  height: 42px !important;
+}
+#header .navlinks {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  flex: 0 1 auto !important;
+  margin: 0 auto !important;
+}
+#header .nav-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex: 0 0 auto !important;
+}
+#header .nav-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 40px !important;
+  padding: 0 18px !important;
+  border-radius: 999px !important;
+  background: #315dff !important;
+  color: #ffffff !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 20px rgba(49, 93, 255, 0.32) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+#header .nav-cta:hover {
+  background: #254edb !important;
+  transform: translateY(-1px) !important;
+}
+#header .hamburger {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+}
+#header .menu-mobile {
+  display: none;
+}
+#header .dd {
+  position: relative;
+}
+#header .dd.dd-wide {
+  position: static;
+}
+#header .dd-btn,
+#header .nav-dd .dd-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 14px !important;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #e2e8f0 !important;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px !important;
+  font-weight: 600 !important;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none !important;
+  text-shadow: 0 1px 3px rgba(2, 8, 23, 0.45);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+#header .dd-btn:hover,
+#header .nav-dd .dd-link:hover,
+#header .dd.open .dd-btn {
+  color: #9fb4ff !important;
+  background: rgba(255, 255, 255, 0.06);
+}
+#header .dd-chev {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+#header .dd.open .dd-chev {
+  transform: rotate(180deg);
+}
+#header .dd-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 200;
+  background: rgba(9, 20, 40, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 30px 70px -20px rgba(2, 8, 23, 0.6);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+  text-align: left;
+}
+#header .dd-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -16px;
+  height: 16px;
+}
+#header .dd.open .dd-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity 0.2s ease, transform 0.25s ease, visibility 0s;
+}
+#header .dd-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px !important;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93a4c3;
+  margin-bottom: 12px !important;
+}
+#header .dd-h::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: #315dff;
+}
+#header .dd-panel a {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px !important;
+  border-radius: 10px;
+  color: #e2e8f0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+#header .dd-panel a:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff !important;
+}
+#header .dd-mega {
+  left: 50% !important;
+  right: auto !important;
+  width: min(1120px, calc(100vw - 48px)) !important;
+  transform: translate(-50%, 8px) !important;
+  padding: 36px 40px 30px !important;
+}
+#header .dd.open .dd-mega {
+  transform: translate(-50%, 0) !important;
+}
+#header .dd-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 36px !important;
+}
+#header .dd-col {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  min-width: 0;
+}
+#header .dd-col a {
+  margin-left: -14px !important;
+  white-space: normal !important;
+  line-height: 1.35;
+}
+#header .dd-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 28px !important;
+  padding: 22px 28px !important;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #1b2f6b, #315dff);
+  color: #ffffff;
+}
+#header .dd-banner b {
+  display: block;
+  font-size: 19px !important;
+}
+#header .dd-banner span {
+  display: block;
+  font-size: 15px !important;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+#header .dd-panel a.dd-banner-btn {
+  flex: none;
+  background: #ffffff;
+  color: #13223a !important;
+  border-radius: 999px;
+  padding: 10px 18px !important;
+  font-weight: 800 !important;
+}
+#header .dd-panel a.dd-banner-btn:hover {
+  background: #e8eeff;
+  color: #13223a !important;
+}
+#header .dd-split {
+  display: grid;
+  grid-template-columns: 300px 400px !important;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#header .dd-list {
+  display: grid;
+  align-content: start;
+  gap: 4px !important;
+  padding: 26px 18px 26px 22px !important;
+}
+#header .dd-list .dd-h {
+  margin-left: 2px;
+}
+#header .dd-list a {
+  position: relative;
+  padding-left: 18px !important;
+}
+#header .dd-list a i {
+  font-style: normal;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #9fb4ff;
+}
+#header .dd-list a.on {
+  background: rgba(49, 93, 255, 0.16);
+  color: #ffffff !important;
+}
+#header .dd-list a.on::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 3px;
+  background: #315dff;
+}
+#header .dd-list a.on i {
+  opacity: 1;
+  transform: none;
+}
+#header .dd-preview {
+  position: relative;
+  min-height: 300px !important;
+  background: #0f1b30;
+}
+#header .dd-preview figure {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+#header .dd-preview figure.on {
+  opacity: 1;
+}
+#header .dd-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#header .dd-preview figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 48px 20px 18px !important;
+  font-size: 14.5px !important;
+  line-height: 1.45;
+  color: #ffffff;
+  background: linear-gradient(0deg, rgba(9, 20, 40, 0.92), transparent);
+}
+#header .dd-small {
+  min-width: 320px !important;
+  padding: 0;
+}
+@media (max-width: 980px) {
+  #header {
+    padding: 8px 14px 0 !important;
+  }
+  #header.scrolled {
+    padding: 8px 14px 0 !important;
+  }
+  #header .nav.container,
+  #header.scrolled .nav.container {
+    height: 60px !important;
+    padding: 0 18px !important;
+    gap: 14px !important;
+    max-width: 100% !important;
+  }
+  #header .navlinks,
+  #header .nav-cta {
+    display: none !important;
+  }
+  #header .hamburger {
+    display: inline-flex !important;
+  }
+  #header .brand .brand-logo-svg,
+  #header.scrolled .brand .brand-logo-svg {
+    height: 36px !important;
+  }
+  #header .menu-mobile.open {
+    display: grid !important;
+    position: fixed !important;
+    top: 74px !important;
+    left: 14px !important;
+    right: 14px !important;
+    background: rgba(7, 16, 34, 0.96) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 22px !important;
+    padding: 20px 24px !important;
+    gap: 12px !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+    z-index: 160 !important;
+    max-height: calc(100svh - 90px) !important;
+    overflow-y: auto !important;
+  }
+  #header .menu-mobile .mm-h {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #93a4c3;
+  }
+  #header .menu-mobile .mm-h:first-child {
+    margin-top: 0;
+  }
+  #header .menu-mobile a {
+    color: #f1f5ff !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    padding: 8px 4px !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+  #header .menu-mobile a:last-child {
+    border-bottom: 0 !important;
+    color: #60a5fa !important;
+  }
+}
+`;
 
 export default function Navbar() {
   const pathname = usePathname();
-  const mounted = useIsMounted();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [desktopOpenDropdown, setDesktopOpenDropdown] = useState<string | null>(null);
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const isCuratedRoute = CURATED_SINGLE_ROUTES.has(pathname);
 
-  // Close mobile menu on route change
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname);
-    setMobileMenuOpen(false);
-  }
-
-  // Lock body scroll and listen for Escape key when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.dataset.scrollLocked = "1";
-      document.body.style.overflow = "hidden";
-    } else {
-      delete document.body.dataset.scrollLocked;
-      document.body.style.overflow = "";
+    if (isCuratedRoute) return;
+    const root = headerRef.current;
+    if (!root) return;
+
+    const $ = <T extends Element = HTMLElement>(s: string, p: ParentNode = root): T | null =>
+      p.querySelector<T>(s);
+    const $$ = <T extends Element = HTMLElement>(s: string, p: ParentNode = root): T[] =>
+      Array.from(p.querySelectorAll<T>(s));
+
+    const menu = $<HTMLElement>("#mobileNav");
+    const hamb = $<HTMLElement>("#hamburger");
+    const onHambClick = () => {
+      if (!menu || !hamb) return;
+      const is = menu.classList.toggle("open");
+      hamb.setAttribute("aria-expanded", String(is));
+      hamb.textContent = is ? "×" : "☰";
+    };
+    hamb?.addEventListener("click", onHambClick);
+    if (menu && hamb) {
+      $$<HTMLElement>("a", menu).forEach((a) =>
+        a.addEventListener("click", () => {
+          menu.classList.remove("open");
+          hamb.textContent = "☰";
+          hamb.setAttribute("aria-expanded", "false");
+        })
+      );
     }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
+    const navDds = $$<HTMLElement>(".nav-dd .dd");
+    let ddCloseTimer: ReturnType<typeof setTimeout> | undefined;
+    const setDd = (target: HTMLElement | null) => {
+      navDds.forEach((dd) => {
+        const on = dd === target;
+        dd.classList.toggle("open", on);
+        $<HTMLElement>(".dd-btn", dd)?.setAttribute("aria-expanded", String(on));
+      });
     };
-    window.addEventListener("keydown", handleKeyDown);
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    navDds.forEach((dd) => {
+      const ddBtn = $<HTMLElement>(".dd-btn", dd);
+      ddBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setDd(dd.classList.contains("open") ? null : dd);
+      });
+      if (finePointer) {
+        dd.addEventListener("mouseenter", () => {
+          if (ddCloseTimer) clearTimeout(ddCloseTimer);
+          setDd(dd);
+        });
+        dd.addEventListener("mouseleave", () => {
+          if (ddCloseTimer) clearTimeout(ddCloseTimer);
+          ddCloseTimer = setTimeout(() => {
+            if (dd.classList.contains("open")) setDd(null);
+          }, 180);
+        });
+      }
+      $$<HTMLElement>(".dd-panel a", dd).forEach((a) => a.addEventListener("click", () => setDd(null)));
+      const listLinks = $$<HTMLElement>(".dd-list a[data-i]", dd);
+      const figures = $$<HTMLElement>(".dd-preview figure", dd);
+      listLinks.forEach((a) => {
+        const activate = () => {
+          listLinks.forEach((x) => x.classList.toggle("on", x === a));
+          figures.forEach((f, i) => f.classList.toggle("on", String(i) === a.dataset.i));
+        };
+        a.addEventListener("mouseenter", activate);
+        a.addEventListener("focus", activate);
+      });
+    });
+
+    const onDdDocClick = (e: MouseEvent) => {
+      if (!(e.target as Element | null)?.closest(".nav-dd .dd")) setDd(null);
+    };
+    const onDdKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      const openDd = navDds.find((dd) => dd.classList.contains("open"));
+      if (!openDd) return;
+      setDd(null);
+      $<HTMLElement>(".dd-btn", openDd)?.focus();
+    };
+    document.addEventListener("click", onDdDocClick);
+    document.addEventListener("keydown", onDdKey);
+
+    const onHeaderScroll = () => {
+      const sy = window.scrollY || document.documentElement.scrollTop || 0;
+      root.classList.toggle("scrolled", sy > 30);
+    };
+    window.addEventListener("scroll", onHeaderScroll, { passive: true });
+    onHeaderScroll();
 
     return () => {
-      delete document.body.dataset.scrollLocked;
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
+      hamb?.removeEventListener("click", onHambClick);
+      if (ddCloseTimer) clearTimeout(ddCloseTimer);
+      document.removeEventListener("click", onDdDocClick);
+      document.removeEventListener("keydown", onDdKey);
+      window.removeEventListener("scroll", onHeaderScroll);
     };
-  }, [mobileMenuOpen]);
+  }, [isCuratedRoute, pathname]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Handlers for smooth desktop dropdown with hover delay buffer
-  const handleMouseEnter = (label: string) => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-    }
-    setDesktopOpenDropdown(label);
-  };
-
-  const handleMouseLeave = () => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-    }
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setDesktopOpenDropdown(null);
-    }, 150);
-  };
-
-  if (pathname === "/") {
+  if (isCuratedRoute) {
     return null;
   }
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-[#04121d]/85 backdrop-blur-xl py-3 shadow-xl border-b border-teal-500/15"
-          : "bg-transparent py-5 sm:py-6"
-          }`}
-      >
-        <div className="container">
-          <div className="flex items-center justify-between">
-            {/* Brand Logo */}
-            {NAVIGATION_DATA?.brand?.href && (
-              <Link
-                href={NAVIGATION_DATA.brand.href}
-                className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-lg py-1"
-                aria-label={NAVIGATION_DATA?.brand?.name ? `${NAVIGATION_DATA.brand.name} Home` : undefined}
-              >
-                {ASSETS?.BRAND_LOGO && (
-                  <Image
-                    src={ASSETS.BRAND_LOGO}
-                    alt={NAVIGATION_DATA?.brand?.name || ""}
-                    width={280}
-                    height={99}
-                    priority
-                    className="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
-                )}
-              </Link>
-            )}
-
-            {/* Desktop Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-1 lg:gap-4">
-              {NAVIGATION_DATA.links.map((item) => {
-                const hasDropdown = Boolean(item.children?.length);
-
-                if (hasDropdown) {
-                  const isOpen = desktopOpenDropdown === item.label;
-
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative"
-                      onMouseEnter={() => handleMouseEnter(item.label)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setDesktopOpenDropdown(null)}
-                        className={`inline-flex items-center gap-1.5 text-sm lg:text-[18px] font-normal rounded-lg px-3 py-1.5 transition-colors cursor-pointer ${isOpen
-                          ? "text-white bg-white/10"
-                          : "text-slate-200 hover:text-white hover:bg-white/10"
-                          }`}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.label}</span>
-                        <ChevronDown
-                          className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-white" : ""
-                            }`}
-                        />
-                      </Link>
-
-                      {/* Mega Menu Dropdown Panel (White Reference Style) */}
-                      {isOpen && item.isMegaMenu && (
-                        <div
-                          className={`absolute top-full left-0 pt-2.5 z-50 ${item.children && item.children.length <= 6 ? "w-[660px] lg:w-[720px]" : "w-[760px] lg:w-[820px]"} max-w-[calc(100vw-2rem)] animate-in fade-in-0 zoom-in-95 duration-150 origin-top-left`}
-                          onMouseEnter={() => handleMouseEnter(item.label)}
-                          onMouseLeave={handleMouseLeave}
-                        >
-                          <div className="rounded-2xl bg-white border border-slate-100 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.04)]">
-                            {/* Top Header */}
-                            <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-slate-100 px-1">
-                              <span className="text-sm font-semibold uppercase tracking-wider text-black">
-                                {item.label === "Services" ? "Services & Capabilities" : "Industries We Serve"}
-                              </span>
-                              <Link
-                                href={item.href}
-                                onClick={() => setDesktopOpenDropdown(null)}
-                                className="group/all inline-flex items-center gap-1 text-[12px] font-medium text-[#0D9488] hover:text-[#0f766e] transition-colors"
-                              >
-                                <span>View All {item.label}</span>
-                                <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/all:translate-x-0.5" />
-                              </Link>
-                            </div>
-
-                            {/* 4-Column Grid of Service Cards */}
-                            <div className={`grid ${item.children && item.children.length <= 6 ? "grid-cols-3" : "grid-cols-4"} gap-2`}>
-                              {item.children?.map((child) => {
-                                const isCreated = child.href !== "#";
-                                const IconComponent =
-                                  (child.iconName && ICON_MAP[child.iconName]) || Sparkles;
-
-                                return (
-                                  <Link
-                                    key={child.label}
-                                    href={child.href}
-                                    onClick={(e) => {
-                                      if (!isCreated) {
-                                        e.preventDefault();
-                                      } else {
-                                        setDesktopOpenDropdown(null);
-                                      }
-                                    }}
-                                    className={`group/item relative flex flex-col p-3 rounded-xl transition-all duration-150 ${isCreated
-                                      ? "bg-transparent hover:bg-teal-50/70 cursor-pointer"
-                                      : "opacity-50 cursor-default"
-                                      }`}
-                                  >
-
-                                    <div className="flex items-center justify-between mb-2.5">
-                                      <div className="w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 text-slate-700 transition-all duration-200 group-hover/item:bg-[#0D9488] group-hover/item:text-white group-hover/item:shadow-sm">
-                                        <IconComponent className="w-4 h-4 transition-transform duration-200 group-hover/item:scale-105" />
-                                      </div>
-                                      {isCreated && (
-                                        <ArrowUpRight className="w-3.5 h-3.5 text-[#0D9488] opacity-0 -translate-x-0.5 translate-y-0.5 transition-all duration-150 group-hover/item:opacity-100 group-hover/item:translate-x-0 group-hover/item:translate-y-0 shrink-0" />
-                                      )}
-                                    </div>
-
-                                    {/* Title */}
-                                    <p className="text-sm text-[#061826] font-medium group-hover/item:text-[#0D9488] transition-colors min-h-[34px] flex items-start">
-                                      {child.label || ""}
-                                    </p>
-
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Standard Dropdown Panel (Industries) */}
-                      {isOpen && !item.isMegaMenu && (
-                        <div
-                          className="absolute top-full left-0 pt-3 z-50 w-80 sm:w-96 animate-in fade-in-0 zoom-in-95 duration-150 origin-top-left"
-                          onMouseEnter={() => handleMouseEnter(item.label)}
-                          onMouseLeave={handleMouseLeave}
-                        >
-                          <div className="rounded-2xl bg-white border border-slate-100 p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.15),0_0_0_1px_rgba(0,0,0,0.05)]">
-                            <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-slate-100 px-2 pt-1">
-                              <span className="text-xs font-semibold uppercase tracking-wider text-black">
-                                {item.label}
-                              </span>
-                              <Link
-                                href={item.href}
-                                onClick={() => setDesktopOpenDropdown(null)}
-                                className="group/all inline-flex items-center gap-1 text-[12px] font-medium text-[#0D9488] hover:text-[#0f766e] transition-colors"
-                              >
-                                <span>View All</span>
-                                <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/all:translate-x-0.5" />
-                              </Link>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              {item.children?.map((child) => {
-                                const isCreated = child.href !== "#";
-                                const IconComponent =
-                                  (child.iconName && ICON_MAP[child.iconName]) || Sparkles;
-
-                                return (
-                                  <Link
-                                    key={child.label}
-                                    href={child.href}
-                                    onClick={(e) => {
-                                      if (!isCreated) {
-                                        e.preventDefault();
-                                      } else {
-                                        setDesktopOpenDropdown(null);
-                                      }
-                                    }}
-                                    className={`group/item flex items-center justify-between rounded-xl p-2.5 transition-all duration-150 ${isCreated
-                                      ? "hover:bg-teal-50/70 cursor-pointer"
-                                      : "opacity-60 cursor-default hover:bg-slate-50"
-                                      }`}
-                                  >
-                                    <div className="flex items-center gap-3 min-w-0 pr-2">
-                                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 text-slate-700 group-hover/item:bg-[#0D9488] group-hover/item:text-white transition-all duration-200 shrink-0">
-                                        <IconComponent className="w-4 h-4" />
-                                      </div>
-                                      <div className="min-w-0">
-                                        <div className="flex items-center gap-2">
-                                          <span className="text-[13.5px] font-semibold text-slate-900 group-hover/item:text-[#0D9488] transition-colors leading-snug truncate">
-                                            {child.label}
-                                          </span>
-                                          {!isCreated && (
-                                            <span className="text-[10px] font-medium bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">
-                                              Soon
-                                            </span>
-                                          )}
-                                        </div>
-                                        {child.desc && (
-                                          <p className="text-[11.5px] text-slate-500 line-clamp-1 mt-0.5">
-                                            {child.desc}
-                                          </p>
-                                        )}
-                                      </div>
-                                    </div>
-                                    {isCreated && (
-                                      <ArrowUpRight className="w-4 h-4 text-[#0D9488] opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover/item:opacity-100 group-hover/item:translate-x-0 group-hover/item:translate-y-0 shrink-0" />
-                                    )}
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="inline-flex items-center text-[15px] lg:text-[18px] font-normal text-slate-200 hover:text-white hover:bg-white/10 rounded-lg px-3 py-1.5 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Right Action Button */}
-            <div className="hidden xl:flex items-center">
-              <Button
-                variant="primary"
-                href={NAVIGATION_DATA.cta.href}
-                className="border-0 shadow-none"
-                icon={
-                  <ChevronRight className="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5" />
-                }
-              >
-                {NAVIGATION_DATA.cta.label}
-              </Button>
-            </div>
-
-            {/* Mobile Menu Hamburger Button */}
-            <button
-              type="button"
-              className="xl:hidden inline-flex items-center justify-center p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition cursor-pointer"
-              onClick={() => setMobileMenuOpen(true)}
-              aria-label="Open navigation menu"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Drawer Rendered via React Portal (White Theme) */}
-      {mounted &&
-        createPortal(
-          <div
-            className={`xl:hidden fixed inset-0 z-[9999] transition-opacity duration-500 ease-in-out ${
-              mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            }`}
-            aria-hidden={!mobileMenuOpen}
-          >
-            {/* Backdrop Overlay with Smooth Blur */}
-            <div
-              className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity duration-500 ease-in-out"
-              onClick={() => setMobileMenuOpen(false)}
+      <style dangerouslySetInnerHTML={{ __html: HOMEPAGE_NAVBAR_CSS }} />
+      <header id="header" ref={headerRef}>
+        <div className="nav container">
+          <Link className="brand" href="/" aria-label="Sparsh IT Home">
+            <img
+              src="/sparshlogo_nav.svg"
+              alt="Sparsh IT"
+              className="brand-logo-svg"
+              width="132"
+              height="44"
             />
-
-            {/* Full-Screen Slider Panel (White Theme) */}
-            <div
-              data-lenis-prevent
-              className={`relative z-10 h-full w-full max-w-sm sm:max-w-md bg-white text-slate-900 flex flex-col shadow-2xl border-r border-slate-100 transition-transform duration-500 ease-in-out ${
-                mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-              }`}
-            >
-              {/* Header inside Mobile Slider */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0 bg-white">
-                {NAVIGATION_DATA?.brand?.href && (
-                  <Link
-                    href={NAVIGATION_DATA.brand.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center focus:outline-none"
-                    aria-label={`${NAVIGATION_DATA?.brand?.name || "Sparsh IT"} Home`}
-                  >
-                    {ASSETS?.FOOTER_BRAND_LOGO && (
-                      <Image
-                        src={ASSETS.FOOTER_BRAND_LOGO}
-                        alt={NAVIGATION_DATA?.brand?.name || "Sparsh IT"}
-                        width={220}
-                        height={78}
-                        priority
-                        className="h-8 sm:h-9 w-auto object-contain"
-                      />
-                    )}
-                  </Link>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 transition-colors cursor-pointer"
-                  aria-label="Close navigation menu"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Navigation Links inside Mobile Drawer */}
-              <div
-                data-lenis-prevent
-                className="flex-1 overflow-y-auto px-5 py-4 space-y-1 [scrollbar-width:thin] [scrollbar-color:#0D9488_transparent]"
+          </Link>
+          <nav aria-label="Primary" className="navlinks nav-dd">
+            <div className="dd dd-wide">
+              <button
+                className="dd-btn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ddWhat"
               >
-                <nav className="flex flex-col">
-                  {NAVIGATION_DATA.links.map((item) => {
-                    const hasChildren = Boolean(item.children?.length);
-                    const isOpen = activeDropdown === item.label;
-
-                    if (!hasChildren) {
-                      return (
-                        <div
-                          key={item.label}
-                          className="border-b border-slate-100 py-1.5 last:border-b-0"
-                        >
-                          <Link
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="group flex items-center justify-between py-2 text-base font-semibold text-slate-800 hover:text-[#0D9488] transition-colors"
-                          >
-                            <span className="transition-transform duration-200 group-hover:translate-x-1">
-                              {item.label}
-                            </span>
-                            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#0D9488] group-hover:translate-x-0.5 transition-all" />
-                          </Link>
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <div
-                        key={item.label}
-                        className="border-b border-slate-100 py-1.5 last:border-b-0"
-                      >
-                        <div className="flex items-center justify-between py-2">
-                          <Link
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="flex-1 text-base font-semibold text-slate-800 hover:text-[#0D9488] transition-colors"
-                          >
-                            {item.label}
-                          </Link>
-                          <button
-                            type="button"
-                            onClick={() => setActiveDropdown(isOpen ? null : item.label)}
-                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer"
-                            aria-label={`Toggle ${item.label} sub-navigation`}
-                            aria-expanded={isOpen}
-                          >
-                            <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${
-                                isOpen ? "rotate-180 text-[#0D9488]" : ""
-                              }`}
-                            />
-                          </button>
-                        </div>
-
-                        {isOpen && (
-                          <div className="mt-1 mb-2 space-y-1 pl-2 border-l-2 border-teal-500/30 animate-in fade-in slide-in-from-top-1 duration-200">
-                            {item.href && (
-                              <Link
-                                href={item.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-teal-50/70 text-[11px] font-semibold uppercase tracking-wider text-[#0D9488] hover:bg-teal-100/70 transition-colors mb-1.5"
-                              >
-                                <span>View All {item.label}</span>
-                                <ChevronRight className="w-3.5 h-3.5" />
-                              </Link>
-                            )}
-
-                            {item.children?.map((child) => {
-                              const isCreated = child.href !== "#";
-                              const IconComponent =
-                                (child.iconName && ICON_MAP[child.iconName]) || Sparkles;
-
-                              return (
-                                <Link
-                                  key={child.label}
-                                  href={child.href}
-                                  onClick={(e) => {
-                                    if (!isCreated) {
-                                      e.preventDefault();
-                                    } else {
-                                      setMobileMenuOpen(false);
-                                    }
-                                  }}
-                                  className={`group/child flex items-center justify-between py-2 px-2.5 rounded-xl text-sm transition-all duration-150 ${
-                                    isCreated
-                                      ? "text-slate-700 hover:text-[#0D9488] hover:bg-slate-50 cursor-pointer"
-                                      : "text-slate-400 opacity-60 cursor-not-allowed"
-                                  }`}
-                                >
-                                  <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                                    <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 group-hover/child:bg-[#0D9488] group-hover/child:text-white transition-all shrink-0">
-                                      <IconComponent className="w-3.5 h-3.5" />
-                                    </div>
-                                    <div className="min-w-0">
-                                      <span className="leading-snug truncate font-medium block">
-                                        {child.label}
-                                      </span>
-                                      {child.desc && (
-                                        <span className="text-[11px] text-slate-400 truncate block">
-                                          {child.desc}
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                  {isCreated ? (
-                                    <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover/child:text-[#0D9488] group-hover/child:translate-x-0.5 transition-all shrink-0" />
-                                  ) : (
-                                    <span className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">
-                                      Soon
-                                    </span>
-                                  )}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </nav>
-              </div>
-
-              {/* Bottom Action Area inside Mobile Drawer */}
-              <div className="border-t border-slate-100 p-5 shrink-0 bg-slate-50/80 space-y-3">
-                <Button
-                  variant="primary"
-                  href={NAVIGATION_DATA.cta.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full justify-center py-3 text-sm sm:text-base font-semibold bg-[#061826] text-white hover:bg-[#0D9488] shadow-md transition-colors"
-                  icon={<ChevronRight className="w-4 h-4 stroke-[2.5]" />}
-                >
-                  {NAVIGATION_DATA.cta.label}
-                </Button>
-
-                <div className="flex items-center justify-between text-[11px] sm:text-xs font-medium text-slate-500 pt-0.5">
-                  <a
-                    href="mailto:info@sparshit.com"
-                    className="hover:text-[#0D9488] transition-colors"
-                  >
-                    info@sparshit.com
+                What We Do
+                <svg className="dd-chev" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3 4.5l3 3 3-3"></path>
+                </svg>
+              </button>
+              <div className="dd-panel dd-mega" id="ddWhat">
+                <div className="dd-cols">
+                  <div className="dd-col">
+                    <span className="dd-h">Engineering</span>
+                    <a href="/services/artificial-intelligence">AI &amp; Intelligent Engineering</a>
+                    <a href="/services/application-development">Application Development</a>
+                    <a href="/services/mobile-application-development">Mobile App Development</a>
+                    <a href="/services/ui-ux-design-and-digital-experience">UI/UX &amp; Digital Experience</a>
+                  </div>
+                  <div className="dd-col">
+                    <span className="dd-h">Platform &amp; Data</span>
+                    <a href="/services/data-engineering-analytics">Data Engineering &amp; Analytics</a>
+                    <a href="/services/devsecops">DevSecOps &amp; Platform</a>
+                    <a href="/services/quality-engineering-and-software-testing">Quality Engineering &amp; QA</a>
+                    <a href="/services/global-capability-centers">Global Capability Centers</a>
+                  </div>
+                  <div className="dd-col">
+                    <span className="dd-h">Packages</span>
+                    <a href="/solutions/silver">Silver · Get Online</a>
+                    <a href="/solutions/gold">Gold · Manage Online</a>
+                    <a href="/solutions/premium">Premium · Sell &amp; Scale</a>
+                  </div>
+                  <div className="dd-col">
+                    <span className="dd-h">Industries</span>
+                    <a href="/industries/manufacturers-wholesale">Manufacturers &amp; Wholesale</a>
+                    <a href="/industries/ecommerce">Retail &amp; E-Commerce</a>
+                    <a href="/industries/service-businesses">Service Businesses</a>
+                    <a href="/industries/startups-founders">Startups &amp; Founders</a>
+                  </div>
+                </div>
+                <div className="dd-banner">
+                  <div>
+                    <b>Not sure where to start?</b>
+                    <span>Tell us what you&apos;re building and we&apos;ll recommend the right package.</span>
+                  </div>
+                  <a className="dd-banner-btn" href="/contact-us">
+                    Start a project
                   </a>
                 </div>
               </div>
             </div>
-          </div>,
-          document.body
-        )}
+
+            <div className="dd">
+              <button
+                className="dd-btn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ddWork"
+              >
+                Our Work
+                <svg className="dd-chev" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3 4.5l3 3 3-3"></path>
+                </svg>
+              </button>
+              <div className="dd-panel dd-split" id="ddWork">
+                <div className="dd-list">
+                  <span className="dd-h">Explore our work</span>
+                  <a href="/showcase" data-i="0" className="on">
+                    <span>Showcase</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="/transformation" data-i="1">
+                    <span>Transformation</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="/selected-work" data-i="2">
+                    <span>Selected Work</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="/how-we-work" data-i="3">
+                    <span>How We Work</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                </div>
+                <div className="dd-preview" aria-hidden="true">
+                  <figure className="on">
+                    <img src="/assets/images/home/Engineering%20Possibilities.webp" alt="" loading="lazy" />
+                    <figcaption>Four product concepts built for real businesses.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="/assets/images/home/retail-bags.jpg" alt="" loading="lazy" />
+                    <figcaption>How an offline business becomes a digital one.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="/assets/images/home/work-hospitality.jpg" alt="" loading="lazy" />
+                    <figcaption>Concept work made to be used and to stand out.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="/assets/images/home/Right-technology.webp" alt="" loading="lazy" />
+                    <figcaption>Four clear stages from first call to launch.</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <div className="dd">
+              <button
+                className="dd-btn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ddCompany"
+              >
+                Company
+                <svg className="dd-chev" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3 4.5l3 3 3-3"></path>
+                </svg>
+              </button>
+              <div className="dd-panel dd-split" id="ddCompany">
+                <div className="dd-list">
+                  <span className="dd-h">Who we are</span>
+                  <a href="/about" data-i="0" className="on">
+                    <span>About Us</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="/our-philosophy" data-i="1">
+                    <span>Our Philosophy</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="/faqs" data-i="2">
+                    <span>FAQs</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                </div>
+                <div className="dd-preview" aria-hidden="true">
+                  <figure className="on">
+                    <img src="/assets/images/about/Banner.webp" alt="" loading="lazy" />
+                    <figcaption>The team and story behind Sparsh IT.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="/assets/images/about/about-vision-future.jpg" alt="" loading="lazy" />
+                    <figcaption>Technology that feels like progress.</figcaption>
+                  </figure>
+                  <figure>
+                    <img src="/assets/images/about/about-mission-tablet.jpg" alt="" loading="lazy" />
+                    <figcaption>Packages, pricing, content and support.</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <div className="dd">
+              <button
+                className="dd-btn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ddJoin"
+              >
+                Join Us
+                <svg className="dd-chev" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3 4.5l3 3 3-3"></path>
+                </svg>
+              </button>
+              <div className="dd-panel dd-small" id="ddJoin">
+                <div className="dd-list">
+                  <span className="dd-h">Join our team</span>
+                  <a href="/join-us" className="on">
+                    <span>Careers at Sparsh IT</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                  <a href="mailto:careers@sparshit.com">
+                    <span>careers@sparshit.com</span>
+                    <i aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <a className="dd-link" href="/contact-us">
+              Contact Us
+            </a>
+          </nav>
+
+          <div className="nav-actions">
+            <a className="btn primary nav-cta" href="/contact-us">
+              Start a Project
+            </a>
+            <button
+              aria-expanded="false"
+              aria-label="Open menu"
+              className="hamburger"
+              id="hamburger"
+              type="button"
+            >
+              ☰
+            </button>
+          </div>
+        </div>
+
+        <nav className="menu-mobile" id="mobileNav" data-lenis-prevent="">
+          <span className="mm-h">What we do</span>
+          <a href="/services/artificial-intelligence">AI &amp; Intelligent Engineering</a>
+          <a href="/services/application-development">Application Development</a>
+          <a href="/services/mobile-application-development">Mobile App Development</a>
+          <a href="/services/ui-ux-design-and-digital-experience">UI/UX &amp; Digital Experience</a>
+          <a href="/services/data-engineering-analytics">Data Engineering &amp; Analytics</a>
+          <a href="/services/devsecops">DevSecOps &amp; Platform</a>
+          <a href="/services/quality-engineering-and-software-testing">Quality Engineering &amp; QA</a>
+          <a href="/services/global-capability-centers">Global Capability Centers</a>
+          <a href="/packages">Packages</a>
+          <a href="/industries/manufacturers-wholesale">Industries</a>
+          <span className="mm-h">Our work</span>
+          <a href="/showcase">Showcase</a>
+          <a href="/transformation">Transformation</a>
+          <a href="/selected-work">Selected Work</a>
+          <a href="/how-we-work">How We Work</a>
+          <span className="mm-h">Company</span>
+          <a href="/about">About Us</a>
+          <a href="/our-philosophy">Our Philosophy</a>
+          <a href="/faqs">FAQs</a>
+          <a href="/join-us">Careers</a>
+          <a href="/contact-us">Contact Us</a>
+        </nav>
+      </header>
     </>
   );
 }

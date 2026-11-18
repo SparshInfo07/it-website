@@ -57,9 +57,19 @@ const PageBreadcrumb = ({
       className={`relative w-full min-h-auto sm:min-h-[580px] lg:h-155 flex flex-col justify-center pt-16 pb-12 sm:pt-32 sm:pb-16 lg:py-0 overflow-hidden bg-cover bg-left! md:bg-center bg-no-repeat ${className}`}
       style={{ backgroundImage: `url(${backgroundImage})` }}>
 
+      {/* Readability: darken the text side of the photo and the band behind the navbar. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(7,12,28,0.86)_0%,rgba(7,12,28,0.62)_42%,rgba(7,12,28,0.12)_78%,rgba(7,12,28,0)_100%)] max-md:bg-[linear-gradient(180deg,rgba(7,12,28,0.55)_0%,rgba(7,12,28,0.78)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-40 bg-gradient-to-b from-[rgba(7,12,28,0.55)] to-transparent"
+      />
+
       <div className="relative z-10 mt-10! container">
-        
-        <div className="max-w-[800px] flex flex-col items-start justify-center text-left">
+
+        <div className="page-hero-in max-w-[800px] flex flex-col items-start justify-center text-left">
           {eyebrow && (
             <p className="tag text-xs sm:text-sm font-semibold tracking-[0.25em] text-white/80 uppercase mb-3 sm:mb-4 text-left">
               {eyebrow}
@@ -73,7 +83,7 @@ const PageBreadcrumb = ({
 
           {resolvedSubtitle && (
             <p
-              className={`section-p text-sm sm:text-base md:text-[16px]  text-white leading-[1.6] font-normal text-left mt-4 sm:mt-5 ${subtitleClassName}`}
+              className={`section-p max-w-[620px] text-sm sm:text-base md:text-[17px] text-white/90 leading-[1.65] font-normal text-left mt-4 sm:mt-5 ${subtitleClassName}`}
             >
               {resolvedSubtitle}
             </p>

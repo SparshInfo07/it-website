@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CURATED_HOMEPAGE_MARKUP } from "@/data/HomePage/curatedHomepageMarkup";
+import SiteFooter from "@/components/Organisms/SiteFooter/SiteFooter";
+import { siteFooterData } from "@/data/siteFooterData";
 
 export default function CuratedMasterHomepage() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -621,7 +623,59 @@ export default function CuratedMasterHomepage() {
       },
     ];
 
+    // Lock the inspector to the height of its tallest capability so switching never resizes it
+    // (a changing height stretches the grid row and shifts the tiles beside it).
+    const capInsp = $<HTMLElement>("#capInspector");
+    const lockCapHeight = () => {
+      if (!capInsp || !capInsp.parentElement) return;
+      const clone = capInsp.cloneNode(true) as HTMLElement;
+      Object.assign(clone.style, {
+        position: "absolute",
+        visibility: "hidden",
+        pointerEvents: "none",
+        left: "-99999px",
+        top: "0",
+        width: `${capInsp.getBoundingClientRect().width}px`,
+        minHeight: "0",
+        height: "auto",
+      });
+      clone.setAttribute("aria-hidden", "true");
+      capInsp.parentElement.append(clone);
+      const q = (sel: string) => clone.querySelector<HTMLElement>(sel);
+      let tallest = 0;
+      cap3Items.forEach((d) => {
+        const set = (sel: string, v: string) => {
+          const el = q(sel);
+          if (el) el.textContent = v;
+        };
+        set("#inspBadge", d.badge);
+        set("#inspTitle", d.title);
+        set("#inspDesc", d.desc);
+        set("#inspStat", d.stat);
+        set("#inspStatSub", d.sub);
+        const pipe = q("#inspPipe");
+        if (pipe) pipe.innerHTML = d.pipe.map((p) => `<div class="pipe-node"><small>${p[0]}</small><b>${p[1]}</b></div>`).join("");
+        const deliv = q("#inspDeliv");
+        if (deliv) deliv.innerHTML = d.deliv.map((x) => `<div class="deliv-item"><i></i>${x}</div>`).join("");
+        tallest = Math.max(tallest, clone.getBoundingClientRect().height);
+      });
+      clone.remove();
+      if (tallest > 0) capInsp.style.minHeight = `${Math.ceil(tallest)}px`;
+    };
+    const onCapResize = () => {
+      if (capInsp) capInsp.style.minHeight = "";
+      lockCapHeight();
+    };
+    lockCapHeight();
+    document.fonts?.ready.then(() => onCapResize());
+    window.addEventListener("resize", onCapResize);
+
     let activeCapIdx = 0;
+    let capTl: gsap.core.Timeline | null = null;
+    let capHoverTimer: ReturnType<typeof setTimeout> | undefined;
+    const capReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Swap the inspector's content: quick fade-out, then the new content rises in piece by piece.
     const setCap = (i: number) => {
       if (i === activeCapIdx || !cap3Items[i]) return;
       activeCapIdx = i;
@@ -634,40 +688,77 @@ export default function CuratedMasterHomepage() {
       const subEl = $<HTMLElement>("#inspStatSub");
       const pipeEl = $<HTMLElement>("#inspPipe");
       const delivEl = $<HTMLElement>("#inspDeliv");
-      const inspEl = $<HTMLElement>("#capInspector");
 
-      if (badgeEl) badgeEl.textContent = d.badge;
-      if (titleEl) titleEl.textContent = d.title;
-      if (descEl) descEl.textContent = d.desc;
-      if (statEl) statEl.textContent = d.stat;
-      if (subEl) subEl.textContent = d.sub;
-      if (pipeEl) {
-        pipeEl.innerHTML = d.pipe
-          .map((p) => `<div class="pipe-node"><small>${p[0]}</small><b>${p[1]}</b></div>`)
-          .join("");
+      const swap = () => {
+        if (badgeEl) badgeEl.textContent = d.badge;
+        if (titleEl) titleEl.textContent = d.title;
+        if (descEl) descEl.textContent = d.desc;
+        if (statEl) statEl.textContent = d.stat;
+        if (subEl) subEl.textContent = d.sub;
+        if (pipeEl) {
+          pipeEl.innerHTML = d.pipe
+            .map((p) => `<div class="pipe-node"><small>${p[0]}</small><b>${p[1]}</b></div>`)
+            .join("");
+        }
+        if (delivEl) {
+          delivEl.innerHTML = d.deliv
+            .map((x) => `<div class="deliv-item"><i></i>${x}</div>`)
+            .join("");
+        }
+      };
+
+      const texts = [badgeEl, titleEl, descEl, statEl, subEl].filter(Boolean) as HTMLElement[];
+      const blocks = [pipeEl, delivEl].filter(Boolean) as HTMLElement[];
+      capTl?.kill();
+      if (capReduce) {
+        swap();
+        gsap.set([...texts, ...blocks], { clearProps: "opacity,transform" });
+        return;
       }
-      if (delivEl) {
-        delivEl.innerHTML = d.deliv
-          .map((x) => `<div class="deliv-item"><i></i>${x}</div>`)
-          .join("");
-      }
-      if (inspEl) {
-        gsap.fromTo(
-          inspEl,
-          { scale: 0.985, opacity: 0.85 },
-          { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out", overwrite: "auto" }
+      capTl = gsap.timeline({ defaults: { overwrite: "auto" } });
+      capTl.to([...texts, ...blocks], { opacity: 0, y: -8, duration: 0.3, ease: "power2.inOut" });
+      capTl.add(() => {
+        swap();
+        gsap.set(blocks, { opacity: 1, y: 0 });
+        const items = blocks.flatMap((b) => Array.from(b.children) as HTMLElement[]);
+        capTl?.fromTo(
+          texts,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.85, ease: "power2.out", stagger: 0.08, clearProps: "transform" },
+          ">"
         );
-      }
+        capTl?.fromTo(
+          items,
+          { opacity: 0, y: 18, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out", stagger: 0.07, clearProps: "transform" },
+          "<0.15"
+        );
+      });
+    };
+    const capTileFrom = (e: Event) => (e.target as Element | null)?.closest<HTMLElement>("[data-cap-tile]") ?? null;
+    // Hover waits a moment so sweeping across several tiles doesn't flicker the inspector.
+    const onCapHover = (e: Event) => {
+      const tile = capTileFrom(e);
+      if (!tile) return;
+      if (capHoverTimer) clearTimeout(capHoverTimer);
+      capHoverTimer = setTimeout(() => setCap(Number(tile.dataset.capTile || 0)), 120);
     };
     const onCapInteract = (e: Event) => {
-      const target = e.target as Element | null;
-      if (!target) return;
-      const tile = target.closest<HTMLElement>("[data-cap-tile]");
-      if (tile) {
-        setCap(Number(tile.dataset.capTile || 0));
-      }
+      const tile = capTileFrom(e);
+      if (!tile) return;
+      if (capHoverTimer) clearTimeout(capHoverTimer);
+      setCap(Number(tile.dataset.capTile || 0));
     };
-    root.addEventListener("pointerover", onCapInteract);
+    // Soft light that follows the cursor inside a tile.
+    const onCapMove = (e: PointerEvent) => {
+      const tile = capTileFrom(e);
+      if (!tile) return;
+      const r = tile.getBoundingClientRect();
+      tile.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      tile.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    root.addEventListener("pointerover", onCapHover);
+    root.addEventListener("pointermove", onCapMove);
     root.addEventListener("click", onCapInteract);
     root.addEventListener("focusin", onCapInteract);
 
@@ -1341,9 +1432,13 @@ export default function CuratedMasterHomepage() {
       root.removeEventListener("pointerover", onPhiloInteract);
       root.removeEventListener("click", onPhiloInteract);
       root.removeEventListener("focusin", onPhiloInteract);
-      root.removeEventListener("pointerover", onCapInteract);
+      root.removeEventListener("pointerover", onCapHover);
+      root.removeEventListener("pointermove", onCapMove);
       root.removeEventListener("click", onCapInteract);
       root.removeEventListener("focusin", onCapInteract);
+      if (capHoverTimer) clearTimeout(capHoverTimer);
+      capTl?.kill();
+      window.removeEventListener("resize", onCapResize);
       document.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onHeaderScroll);
       window.removeEventListener("scroll", onScrollChoreography);
@@ -1360,10 +1455,13 @@ export default function CuratedMasterHomepage() {
   }, [markupObj]);
 
   return (
-    <div
-      ref={rootRef}
-      className="sparsh-curated-root"
-      dangerouslySetInnerHTML={markupObj}
-    />
+    <>
+      <div
+        ref={rootRef}
+        className="sparsh-curated-root"
+        dangerouslySetInnerHTML={markupObj}
+      />
+      <SiteFooter data={siteFooterData} />
+    </>
   );
 }

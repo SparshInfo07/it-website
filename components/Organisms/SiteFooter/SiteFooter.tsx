@@ -4,30 +4,35 @@ import type { SiteFooterData } from "@/data/siteFooterData";
 
 export default function SiteFooter({ data }: { data: SiteFooterData }) {
   return (
-    <footer className="relative overflow-hidden rounded-t-[28px] bg-[#070a0f] text-[#94a3b8] pt-14 pb-9 border-t border-white/10">
-      <div className="container">
+    <footer
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#070a0f] text-[#94a3b8] pt-16 sm:pt-20 pb-8 sm:pb-10 border-t border-white/10"
+      style={{
+        background:
+          "radial-gradient(circle at 88% 8%, rgba(16, 185, 129, 0.08) 0%, transparent 38%), radial-gradient(circle at 12% 85%, rgba(49, 93, 255, 0.07) 0%, transparent 42%), #070a0f",
+      }}
+    >
+      <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 flex-1 flex flex-col justify-between">
         {/* Top 5-Column Menu Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.35fr_1.15fr_1fr_1.25fr] gap-9 pb-14 border-t border-white/10 pt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.35fr_1.15fr_1fr_1.25fr] gap-10 xl:gap-14 pb-12 pt-4">
           <div>
-            <h4 className="text-white text-[11.5px] font-extrabold tracking-[0.12em] uppercase mb-5">
+            <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               QUICK LINKS
             </h4>
-            <ul className="space-y-3 text-[13.5px] font-medium">
+            <ul className="space-y-3.5 text-[14px] font-medium">
               <li><Link href="/" className="text-[#9ca3af] hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/#featured" className="text-[#9ca3af] hover:text-white transition-colors">Showcase</Link></li>
-              <li><Link href="/#transformation" className="text-[#9ca3af] hover:text-white transition-colors">Transformation</Link></li>
-              <li><Link href="/#pricing" className="text-[#9ca3af] hover:text-white transition-colors">Packages</Link></li>
-              <li><Link href="/#insights" className="text-[#9ca3af] hover:text-white transition-colors">Insights</Link></li>
+              <li><Link href="/showcase" className="text-[#9ca3af] hover:text-white transition-colors">Showcase</Link></li>
+              <li><Link href="/transformation" className="text-[#9ca3af] hover:text-white transition-colors">Transformation</Link></li>
+              <li><Link href="/packages" className="text-[#9ca3af] hover:text-white transition-colors">Packages</Link></li>
               <li><Link href="/about" className="text-[#9ca3af] hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/join-us" className="text-[#9ca3af] hover:text-white transition-colors">Careers</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white text-[11.5px] font-extrabold tracking-[0.12em] uppercase mb-5">
+            <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               SERVICES
             </h4>
-            <ul className="space-y-3 text-[13.5px] font-medium">
+            <ul className="space-y-3.5 text-[14px] font-medium">
               <li><Link href="/services/artificial-intelligence" className="text-[#9ca3af] hover:text-white transition-colors">AI &amp; Intelligent Engineering</Link></li>
               <li><Link href="/services/devsecops" className="text-[#9ca3af] hover:text-white transition-colors">DevSecOps &amp; Platform</Link></li>
               <li><Link href="/services/application-development" className="text-[#9ca3af] hover:text-white transition-colors">Application Development</Link></li>
@@ -40,29 +45,29 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
           </div>
 
           <div>
-            <h4 className="text-white text-[11.5px] font-extrabold tracking-[0.12em] uppercase mb-5">
+            <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               SOLUTIONS &amp; INDUSTRIES
             </h4>
-            <ul className="space-y-3 text-[13.5px] font-medium">
-              <li><Link href="/#pricing" className="text-[#9ca3af] hover:text-white transition-colors">Silver — Get Online</Link></li>
-              <li><Link href="/#pricing" className="text-[#9ca3af] hover:text-white transition-colors">Gold — Manage Online</Link></li>
-              <li><Link href="/#pricing" className="text-[#9ca3af] hover:text-white transition-colors">Premium — Sell &amp; Scale</Link></li>
-              <li><Link href="/#industries" className="text-[#9ca3af] hover:text-white transition-colors">Manufacturers &amp; Wholesale</Link></li>
-              <li><Link href="/#industries" className="text-[#9ca3af] hover:text-white transition-colors">Retail &amp; E-Commerce</Link></li>
-              <li><Link href="/#industries" className="text-[#9ca3af] hover:text-white transition-colors">Service Businesses</Link></li>
-              <li><Link href="/#industries" className="text-[#9ca3af] hover:text-white transition-colors">Startups &amp; Founders</Link></li>
+            <ul className="space-y-3.5 text-[14px] font-medium">
+              <li><Link href="/solutions/silver" className="text-[#9ca3af] hover:text-white transition-colors">Silver — Get Online</Link></li>
+              <li><Link href="/solutions/gold" className="text-[#9ca3af] hover:text-white transition-colors">Gold — Manage Online</Link></li>
+              <li><Link href="/solutions/premium" className="text-[#9ca3af] hover:text-white transition-colors">Premium — Sell &amp; Scale</Link></li>
+              <li><Link href="/industries/manufacturers-wholesale" className="text-[#9ca3af] hover:text-white transition-colors">Manufacturers &amp; Wholesale</Link></li>
+              <li><Link href="/industries/ecommerce" className="text-[#9ca3af] hover:text-white transition-colors">Retail &amp; E-Commerce</Link></li>
+              <li><Link href="/industries/service-businesses" className="text-[#9ca3af] hover:text-white transition-colors">Service Businesses</Link></li>
+              <li><Link href="/industries/startups-founders" className="text-[#9ca3af] hover:text-white transition-colors">Startups &amp; Founders</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white text-[11.5px] font-extrabold tracking-[0.12em] uppercase mb-5">
+            <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               COMPANY &amp; LEGAL
             </h4>
-            <ul className="space-y-3 text-[13.5px] font-medium">
-              <li><Link href="/#philosophy" className="text-[#9ca3af] hover:text-white transition-colors">Our Philosophy</Link></li>
-              <li><Link href="/#process" className="text-[#9ca3af] hover:text-white transition-colors">How We Work</Link></li>
-              <li><Link href="/#work" className="text-[#9ca3af] hover:text-white transition-colors">Selected Work</Link></li>
-              <li><Link href="/#faq" className="text-[#9ca3af] hover:text-white transition-colors">FAQs</Link></li>
+            <ul className="space-y-3.5 text-[14px] font-medium">
+              <li><Link href="/our-philosophy" className="text-[#9ca3af] hover:text-white transition-colors">Our Philosophy</Link></li>
+              <li><Link href="/how-we-work" className="text-[#9ca3af] hover:text-white transition-colors">How We Work</Link></li>
+              <li><Link href="/selected-work" className="text-[#9ca3af] hover:text-white transition-colors">Selected Work</Link></li>
+              <li><Link href="/faqs" className="text-[#9ca3af] hover:text-white transition-colors">FAQs</Link></li>
               <li><Link href="/privacy-policy" className="text-[#9ca3af] hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookie-policy" className="text-[#9ca3af] hover:text-white transition-colors">Cookie Policy</Link></li>
               <li><Link href="/contact-us" className="text-[#9ca3af] hover:text-white transition-colors">Contact Us</Link></li>
@@ -70,7 +75,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
           </div>
 
           <div>
-            <h4 className="text-white text-[11.5px] font-extrabold tracking-[0.12em] uppercase mb-5">
+            <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               CONTACT US
             </h4>
             <div className="space-y-4">
@@ -80,7 +85,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Sales &amp; Enquiries</small>
-                  <a href={`mailto:${data.contact?.email || "info@sparshit.com"}`} className="text-[13.5px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                  <a href={`mailto:${data.contact?.email || "info@sparshit.com"}`} className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
                     {data.contact?.email || "info@sparshit.com"}
                   </a>
                 </div>
@@ -92,7 +97,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Careers &amp; Support</small>
-                  <a href="mailto:careers@sparshit.com" className="text-[13.5px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                  <a href="mailto:careers@sparshit.com" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
                     careers@sparshit.com
                   </a>
                 </div>
@@ -104,7 +109,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Phone</small>
-                  <a href="tel:+18728036987" className="text-[13.5px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                  <a href="tel:+18728036987" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
                     {data.contact?.phone || "(872) 803-6987"}
                   </a>
                 </div>
@@ -116,7 +121,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Company</small>
-                  <span className="text-[13.5px] font-semibold text-[#d1d5db]">Sparsh IT Private Limited</span>
+                  <span className="text-[14px] font-semibold text-[#d1d5db]">Sparsh IT Private Limited</span>
                 </div>
               </div>
             </div>
@@ -125,26 +130,29 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
 
         {/* Centered Follow Us Social Row */}
         <div className="border-t border-white/10 py-7 flex items-center justify-center gap-4">
-          <span className="text-white text-[13px] font-bold">Follow Us</span>
-          <div className="flex items-center gap-2.5">
-            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X" className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.02] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
+          <span className="text-white text-[13.5px] font-bold">Follow Us</span>
+          <div className="flex items-center gap-3">
+            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-white/15 bg-white/[0.03] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.02] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-white/15 bg-white/[0.03] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.02] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/15 bg-white/[0.03] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full border border-white/15 bg-white/[0.03] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
             </a>
           </div>
         </div>
 
-        {/* Monumental Giant Sparsh IT All-White Logo Design */}
-        <div className="py-4 pb-8 flex justify-center items-center select-none overflow-hidden">
+        {/* Monumental Edge-to-Edge Full-Screen Sparsh IT All-White Logo Design */}
+        <div className="py-6 sm:py-8 flex-1 flex justify-center items-center select-none overflow-hidden w-full">
           <svg
-            className="w-full max-w-[960px] h-auto block mx-auto"
+            className="w-full max-w-none h-auto block mx-auto"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="18 10 1325 438"
+            viewBox="18 8 1325 444"
             role="img"
             aria-label="Sparsh IT"
           >
@@ -202,11 +210,11 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-[#6b7280]">
-          <span>{data.copyright}</span>
-          <div className="flex items-center gap-4">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-[#6b7280]">
+          <span>© 2026 Sparsh IT Private Limited. All rights reserved.</span>
+          <div className="flex items-center gap-6">
             {data.legalLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="hover:text-white transition-colors">
+              <Link key={link.label} href={link.href} className="hover:text-white transition-colors font-semibold">
                 {link.label}
               </Link>
             ))}
