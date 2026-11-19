@@ -11,7 +11,7 @@ export interface AIPageBreadcrumbData {
 
 export const AI_PAGE_BREADCRUMB_DATA: AIPageBreadcrumbData = {
   title:
-    "Enterprise AI solutions advancing intelligence. Redefining enterprise possibilities.",
+    "Enterprise AI Solutions Advancing Intelligence. Redefining Enterprise Possibilities.",
   subtitle:
     "Sparsh IT helps businesses translate artificial intelligence into practical enterprise capabilities. From machine learning and predictive analytics to generative AI and intelligent automation, we develop technology solutions that support informed decisions, optimize operations, and address complex business challenges.",
   backgroundImage: ASSETS.AI_BANNER,

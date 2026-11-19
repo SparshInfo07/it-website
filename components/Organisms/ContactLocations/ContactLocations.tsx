@@ -23,7 +23,7 @@ export default function ContactLocations({
       <div className="container">
         <header className="mx-auto mb-12 max-w-5xl text-center sm:mb-14">
           <h2 className="text-5xl font-medium tracking-tight text-[#111] sm:text-4xl lg:text-[45px]">
-            Our presence across the United States
+            Our Presence Across the United States
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-6 text-[#858585]">
             With offices across the United States, Sparsh IT stays closer to clients, enabling stronger collaboration, responsive support, and seamless business engagement.

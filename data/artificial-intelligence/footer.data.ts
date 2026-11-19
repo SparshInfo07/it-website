@@ -3,7 +3,7 @@ import type { FooterData } from "@/data/footerData";
 
 export const AI_FOOTER_DATA: FooterData = {
   title:
-    "Advance beyond AI experimentation.<br /> Engineer enterprise intelligence.",
+    "Advance Beyond AI Experimentation.<br /> Engineer Enterprise Intelligence.",
   description:
     "Transform emerging AI possibilities into strategically aligned, enterprise-ready capabilities through Sparsh IT's intelligent engineering expertise.",
   primaryLabel: "Discuss Your AI Vision",

@@ -19,7 +19,7 @@ export interface ClearApproachData {
 
 export const AI_CLEAR_APPROACH_DATA: ClearApproachData = {
   heading:
-    "Transforming artificial intelligence into <br /> enterprise advantage.",
+    "Transforming Artificial Intelligence into <br /> Enterprise Advantage.",
   description:
     "The true potential of artificial intelligence emerges when advanced computational capabilities are integrated with enterprise strategy, operational intelligence, and clearly defined business outcomes.Sparsh IT enables organizations to operationalize intelligent technologies across critical business functions, unlocking new dimensions of efficiency, insight, adaptability, and innovation.",
   cards: [

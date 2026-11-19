@@ -1,7 +1,7 @@
 import type { FooterData } from "@/data/footerData";
 
 export const SERVICES_FOOTER_DATA: FooterData = {
-  title: "Design it. Build it. <br /> Make it smarter.",
+  title: "Design It. Build It. <br /> Make It Smarter.",
   description:
     "Tell us what you are working on. We will recommend the right mix of UI/UX, app, website and AI work, with a clear plan and estimate.",
   primaryLabel: "Start a Project",

@@ -5,7 +5,7 @@ const lead = (title: string, body: string) =>
   `<strong class="block text-[#061826] mb-1">${title}</strong>${body}`;
 
 export const SERVICES_DIFFERENT_INDUSTRIES_DATA: DifferentIndustriesData = {
-  heading: "Why one team <br /> works better.",
+  heading: "Why One Team <br /> Works Better.",
   subheading:
     "Design, development and AI work best when they are planned together. One team means fewer hand-offs, faster decisions and a product that feels consistent from the first screen to the last feature.",
   industries: [

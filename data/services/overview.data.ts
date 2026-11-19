@@ -18,7 +18,7 @@ export interface ServiceOverviewData {
 }
 
 export const SERVICE_OVERVIEW_DATA: ServiceOverviewData = {
-  title: "Four Services. One Team From Idea to Launch.",
+  title: "Four Services. One Team from Idea to Launch.",
   subtitle:
     "Design, build and make it smarter. Hire us for one service, or let one team take your product from first sketch to launch and beyond.",
   services: CORE_SERVICES.map((s) => ({

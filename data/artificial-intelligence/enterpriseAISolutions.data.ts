@@ -18,7 +18,7 @@ export interface EnterpriseAISolutionsData {
 export const ENTERPRISE_AI_SOLUTIONS_DATA: EnterpriseAISolutionsData = {
   badge: "AI SOLUTIONS",
   heading:
-    "Enterprise AI solutions <br /> Advancing intelligence. Redefining enterprise possibilities.",
+    "Enterprise AI Solutions <br /> Advancing Intelligence. Redefining Enterprise Possibilities.",
   description:
     "Artificial intelligence is creating new possibilities for enterprise operations, decision-making, and digital innovation. Sparsh IT helps organizations translate these possibilities into practical AI capabilities aligned with business objectives. From AI strategy and generative engineering to agentic systems, enterprise integration, and responsible AI practices, we focus on building intelligent solutions that can operate within real business environments and deliver meaningful outcomes",
   items: [

@@ -4,7 +4,7 @@ import type { EnterpriseAISolutionsData } from "@/data/artificial-intelligence";
 export const UI_UX_ENTERPRISE_SOLUTIONS_DATA: EnterpriseAISolutionsData = {
   badge: "UI/UX DESIGN & DIGITAL EXPERIENCE",
   heading:
-    "Orchestrating human-centered design. Elevating digital interaction.",
+    "Orchestrating Human-Centered Design. Elevating Digital Interaction.",
   description:
     "Exceptional digital experiences bring user expectations and business objectives into alignment. Sparsh IT combines research, experience strategy, interface design, and iterative evaluation to create digital products that are intuitive, engaging, and consistent.",
   items: [

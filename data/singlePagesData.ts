@@ -57,8 +57,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "showcase",
     category: "OUR WORK",
     eyebrow: "INTERACTIVE PRODUCT SHOWCASE",
-    title: "Not just pretty.",
-    titleAccent: "Purposefully built.",
+    title: "Not Just Pretty.",
+    titleAccent: "Purposefully Built.",
     subtitle:
       "Explore four signature digital product architectures engineered by Sparsh IT for real-world businesses—from 24/7 digital showrooms and B2B quotation engines to unified owner dashboards.",
     heroImage: "/images/home-v2/home-show-web.webp",
@@ -73,13 +73,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "24/7", label: "Always-on digital showroom & lead capture" },
     ],
     overviewEyebrow: "EXPERIENCE ARCHITECTURES",
-    overviewTitle: "Four concepts. One for each service we offer.",
+    overviewTitle: "Four Concepts. One for Each Service We Offer.",
     overviewLead:
       "Every business reaches a point where scattered WhatsApp messages, static PDF catalogues, and manual spreadsheets slow down growth. These four interactive blueprints demonstrate how we turn everyday friction into calm, high-converting software.",
     deliverables: [
       {
         tag: "WEBSITE DEVELOPMENT",
-        title: "The store that never closes.",
+        title: "The Store That Never Closes.",
         description:
           "A high-craft digital product catalogue with structured specification filters, collection storytelling, and direct quotation capture.",
         bullets: [
@@ -90,7 +90,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "APP DEVELOPMENT",
-        title: "A calmer way to run the day.",
+        title: "A Calmer Way to Run the Day.",
         description:
           "One centralized admin workspace for managing products, inbound enquiries, and pending customer quotations without developer dependency.",
         bullets: [
@@ -101,7 +101,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "AI & INTELLIGENCE",
-        title: "From request to real business.",
+        title: "From Request to Real Business.",
         description:
           "A dedicated B2B Request-for-Quotation (RFQ) workflow that captures buyer quantities, custom finishes, and delivery locations in one step.",
         bullets: [
@@ -112,7 +112,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "FROM CONCEPT TO PRODUCTION",
-    workflowTitle: "How we adapt these architectures to your business.",
+    workflowTitle: "How We Adapt These Architectures to Your Business.",
     workflowSteps: [
       {
         step: "01",
@@ -142,28 +142,28 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     galleryCards: [
       {
         tag: "WEBSITE DEVELOPMENT",
-        title: "The store that never closes.",
+        title: "The Store That Never Closes.",
         description: "A product catalogue website with enquiries and a quotation journey built in.",
         image: "/images/home-v2/home-show-web.webp",
         href: "/selected-work",
       },
       {
         tag: "APP DEVELOPMENT",
-        title: "A calmer way to run the day.",
+        title: "A Calmer Way to Run the Day.",
         description: "Products, enquiries and orders managed from one web app and dashboard.",
         image: "/images/home-v2/home-show-app.webp",
         href: "/selected-work",
       },
       {
         tag: "AI & INTELLIGENCE",
-        title: "From request to real business.",
+        title: "From Request to Real Business.",
         description: "AI reads each buyer request and drafts the quotation for you to approve.",
         image: "/images/home-v2/home-show-ai.webp",
         href: "/selected-work",
       },
       {
         tag: "UI/UX DESIGN",
-        title: "Your next chapter begins here.",
+        title: "Your Next Chapter Begins Here.",
         description: "A familiar offline business redesigned as a simple, modern digital experience.",
         image: "/images/home-v2/home-show-ui.webp",
         href: "/transformation",
@@ -192,8 +192,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "transformation",
     category: "OUR WORK",
     eyebrow: "SIGNATURE TRANSFORMATION STORY",
-    title: "From offline.",
-    titleAccent: "To everything possible.",
+    title: "From Offline.",
+    titleAccent: "To Everything Possible.",
     subtitle:
       "Follow the four-stage evolution of a traditional business as it moves from scattered folders, PDF catalogues, and missed calls to a connected digital operation.",
     heroImage: "/images/home-v2/home-tr-1.webp",
@@ -208,13 +208,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "3-Stage", label: "Modular upgrade path (Silver → Gold → Premium)" },
     ],
     overviewEyebrow: "THE 4 CHAPTERS OF DIGITAL EVOLUTION",
-    overviewTitle: "One business. Transformed step by step.",
+    overviewTitle: "One Business. Transformed Step by Step.",
     overviewLead:
       "Digital transformation doesn't mean replacing how your business works overnight. It means removing the invisible barriers between your products and your buyers, one practical chapter at a time.",
     deliverables: [
       {
         tag: "CHAPTER 01 — THE STARTING POINT",
-        title: "A great business. An invisible presence.",
+        title: "A Great Business. An Invisible Presence.",
         description:
           "Before transformation, products live in scattered folders and 48MB PDFs, enquiries arrive unstructured across WhatsApp and phone calls, and every buyer needs a manual explanation.",
         bullets: [
@@ -225,7 +225,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "CHAPTER 02 — GET DISCOVERED",
-        title: "Your catalogue, ready to explore.",
+        title: "Your Catalogue, Ready to Explore.",
         description:
           "Give buyers one lightning-fast digital showroom to filter specifications, compare collections, view high-res finishes, and take immediate action.",
         bullets: [
@@ -236,7 +236,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "CHAPTER 03 & 04 — QUOTE & OPERATE",
-        title: "Smarter quotations & unified control.",
+        title: "Smarter Quotations & Unified Control.",
         description:
           "Turn scattered chats into structured RFQ requests with quantities and SKUs, and manage products, orders, payments, and inventory from one calm owner workspace.",
         bullets: [
@@ -247,7 +247,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "TRANSFORMATION ROADMAP",
-    workflowTitle: "Four chapters that scale at your pace.",
+    workflowTitle: "Four Chapters That Scale at Your Pace.",
     workflowSteps: [
       {
         step: "01",
@@ -295,7 +295,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "CHAPTER 04",
-        title: "Grow With Control",
+        title: "Grow with Control",
         description: "One calm owner workspace for products, enquiries, orders, and inventory.",
         image: "/images/home-v2/home-tr-4.webp",
       },
@@ -318,8 +318,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "packages",
     category: "SOLUTIONS",
     eyebrow: "GROW YOUR BUSINESS",
-    title: "Start simple.",
-    titleAccent: "Grow on your terms.",
+    title: "Start Simple.",
+    titleAccent: "Grow on Your Terms.",
     subtitle:
       "Three transparent service foundations—Silver, Gold, and Premium—designed as a modular upgrade path. Start with what your business needs today and expand without rebuilding.",
     heroImage: "/images/home-v2/home-show-app.webp",
@@ -334,13 +334,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Custom", label: "Bespoke SaaS, mobile apps & AI automation" },
     ],
     overviewEyebrow: "THREE PRACTICAL FOUNDATIONS",
-    overviewTitle: "Choose the stage that matches your business today.",
+    overviewTitle: "Choose the Stage That Matches Your Business Today.",
     overviewLead:
       "We don't push oversized enterprise contracts when you need a focused starting point, nor do we box you into a tool you'll outgrow in six months. Every package is engineered on a modular stack.",
     deliverables: [
       {
         tag: "TIER 01 · SILVER",
-        title: "Get Online — Launch your digital presence.",
+        title: "Get Online — Launch Your Digital Presence.",
         description:
           "Make a powerful first impression, showcase your products or services, and capture direct customer enquiries via WhatsApp and contact flows.",
         bullets: [
@@ -352,7 +352,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "TIER 02 · GOLD (MOST POPULAR)",
-        title: "Manage Online — Control products & leads.",
+        title: "Manage Online — Control Products & Leads.",
         description:
           "Everything in Silver, plus your own secure Admin Dashboard & CMS to add/edit products, manage content, and track customer quotation requests in one place.",
         bullets: [
@@ -364,7 +364,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "TIER 03 · PREMIUM",
-        title: "Sell & Scale — End-to-end online commerce.",
+        title: "Sell & Scale — End-to-End Online Commerce.",
         description:
           "Everything in Gold, plus online payment gateway integration, automated order management, stock & inventory controls, and executive reporting.",
         bullets: [
@@ -376,7 +376,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "MODULAR UPGRADE ARCHITECTURE",
-    workflowTitle: "How our scoping and upgrade path works.",
+    workflowTitle: "How Our Scoping and Upgrade Path Works.",
     workflowSteps: [
       {
         step: "01",
@@ -444,8 +444,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "solutions/silver",
     category: "SOLUTIONS",
     eyebrow: "SILVER PACKAGE · GET ONLINE",
-    title: "Launch a powerful",
-    titleAccent: "digital presence.",
+    title: "Launch a Powerful",
+    titleAccent: "Digital Presence.",
     subtitle:
       "The ideal starting point for businesses moving online. Showcase your brand, products, and specifications beautifully while turning visitor interest into direct WhatsApp and email enquiries.",
     heroImage: "/images/home-v2/home-show-web.webp",
@@ -460,13 +460,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Upgrade", label: "Ready to upgrade to Gold CMS anytime" },
     ],
     overviewEyebrow: "WHAT'S INCLUDED IN SILVER",
-    overviewTitle: "Everything you need to look credible and get discovered.",
+    overviewTitle: "Everything You Need to Look Credible and Get Discovered.",
     overviewLead:
       "Silver is built for businesses that don't need daily content edits or complex backend dashboards yet, but refuse to settle for a generic template. You get a custom-engineered storefront designed to win trust and capture leads.",
     deliverables: [
       {
         tag: "BRAND & WEB FLAGSHIP",
-        title: "Custom responsive business website.",
+        title: "Custom Responsive Business Website.",
         description:
           "A bespoke, mobile-first website crafted around your brand identity, value proposition, and target buyers.",
         bullets: [
@@ -477,7 +477,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "PRODUCT & SERVICE SHOWCASE",
-        title: "Structured product details & imagery.",
+        title: "Structured Product Details & Imagery.",
         description:
           "Present your collections, product specifications, and service offerings with clarity so customers understand exactly what you offer.",
         bullets: [
@@ -488,7 +488,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "INSTANT LEAD CAPTURE",
-        title: "WhatsApp & direct enquiry CTAs.",
+        title: "WhatsApp & Direct Enquiry CTAs.",
         description:
           "Make it effortless for interested buyers to reach your sales team immediately from any product page.",
         bullets: [
@@ -499,7 +499,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "SILVER DELIVERY PROCESS",
-    workflowTitle: "From first call to live website in four clear steps.",
+    workflowTitle: "From First Call to Live Website in Four Clear Steps.",
     workflowSteps: [
       {
         step: "01",
@@ -544,8 +544,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "solutions/gold",
     category: "SOLUTIONS",
     eyebrow: "GOLD PACKAGE · MANAGE ONLINE (MOST POPULAR)",
-    title: "Your digital showroom",
-    titleAccent: "& admin in one place.",
+    title: "Your Digital Showroom",
+    titleAccent: "& Admin in One Place.",
     subtitle:
       "Our most popular package for growing businesses. Launch a high-converting website and product catalogue backed by a self-service Admin Dashboard, Visual CMS, and centralized Quotation Inbox.",
     heroImage: "/images/home-v2/home-show-app.webp",
@@ -560,13 +560,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Live", label: "Email & dashboard alerts for every enquiry" },
     ],
     overviewEyebrow: "WHAT'S INCLUDED IN GOLD",
-    overviewTitle: "Complete autonomy over your catalogue and customer leads.",
+    overviewTitle: "Complete Autonomy Over Your Catalogue and Customer Leads.",
     overviewLead:
       "Gold gives your team the tools to run your digital presence independently. Add new products in seconds, update specifications, and manage every buyer quotation request from a single organized dashboard.",
     deliverables: [
       {
         tag: "SELF-SERVICE CMS & ADMIN",
-        title: "Update products & content without code.",
+        title: "Update Products & Content Without Code.",
         description:
           "A clean, intuitive admin workspace built specifically for business owners and operations teams.",
         bullets: [
@@ -577,7 +577,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "QUOTATION & LEAD INBOX",
-        title: "Turn buyer interest into organized RFQs.",
+        title: "Turn Buyer Interest into Organized RFQs.",
         description:
           "Stop chasing enquiries across scattered email threads and chat apps. Every lead lands in your centralized inbox.",
         bullets: [
@@ -588,7 +588,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "EVERYTHING IN SILVER",
-        title: "Flagship storefront & SEO architecture.",
+        title: "Flagship Storefront & SEO Architecture.",
         description:
           "Includes the full custom-designed frontend, responsive performance, and WhatsApp integration of our Silver tier.",
         bullets: [
@@ -599,7 +599,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "GOLD DELIVERY PROCESS",
-    workflowTitle: "Engineered around your catalogue and sales team.",
+    workflowTitle: "Engineered Around Your Catalogue and Sales Team.",
     workflowSteps: [
       {
         step: "01",
@@ -644,8 +644,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "solutions/premium",
     category: "SOLUTIONS",
     eyebrow: "PREMIUM PACKAGE · SELL & SCALE",
-    title: "End-to-end digital",
-    titleAccent: "commerce & operations.",
+    title: "End-to-End Digital",
+    titleAccent: "Commerce & Operations.",
     subtitle:
       "Transform your digital presence into a complete online selling and operations engine. Includes everything in Gold plus payment gateways, live inventory & stock management, orders dashboard, and ERP/CRM integrations.",
     heroImage: "/images/home-v2/home-show-ai.webp",
@@ -660,13 +660,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "99.98%", label: "Enterprise cloud reliability & security" },
     ],
     overviewEyebrow: "WHAT'S INCLUDED IN PREMIUM",
-    overviewTitle: "Built for high-volume selling and connected operations.",
+    overviewTitle: "Built for High-Volume Selling and Connected Operations.",
     overviewLead:
       "Premium connects your storefront directly to revenue and fulfillment. Accept instant online payments, enforce minimum order quantities (MOQs), track stock levels automatically, and view real-time sales analytics.",
     deliverables: [
       {
         tag: "ONLINE CHECKOUT & PAYMENTS",
-        title: "Seamless payment gateway integration.",
+        title: "Seamless Payment Gateway Integration.",
         description:
           "Accept cards, UPI, net banking, wallets, and international payments with automated tax and shipping rules.",
         bullets: [
@@ -677,7 +677,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "ORDERS & INVENTORY ENGINE",
-        title: "Stock, fulfillment & order management.",
+        title: "Stock, Fulfillment & Order Management.",
         description:
           "Keep inventory accurate across channels and manage orders from placement to dispatch.",
         bullets: [
@@ -688,7 +688,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "REPORTING & INTEGRATIONS",
-        title: "Executive analytics & system sync.",
+        title: "Executive Analytics & System Sync.",
         description:
           "Connect your commerce platform with accounting, ERP, CRM, and shipping providers.",
         bullets: [
@@ -699,7 +699,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "PREMIUM DELIVERY PROCESS",
-    workflowTitle: "Architecting a resilient commerce platform.",
+    workflowTitle: "Architecting a Resilient Commerce Platform.",
     workflowSteps: [
       {
         step: "01",
@@ -744,8 +744,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "industries/manufacturers-wholesale",
     category: "INDUSTRIES",
     eyebrow: "MANUFACTURERS & WHOLESALE",
-    title: "Show more.",
-    titleAccent: "Quote faster.",
+    title: "Show More.",
+    titleAccent: "Quote Faster.",
     subtitle:
       "Digital product catalogues, technical specification portals, and bulk Request-for-Quotation (RFQ) systems engineered specifically for manufacturers, industrial suppliers, and B2B wholesalers.",
     heroImage: "/images/home-v2/home-case-forme.webp",
@@ -760,13 +760,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "100%", label: "Self-serve catalogue updates for your team" },
     ],
     overviewEyebrow: "BUILT FOR B2B COMPLEXITY",
-    overviewTitle: "Replace static PDF catalogues with a live B2B quotation engine.",
+    overviewTitle: "Replace Static PDF Catalogues with a Live B2B Quotation Engine.",
     overviewLead:
       "B2B buyers don't buy like retail shoppers—they search by technical specification, order in bulk quantities, request custom finishes, and need formal quotations. We build digital portals around the way wholesale actually works.",
     deliverables: [
       {
         tag: "TECHNICAL PRODUCT CATALOGUE",
-        title: "Filterable specs, dimensions & finishes.",
+        title: "Filterable Specs, Dimensions & Finishes.",
         description:
           "Organize thousands of SKUs with multi-attribute filters, material swatches, dimension drawings, and downloadable data sheets.",
         bullets: [
@@ -777,7 +777,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "BULK RFQ QUOTATION CART",
-        title: "Multi-item quotation requests in one click.",
+        title: "Multi-Item Quotation Requests in One Click.",
         description:
           "Let distributors and trade buyers add multiple products and quantities to an RFQ cart and submit one structured price request.",
         bullets: [
@@ -788,7 +788,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "TRADE & DISTRIBUTOR PORTAL",
-        title: "Centralized lead & quotation workspace.",
+        title: "Centralized Lead & Quotation Workspace.",
         description:
           "Review incoming RFQs, approve custom pricing, and track repeat trade buyers from one calm admin dashboard.",
         bullets: [
@@ -799,7 +799,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "B2B BUYER JOURNEY",
-    workflowTitle: "How trade buyers interact with your digital catalogue.",
+    workflowTitle: "How Trade Buyers Interact with Your Digital Catalogue.",
     workflowSteps: [
       {
         step: "01",
@@ -844,8 +844,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "industries/service-businesses",
     category: "INDUSTRIES",
     eyebrow: "SERVICE BUSINESSES & AGENCIES",
-    title: "Turn visits",
-    titleAccent: "into bookings.",
+    title: "Turn Visits",
+    titleAccent: "Into Bookings.",
     subtitle:
       "High-trust service websites, interactive capability showcases, structured client intake flows, and automated appointment scheduling engineered for professional service firms.",
     heroImage: "/images/home-v2/home-case-flow.webp",
@@ -860,13 +860,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "100%", label: "Self-manageable case studies & services" },
     ],
     overviewEyebrow: "ENGINEERED FOR SERVICE LEADERS",
-    overviewTitle: "Credibility that wins trust. Workflows that capture clients.",
+    overviewTitle: "Credibility That Wins Trust. Workflows That Capture Clients.",
     overviewLead:
       "In a service business, your website is your most visible partner. We combine authoritative editorial design with frictionless intake and booking workflows so prospects move from discovery to scheduled consultation effortlessly.",
     deliverables: [
       {
         tag: "SERVICE & CASE STUDY SHOWCASE",
-        title: "Present your expertise with authority.",
+        title: "Present Your Expertise with Authority.",
         description:
           "Dedicated service architecture, proof points, and interactive case studies that answer client questions before they even call.",
         bullets: [
@@ -877,7 +877,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "BOOKING & CLIENT INTAKE",
-        title: "Automated appointments & scoped enquiries.",
+        title: "Automated Appointments & Scoped Enquiries.",
         description:
           "Capture project briefs, service selections, preferred time slots, and client details in one structured flow.",
         bullets: [
@@ -888,7 +888,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "CLIENT & LEAD WORKSPACE",
-        title: "Manage bookings, leads & content easily.",
+        title: "Manage Bookings, Leads & Content Easily.",
         description:
           "Keep track of every prospect, consultation request, and website update from one clean dashboard.",
         bullets: [
@@ -899,7 +899,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "SERVICE CONVERSION FLOW",
-    workflowTitle: "How prospects become booked clients.",
+    workflowTitle: "How Prospects Become Booked Clients.",
     workflowSteps: [
       {
         step: "01",
@@ -944,8 +944,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "industries/startups-founders",
     category: "INDUSTRIES",
     eyebrow: "STARTUPS & FOUNDERS",
-    title: "Launch the",
-    titleAccent: "next big idea.",
+    title: "Launch The",
+    titleAccent: "Next Big Idea.",
     subtitle:
       "From interactive product prototypes and high-converting launch sites to full-stack SaaS MVPs and mobile applications—engineered to validate real customer demand and scale.",
     heroImage: "/images/home-v2/home-case-atelier.webp",
@@ -960,13 +960,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "99.98%", label: "Production cloud uptime & security foundation" },
     ],
     overviewEyebrow: "FROM ZERO TO ONE",
-    overviewTitle: "Ship a product users love—without technical debt.",
+    overviewTitle: "Ship a Product Users Love—without Technical Debt.",
     overviewLead:
       "Founders need speed, clarity, and a product partner who thinks about user adoption as much as system architecture. We help you define a sharp MVP scope, craft an unforgettable UI/UX, and ship production-grade code.",
     deliverables: [
       {
         tag: "PRODUCT DISCOVERY & UI/UX",
-        title: "Interactive prototypes that win users & investors.",
+        title: "Interactive Prototypes That Win Users & Investors.",
         description:
           "Before writing backend code, we map user journeys and build high-craft interactive prototypes to validate the experience.",
         bullets: [
@@ -977,7 +977,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "FULL-STACK MVP ENGINEERING",
-        title: "Web, SaaS & mobile app development.",
+        title: "Web, SaaS & Mobile App Development.",
         description:
           "We engineer your core product on a modern, scalable stack with authentication, payments, dashboards, and APIs.",
         bullets: [
@@ -988,7 +988,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "AI & SCALE ARCHITECTURE",
-        title: "Built to evolve from first 100 to 100,000+ users.",
+        title: "Built to Evolve from First 100 to 100,000+ Users.",
         description:
           "Clean modular code, automated CI/CD pipelines, and AI integrations so your internal team or our dedicated pod can iterate fast.",
         bullets: [
@@ -999,7 +999,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "FOUNDER SPRINT MODEL",
-    workflowTitle: "How we take your product from concept to launch.",
+    workflowTitle: "How We Take Your Product from Concept to Launch.",
     workflowSteps: [
       {
         step: "01",
@@ -1044,8 +1044,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "our-philosophy",
     category: "COMPANY",
     eyebrow: "OUR PHILOSOPHY",
-    title: "Technology should feel like progress —",
-    titleAccent: "not another system to manage.",
+    title: "Technology Should Feel Like Progress —",
+    titleAccent: "Not Another System to Manage.",
     subtitle:
       "We approach digital transformation from your business outward. First we understand your customers, revenue workflows, and operational bottlenecks—then we engineer calm, self-manageable software.",
     heroImage: "/images/curated/architecture.jpg",
@@ -1060,13 +1060,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "3-Stage", label: "Modular growth foundation (Silver → Gold → Premium)" },
     ],
     overviewEyebrow: "THREE CORE PRINCIPLES",
-    overviewTitle: "We make the complex feel simple.",
+    overviewTitle: "We Make the Complex Feel Simple.",
     overviewLead:
       "Too many software projects fail because they prioritize technical buzzwords over the people who actually use the system. Our philosophy is grounded in three non-negotiable engineering principles.",
     deliverables: [
       {
         tag: "PRINCIPLE 01 · BUSINESS-FIRST",
-        title: "Engineered around commercial outcomes.",
+        title: "Engineered Around Commercial Outcomes.",
         description:
           "We start with your customers, enquiry conversion, and real operational bottlenecks before writing a single line of code.",
         bullets: [
@@ -1077,7 +1077,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "PRINCIPLE 02 · DESIGN WITH INTENT",
-        title: "Zero-friction interfaces people love using.",
+        title: "Zero-Friction Interfaces People Love Using.",
         description:
           "Every screen, product filter, and admin workflow is crafted to remove confusion for both your buyers and your internal team.",
         bullets: [
@@ -1088,7 +1088,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "PRINCIPLE 03 · BUILT TO EVOLVE",
-        title: "Start lean today. Scale tomorrow.",
+        title: "Start Lean Today. Scale Tomorrow.",
         description:
           "We architect modular systems so you can launch a focused storefront or MVP now and plug in CMS, payments, ERP, and AI later.",
         bullets: [
@@ -1099,7 +1099,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "THE SPARSH IT DIFFERENCE",
-    workflowTitle: "How our philosophy shapes every engagement.",
+    workflowTitle: "How Our Philosophy Shapes Every Engagement.",
     workflowSteps: [
       {
         step: "01",
@@ -1139,8 +1139,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "how-we-work",
     category: "OUR WORK",
     eyebrow: "HOW WE WORK",
-    title: "Less guesswork.",
-    titleAccent: "More momentum.",
+    title: "Less Guesswork.",
+    titleAccent: "More Momentum.",
     subtitle:
       "A transparent, four-stage delivery process—Discover, Design, Build, and Launch & Evolve—engineered to eliminate surprises and ship software that delivers value from day one.",
     heroImage: "/images/curated/workspace.jpg",
@@ -1155,13 +1155,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Stage 04", label: "Launch & Evolve — Go-live, training & growth" },
     ],
     overviewEyebrow: "CLARITY AT EVERY MILESTONE",
-    overviewTitle: "Thoughtfully planned. Confidently delivered.",
+    overviewTitle: "Thoughtfully Planned. Confidently Delivered.",
     overviewLead:
       "Every Sparsh IT engagement follows a structured rhythm with clear deliverables, weekly interactive check-ins, and accountable milestones so you always know what is being built and why.",
     deliverables: [
       {
         tag: "01 · DISCOVER & SCOPE",
-        title: "Understand the business and define the job.",
+        title: "Understand the Business and Define the Job.",
         description:
           "We align on your commercial goals, buyer personas, product catalogue structure, and operational pain points.",
         bullets: [
@@ -1172,7 +1172,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "02 · DESIGN & PROTOTYPE",
-        title: "Shape the experience before writing code.",
+        title: "Shape the Experience Before Writing Code.",
         description:
           "We map customer journeys, wireframe key screens, and craft a high-contrast visual design system.",
         bullets: [
@@ -1183,7 +1183,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "03 & 04 · BUILD, LAUNCH & EVOLVE",
-        title: "Engineer for speed, test thoroughly & scale.",
+        title: "Engineer for Speed, Test Thoroughly & Scale.",
         description:
           "We develop the frontend, backend CMS, and integrations in agile sprints, then launch with full team onboarding.",
         bullets: [
@@ -1194,7 +1194,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "THE 4-STAGE JOURNEY",
-    workflowTitle: "What happens at each stage of your project.",
+    workflowTitle: "What Happens at Each Stage of Your Project.",
     workflowSteps: [
       {
         step: "01",
@@ -1239,8 +1239,8 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     slug: "selected-work",
     category: "OUR WORK",
     eyebrow: "SELECTED CONCEPT WORK",
-    title: "Made to be used.",
-    titleAccent: "Made to stand out.",
+    title: "Made to Be Used.",
+    titleAccent: "Made to Stand Out.",
     subtitle:
       "Explore three signature digital product concepts—Forme Catalogue, Atelier Commerce, and Flow Booking—demonstrating how Sparsh IT combines editorial craft with practical business workflows.",
     heroImage: "/images/home-v2/home-case-forme.webp",
@@ -1255,7 +1255,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Custom", label: "Tailored to your brand & operational rules" },
     ],
     overviewEyebrow: "CONCEPT CASE STUDIES",
-    overviewTitle: "Proof is in the product thinking.",
+    overviewTitle: "Proof Is in the Product Thinking.",
     overviewLead:
       "Each concept below addresses a distinct commercial model—B2B wholesale distribution, curated retail commerce, and appointment-driven service operations.",
     deliverables: [
@@ -1294,7 +1294,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "ADAPTING TO YOUR WORLD",
-    workflowTitle: "How we turn a concept direction into your live platform.",
+    workflowTitle: "How We Turn a Concept Direction into Your Live Platform.",
     workflowSteps: [
       {
         step: "01",
@@ -1358,7 +1358,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     category: "COMPANY",
     eyebrow: "FREQUENTLY ASKED QUESTIONS",
     title: "Everything",
-    titleAccent: "made clear.",
+    titleAccent: "Made Clear.",
     subtitle:
       "Straightforward answers about our Silver, Gold, and Premium packages, custom project pricing, B2B quotation workflows, CMS ownership, and post-launch support.",
     heroImage: "/images/curated/city.jpg",
@@ -1373,13 +1373,13 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "Direct", label: "Access to senior engineers & architects" },
     ],
     overviewEyebrow: "COMMON QUESTIONS BY TOPIC",
-    overviewTitle: "What business owners ask us before we begin.",
+    overviewTitle: "What Business Owners Ask Us Before We Begin.",
     overviewLead:
       "We believe clarity builds better software. Below you'll find detailed answers covering packages, pricing, self-service content management, and ongoing support.",
     deliverables: [
       {
         tag: "PACKAGES & UPGRADES",
-        title: "Choosing between Silver, Gold & Premium.",
+        title: "Choosing Between Silver, Gold & Premium.",
         description:
           "Understand which foundation fits your current stage and how upgrades work as your business grows.",
         bullets: [
@@ -1390,7 +1390,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "PRICING & TIMELINES",
-        title: "How we scope and price projects transparently.",
+        title: "How We Scope and Price Projects Transparently.",
         description:
           "No invented one-size-fits-all price tags—your proposal is scoped accurately around your actual deliverables.",
         bullets: [
@@ -1401,7 +1401,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
       {
         tag: "OWNERSHIP & SUPPORT",
-        title: "Managing your platform after launch.",
+        title: "Managing Your Platform After Launch.",
         description:
           "You control your content day-to-day while our team backs you with reliable cloud hosting and technical support.",
         bullets: [
@@ -1412,7 +1412,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       },
     ],
     workflowEyebrow: "STILL HAVE A QUESTION?",
-    workflowTitle: "How we move from first question to custom proposal.",
+    workflowTitle: "How We Move from First Question to Custom Proposal.",
     workflowSteps: [
       {
         step: "01",

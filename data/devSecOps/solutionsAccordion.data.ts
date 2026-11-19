@@ -78,7 +78,7 @@ export const SOLUTIONS_ACCORDION_DEFAULT_DATA: SolutionsAccordionData = {
 };
 
 export const DEVSECOPS_ACCORDION_DATA: SolutionsAccordionData = {
-  heading: "Embed Security Into <br /> Every Stage of Delivery",
+  heading: "Embed Security into <br /> Every Stage of Delivery",
   description:
     "Integrate security validation into application development, software testing, and infrastructure management to identify vulnerabilities and configuration risks throughout the software development lifecycle. Where supported by the delivery architecture, integrate security scans and policy checks into CI/CD workflows to identify issues before release.",
   items: [

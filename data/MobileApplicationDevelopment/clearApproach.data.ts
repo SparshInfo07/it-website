@@ -19,7 +19,7 @@ export interface ClearApproachData {
 
 export const AI_CLEAR_APPROACH_DATA: ClearApproachData = {
   heading:
-    "Extending enterprise capabilities <br /> Through intelligent mobility.",
+    "Extending Enterprise Capabilities <br /> Through Intelligent Mobility.",
   description:
     "Sparsh IT transforms mobile platforms into strategic digital touchpoints that connect users, enterprise services, and business operations through sophisticated, reliable experiences.",
   cards: [

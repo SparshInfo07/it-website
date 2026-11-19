@@ -3,7 +3,7 @@ import type { FooterData } from "@/data/footerData";
 
 export const HOSPITALITY_FOOTER_DATA: FooterData = {
   title:
-    "Hospitality innovation. Engineered around experience. <br /><span class='text-2xl sm:text-3xl md:text-4xl block mt-2.5 font-light text-slate-200 opacity-90'>Elevate service excellence through intelligent technology.</span>",
+    "Hospitality Innovation. Engineered Around Experience. <br /><span class='text-2xl sm:text-3xl md:text-4xl block mt-2.5 font-light text-slate-200 opacity-90'>Elevate Service Excellence Through Intelligent Technology.</span>",
   description:
     "Transform hospitality ecosystems through personalized digital experiences, integrated operations, and sophisticated engineering capabilities.",
   primaryLabel: "Discuss Hospitality Solutions",

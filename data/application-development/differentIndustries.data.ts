@@ -3,7 +3,7 @@ import type { DifferentIndustriesData } from "@/data/differentIndustries";
 
 export const SERVICE_APP_DIFFERENT_INDUSTRIES_DATA: DifferentIndustriesData = {
   heading:
-    "Purpose-built applications for complex <br /> Industry environments.",
+    "Purpose-Built Applications for Complex <br /> Industry Environments.",
   industries: [
     {
       id: "banking",

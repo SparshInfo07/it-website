@@ -1,7 +1,7 @@
 import type { ClearApproachData } from "@/data/clearApproach";
 
 export const BETTER_DECISIONS_DATA: ClearApproachData = {
-  heading: "Transforming Application Landscapes Into <br /> Strategic Digital Assets.",
+  heading: "Transforming Application Landscapes into <br /> Strategic Digital Assets.",
   subheading:
     "Sparsh IT enables enterprises to transcend architectural limitations and evolve complex software environments into adaptable, high-performing digital ecosystems aligned with long-term business ambitions.",
   cards: [

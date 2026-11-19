@@ -13,7 +13,7 @@ export interface DevSecOpsHeroData {
 }
 
 export const DEVSECOPS_HERO_DATA: DevSecOpsHeroData = {
-  title: " DevSecOps Engineering For <br /> Secure Software Delivery ",
+  title: " DevSecOps Engineering for <br /> Secure Software Delivery ",
   subtitle:
     "Strengthen software security, improve delivery consistency, and enhance operational reliability with integrated DevSecOps practices. We combine CI/CD automation, security controls, and infrastructure management to help organizations streamline engineering workflows and deliver dependable software.",
   backgroundImage: ASSETS.DEVSECOPS_BG,

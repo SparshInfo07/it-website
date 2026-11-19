@@ -10,7 +10,7 @@ export interface AIPageBreadcrumbData {
 }
 
 export const AI_PAGE_BREADCRUMB_DATA: AIPageBreadcrumbData = {
-  title: "Turn Enterprise Data Into Actionable Analytics and Intelligence",
+  title: "Turn Enterprise Data into Actionable Analytics and Intelligence",
   subtitle:
     "Sparsh IT helps organizations build reliable data foundations, modern analytics capabilities and real-time insights that strengthen decision-making and prepare data for AI adoption.",
   backgroundImage: ASSETS.DATA_ENG_BANNER,

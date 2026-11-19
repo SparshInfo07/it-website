@@ -432,7 +432,7 @@ export default function CuratedMasterHomepage() {
       {
         kicker: "COMMERCIAL ARCHITECTURE",
         title:
-          "We don't hand you a complex codebase and walk away. We engineer revenue-first systems that accelerate quotations and sales.",
+          "We Don't Hand You a Complex Codebase and Walk Away. We Engineer Revenue-First Systems That Accelerate Quotations and Sales.",
         stats: [
           ["4.2×", "Faster enquiry-to-quote velocity"],
           ["-68%", "Reduction in manual admin work"],
@@ -442,7 +442,7 @@ export default function CuratedMasterHomepage() {
       {
         kicker: "HUMAN-CENTRIC EXPERIENCE",
         title:
-          "Every buyer journey, product catalogue filter, and admin screen is crafted for zero confusion and instant adoption.",
+          "Every Buyer Journey, Product Catalogue Filter, and Admin Screen Is Crafted for Zero Confusion and Instant Adoption.",
         stats: [
           ["0.4s", "Instant catalogue search & filter"],
           ["3-Click", "Streamlined buyer RFQ journey"],
@@ -452,7 +452,7 @@ export default function CuratedMasterHomepage() {
       {
         kicker: "MODULAR FUTURE-PROOF STACK",
         title:
-          "Launch lean with what your business needs today, then plug in CMS, payments, inventory, and AI automation without rebuilding.",
+          "Launch Lean with What Your Business Needs Today, Then Plug in CMS, Payments, Inventory, and AI Automation Without Rebuilding.",
         stats: [
           ["3-Stage", "Upgrade path (Silver → Gold → Premium)"],
           ["99.9%", "Production-grade cloud uptime"],
@@ -533,7 +533,7 @@ export default function CuratedMasterHomepage() {
     const cap3Items = [
       {
         badge: "DESIGN STUDIO",
-        title: "Design people understand.",
+        title: "Design People Understand.",
         desc: "We research your users, map every journey and design clear, beautiful screens, then hand developers a system they can build from.",
         pipe: [
           ["INPUT", "Your Users & Goals"],
@@ -547,7 +547,7 @@ export default function CuratedMasterHomepage() {
       },
       {
         badge: "PRODUCT ENGINEERING",
-        title: "Apps people open every day.",
+        title: "Apps People Open Every Day.",
         desc: "Native and cross-platform mobile apps, web apps and dashboards, built in short sprints and launched with a plan for what comes next.",
         pipe: [
           ["INPUT", "Your Idea or Workflow"],
@@ -561,7 +561,7 @@ export default function CuratedMasterHomepage() {
       },
       {
         badge: "WEB DEVELOPMENT",
-        title: "Websites that work harder.",
+        title: "Websites That Work Harder.",
         desc: "Fast, search-friendly websites, catalogues and online stores that look the part, bring in enquiries and are easy for your team to update.",
         pipe: [
           ["INPUT", "Search & Brand Discovery"],
@@ -575,7 +575,7 @@ export default function CuratedMasterHomepage() {
       },
       {
         badge: "APPLIED AI",
-        title: "AI that does real work.",
+        title: "AI That Does Real Work.",
         desc: "Assistants that answer customers, agents that draft quotes and update records, and smart features inside the products you already run.",
         pipe: [
           ["INPUT", "Enquiries, Docs & Data"],
@@ -820,7 +820,7 @@ export default function CuratedMasterHomepage() {
     > = {
       wholesale: {
         tag: "B2B / DIGITAL CATALOGUE",
-        title: "Show more. Quote faster.",
+        title: "Show More. Quote Faster.",
         desc: "Let buyers browse specifications, choose quantities, and request tailored bulk quotations.",
         rows: ["Product Catalogue", "Bulk quotation requests", "Lead dashboard"],
         pills: ["LIVE", "NEW", "ADMIN"],
@@ -828,7 +828,7 @@ export default function CuratedMasterHomepage() {
       },
       retail: {
         tag: "RETAIL / CURATED COMMERCE",
-        title: "From shelf to screen.",
+        title: "From Shelf to Screen.",
         desc: "Make collections discoverable and let customers reach you or place orders online.",
         rows: ["Seasonal collections", "Content updates", "Customer enquiries"],
         pills: ["SHOP", "CMS", "NEW"],
@@ -836,7 +836,7 @@ export default function CuratedMasterHomepage() {
       },
       services: {
         tag: "SERVICES / APPOINTMENTS",
-        title: "Turn visits into bookings.",
+        title: "Turn Visits into Bookings.",
         desc: "Present services, capture client requirements, and organise appointment requests.",
         rows: ["Service catalogue", "Booking requests", "Customer profiles"],
         pills: ["LIVE", "NEW", "CRM"],
@@ -844,7 +844,7 @@ export default function CuratedMasterHomepage() {
       },
       startups: {
         tag: "STARTUPS / MVP & SAAS",
-        title: "Launch the next idea.",
+        title: "Launch the Next Idea.",
         desc: "Design, validate, and ship a high-impact version of your digital product.",
         rows: ["Product discovery", "MVP design & build", "Iteration roadmap"],
         pills: ["IDEA", "MVP", "SCALE"],

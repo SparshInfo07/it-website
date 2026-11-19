@@ -18,7 +18,7 @@ export interface ClearApproachData {
 }
 
 export const UI_UX_CLEAR_APPROACH_DATA: ClearApproachData = {
-  heading: "Transforming Digital Interaction Into <br /> Experiential Value.",
+  heading: "Transforming Digital Interaction into <br /> Experiential Value.",
   description:
     "Sparsh IT elevates digital engagement by connecting human-centered design principles with enterprise objectives, creating intuitive experiences that simplify complexity and reinforce digital consistency.",
   cards: [

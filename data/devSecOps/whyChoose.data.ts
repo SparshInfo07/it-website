@@ -2,7 +2,7 @@ import { ASSETS } from "@/constants/images.constants";
 import type { WhyBusinessesChooseData } from "@/data/about";
 
 export const DEVSECOPS_WHY_CHOOSE_DATA: WhyBusinessesChooseData = {
-  heading: "Why Businesses Choose Sparsh IT <br /> For DevSecOps",
+  heading: "Why Businesses Choose Sparsh IT <br /> for DevSecOps",
   subheading:
     "We unite engineering speed with enterprise-grade security, ensuring compliance and dependability at every stage of the software lifecycle.",
   cards: [

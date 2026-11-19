@@ -113,7 +113,7 @@ export const PRIVACY_POLICY_DATA: PrivacyPolicyData = {
   },
   ctaSection: {
     heading:
-      "Get in touch with us to discuss how we can help yourbusiness succeed",
+      "Get in Touch with Us to Discuss How We Can Help Your Business Succeed",
     buttonText: "Contact Us",
     buttonHref: "/contact-us",
   },
@@ -121,7 +121,7 @@ export const PRIVACY_POLICY_DATA: PrivacyPolicyData = {
 
 export const PRIVACY_POLICY_FOOTER_DATA: FooterData = {
   title:
-    "Get in touch with us to discuss how we can help yourbusiness succeed",
+    "Get in Touch with Us to Discuss How We Can Help Your Business Succeed",
   primaryLabel: "Contact Us",
   primaryLink: "/contact-us",
   backgroundImage: ASSETS.FOOTER_CTA_BANNER,

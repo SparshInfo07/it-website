@@ -2,7 +2,7 @@ import { ASSETS } from "@/constants/images.constants";
 import type { DifferentIndustriesData } from "@/data/differentIndustries";
 
 export const QUALITY_ENGINEERING_DIFFERENT_INDUSTRIES_DATA: DifferentIndustriesData = {
-  heading: "Intelligent Quality Engineering For <br /> Complex Enterprise Ecosystems.",
+  heading: "Intelligent Quality Engineering for <br /> Complex Enterprise Ecosystems.",
   industries: [
     {
       id: "banking",

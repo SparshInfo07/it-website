@@ -18,7 +18,7 @@ export interface ClearApproachData {
 }
 
 export const AI_CLEAR_APPROACH_DATA: ClearApproachData = {
-  heading: "Elevating Enterprise Data Into Strategic Intelligence.",
+  heading: "Elevating Enterprise Data into Strategic Intelligence.",
   description:
     "Sparsh IT transforms fragmented information landscapes into governed, scalable, and analytics-ready ecosystems that enable informed decisions and accelerate data-driven innovation.",
   cards: [

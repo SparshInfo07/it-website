@@ -97,7 +97,7 @@ export const COOKIE_POLICY_DATA: CookiePolicyData = {
   ],
   ctaSection: {
     heading:
-      "Get in touch with us to discuss how we can help yourbusiness succeed",
+      "Get in Touch with Us to Discuss How We Can Help Your Business Succeed",
     buttonText: "Contact Us",
     buttonHref: "/contact-us",
   },
@@ -105,7 +105,7 @@ export const COOKIE_POLICY_DATA: CookiePolicyData = {
 
 export const COOKIE_POLICY_FOOTER_DATA: FooterData = {
   title:
-    "Get in touch with us to discuss how we can help yourbusiness succeed",
+    "Get in Touch with Us to Discuss How We Can Help Your Business Succeed",
   primaryLabel: "Contact Us",
   primaryLink: "/contact-us",
   backgroundImage: ASSETS.FOOTER_CTA_BANNER,

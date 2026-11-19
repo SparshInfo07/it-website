@@ -9,7 +9,7 @@ export type { AISolutionItem, EnterpriseAISolutionsData };
 export const ENTERPRISE_AI_SOLUTIONS_DATA: EnterpriseAISolutionsData = {
   badge: "",
   heading:
-    "Data engineering & analytics <br /> Transforming data complexity into enterprise intelligence.",
+    "Data Engineering & Analytics <br /> Transforming Data Complexity into Enterprise Intelligence.",
   description:
     "Reliable data foundations are essential for enterprise analytics, informed decision-making, and AI adoption. Sparsh IT engineers data platforms and pipelines that help organizations consolidate information, strengthen data integrity, and enable scalable analytical capabilities.",
   items: [

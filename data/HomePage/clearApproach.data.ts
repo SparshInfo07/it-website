@@ -3,7 +3,7 @@ import type { ClearApproachData } from "@/data/clearApproach";
 export const HOMEPAGE_CLEAR_APPROACH_DATA: ClearApproachData = {
   eyebrow: "",
   heading:
-    "Good technology solves problems. <br /> Exceptional engineering creates possibilities.",
+    "Good Technology Solves Problems. <br /> Exceptional Engineering Creates Possibilities.",
   description:
     "Every successful transformation begins with a clear understanding of the business challenge. At Sparsh IT, we combine strategic thinking, engineering discipline, and collaborative execution to deliver solutions that create lasting value.",
   cards: [

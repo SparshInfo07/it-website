@@ -102,7 +102,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
     },
     offerings: {
       badge: "UI/UX DESIGN",
-      heading: "Design that is clear, consistent <br /> and ready to build.",
+      heading: "Design That Is Clear, Consistent <br /> and Ready to Build.",
       description:
         "Good design is not decoration. It decides whether a visitor becomes a customer and whether your team enjoys the tools they use. We combine research, structure and visual craft so every screen has a reason to exist.",
       items: [
@@ -157,7 +157,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     outcomes: {
-      heading: "What better design <br /> changes for your business.",
+      heading: "What Better Design <br /> Changes for Your Business.",
       description:
         "Design work is measured by what it improves: more sign-ups, fewer support questions and products your team can grow without starting over.",
       cards: [
@@ -196,7 +196,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     approach: {
-      heading: "How we design with you.",
+      heading: "How We Design with You.",
       cards: [
         { id: "discover", number: "01", title: "Discover", description: "We learn your business, your users and what success looks like, then agree a focused design brief.", icon: ASSETS.EXPERIENCE_STRATEGY_USER_INTELLIGENCE },
         { id: "structure", number: "02", title: "Structure", description: "Sitemaps, user flows and wireframes set out what goes where before any visual design begins.", icon: ASSETS.INFORMATION_ARCHITECTURE_JOURNEY_ORCHESTRATION },
@@ -207,7 +207,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     industries: {
-      heading: "Design shaped around <br /> how your customers buy.",
+      heading: "Design Shaped Around <br /> How Your Customers Buy.",
       industries: [
         { id: "manufacturing", name: "Manufacturing & Wholesale", tagline: "Catalogues and quotation journeys that let trade buyers find products and request prices without a phone call.", image: art("ui-manufacturing"), alt: "UI/UX design for manufacturers and wholesalers", href: "/industries/manufacturers-wholesale" },
         { id: "retail", name: "Retail & E-Commerce", tagline: "Product pages, filters and checkouts designed to reduce drop-off and lift order value.", image: art("ui-retail"), alt: "UI/UX design for retail and e-commerce", href: "/industries/ecommerce" },
@@ -217,7 +217,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     cta: {
-      title: "Good products start <br /> with good design.",
+      title: "Good Products Start <br /> with Good Design.",
       description: "Share what you are building and we will suggest the right design scope, from a quick UX audit to a full design system.",
       primaryLabel: "Start a Design Project",
       primaryLink: contact,
@@ -239,7 +239,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
     },
     offerings: {
       badge: "APP DEVELOPMENT",
-      heading: "Apps for your customers, <br /> your team and your next idea.",
+      heading: "Apps for Your Customers, <br /> Your Team and Your Next Idea.",
       description:
         "Whether it is a customer-facing app, an internal tool or a new SaaS product, we handle the full build: product planning, design, front end, back end, testing and release.",
       items: [
@@ -294,7 +294,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     outcomes: {
-      heading: "Built to launch. <br /> Built to last.",
+      heading: "Built to Launch. <br /> Built to Last.",
       description:
         "An app is only valuable if people keep using it. We build for performance, security and easy updates from the very first sprint.",
       cards: [
@@ -305,7 +305,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     approach: {
-      heading: "From idea to app store.",
+      heading: "From Idea to App Store.",
       cards: [
         { id: "plan", number: "01", title: "Product Planning", description: "We shape the idea into a clear feature list, user stories and a realistic release plan.", icon: ASSETS.MOBILE_APP_WHY_ARCHITECTURE },
         { id: "design", number: "02", title: "UX & Interface Design", description: "Flows and screens are designed and prototyped before a single line of code is written.", icon: ASSETS.MOBILE_APP_WHY_NATIVE },
@@ -316,7 +316,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     industries: {
-      heading: "Apps built around <br /> the way you work.",
+      heading: "Apps Built Around <br /> the Way You Work.",
       industries: [
         { id: "manufacturing", name: "Manufacturing & Wholesale", tagline: "Sales-rep ordering apps, dealer portals and stock tools that keep the warehouse and the field in sync.", image: art("app-manufacturing"), alt: "App development for manufacturers and wholesalers", href: "/industries/manufacturers-wholesale" },
         { id: "retail", name: "Retail & E-Commerce", tagline: "Shopping apps, loyalty programmes and order tracking that bring customers back.", image: art("app-retail"), alt: "App development for retail and e-commerce", href: "/industries/ecommerce" },
@@ -326,7 +326,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     cta: {
-      title: "Have an app idea? <br /> Let us build it properly.",
+      title: "Have an App Idea? <br /> Let Us Build It Properly.",
       description: "Tell us what your app needs to do and we will come back with a clear plan, timeline and estimate.",
       primaryLabel: "Discuss Your App",
       primaryLink: contact,
@@ -348,7 +348,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
     },
     offerings: {
       badge: "WEBSITE DEVELOPMENT",
-      heading: "From a first website <br /> to a full online store.",
+      heading: "From a First Website <br /> to a Full Online Store.",
       description:
         "Your website is often the first conversation a customer has with you. We design and build sites that load instantly, rank well and make the next step obvious, whether that is a call, a quote request or a checkout.",
       items: [
@@ -403,7 +403,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     outcomes: {
-      heading: "A website that <br /> earns its keep.",
+      heading: "A Website That <br /> Earns Its Keep.",
       description:
         "We measure a website by what it brings in. Every build is planned around the action you most want a visitor to take.",
       cards: [
@@ -414,7 +414,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     approach: {
-      heading: "How we build your website.",
+      heading: "How We Build Your Website.",
       cards: [
         { id: "brief", number: "01", title: "Brief & Goals", description: "We agree who the site is for, what it must achieve and which pages and features it needs.", icon: ASSETS.SOLUTIONS_ACCORDION_ENTERPRISE_ARCH },
         { id: "content", number: "02", title: "Structure & Content", description: "Sitemap, page outlines and copy guidance so every page has a clear job.", icon: ASSETS.SOLUTIONS_ACCORDION_API_INTEGRATION },
@@ -425,7 +425,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     industries: {
-      heading: "Websites made for <br /> your kind of customer.",
+      heading: "Websites Made for <br /> Your Kind of Customer.",
       industries: [
         { id: "manufacturing", name: "Manufacturing & Wholesale", tagline: "Digital catalogues with specifications and bulk quotation requests for trade buyers.", image: art("web-manufacturing"), alt: "Websites for manufacturers and wholesalers", href: "/industries/manufacturers-wholesale" },
         { id: "retail", name: "Retail & E-Commerce", tagline: "Collection pages and online stores that look premium and are simple to shop on a phone.", image: art("web-retail"), alt: "Websites for retail and e-commerce", href: "/industries/ecommerce" },
@@ -435,7 +435,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     cta: {
-      title: "Your next customer <br /> is looking for you online.",
+      title: "Your Next Customer <br /> Is Looking for You Online.",
       description: "Start with a website and grow into a catalogue, CMS or online store. We will scope the right package for you.",
       primaryLabel: "Plan Your Website",
       primaryLink: contact,
@@ -457,7 +457,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
     },
     offerings: {
       badge: "AI & INTELLIGENCE",
-      heading: "Practical AI, <br /> built into how you work.",
+      heading: "Practical AI, <br /> Built into How You Work.",
       description:
         "AI is most useful when it quietly removes busywork. We start with the tasks that cost your team the most time, then design AI that is accurate, safe and connected to your real data and tools.",
       items: [
@@ -512,7 +512,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     outcomes: {
-      heading: "AI measured in <br /> hours saved.",
+      heading: "AI Measured in <br /> Hours Saved.",
       description:
         "We focus on clear, measurable wins first, then build on what works. No hype, no black boxes.",
       cards: [
@@ -523,7 +523,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     approach: {
-      heading: "How we bring AI <br /> into your business.",
+      heading: "How We Bring AI <br /> into Your Business.",
       cards: [
         { id: "find", number: "01", title: "Find the Opportunity", description: "We review your workflows and pick the tasks where AI saves the most time or money.", icon: ASSETS.AI_MACHINE_LEARNING_PREDICTIVE_INTELLIGENCE },
         { id: "data", number: "02", title: "Prepare Your Data", description: "Documents, catalogues and records are cleaned and connected so the AI has the right context.", icon: ASSETS.AI_ENTERPRISE_DATA_KNOWLEDGE_INTEGRATION },
@@ -534,7 +534,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     industries: {
-      heading: "AI use cases <br /> for your industry.",
+      heading: "AI Use Cases <br /> for Your Industry.",
       industries: [
         { id: "manufacturing", name: "Manufacturing & Wholesale", tagline: "Auto-draft quotations from buyer emails, read purchase orders and forecast stock demand.", image: art("ai-manufacturing"), alt: "AI for manufacturers and wholesalers", href: "/industries/manufacturers-wholesale" },
         { id: "retail", name: "Retail & E-Commerce", tagline: "Product recommendations, smart search and a shopping assistant that answers sizing and delivery questions.", image: art("ai-retail"), alt: "AI for retail and e-commerce", href: "/industries/ecommerce" },
@@ -544,7 +544,7 @@ export const CORE_SERVICE_PAGES: Record<CoreServiceId, CoreServicePageData> = {
       ],
     },
     cta: {
-      title: "Put AI to work <br /> where it counts.",
+      title: "Put AI to Work <br /> Where It Counts.",
       description: "Tell us which tasks slow your team down. We will show you what AI can realistically take on, and what it will save.",
       primaryLabel: "Explore AI for Your Business",
       primaryLink: contact,

@@ -2,7 +2,7 @@ import { ASSETS } from "@/constants/images.constants";
 import type { SolutionsAccordionData } from "@/data/solutionsAccordion";
 
 export const SERVICE_APP_ACCORDION_DATA: SolutionsAccordionData = {
-  heading: "Architecting Applications For <br /> Enterprise Evolution.",
+  heading: "Architecting Applications for <br /> Enterprise Evolution.",
   items: [
     {
       id: "enterprise-application-architecture",
