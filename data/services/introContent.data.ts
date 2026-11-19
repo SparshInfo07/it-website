@@ -16,11 +16,11 @@ export interface ServiceIntroData {
 }
 
 export const SERVICE_INTRO_DATA: ServiceIntroData = {
-  heading: "Transforming Technological Complexity Into Strategic Advantage.",
+  heading: "Everything Your Digital Product Needs, Under One Roof.",
   paragraphs: [
-    "In an era defined by accelerating technological disruption, enterprise success demands more than isolated digital solutions. It requires architectural foresight, engineering precision, and the ability to orchestrate interconnected technologies into cohesive business capabilities.",
-    "Sparsh IT operates at the intersection of enterprise strategy and advanced engineering, helping organizations modernize critical technology landscapes, strengthen digital resilience, and unlock new dimensions of operational performance.",
-    "Through an integrated portfolio of consulting, engineering, and transformation capabilities, we translate ambitious business priorities into scalable technology ecosystems designed for sustained innovation and enterprise evolution.",
+    "Most businesses end up juggling a designer, a web agency, an app developer and an AI consultant, and spend their time keeping everyone in sync. We bring those four skills into one focused team.",
+    "Our UI/UX designers shape how your product looks and feels. Our developers turn that design into fast websites and reliable mobile and web apps. Our AI team adds assistants and automations that save hours every week.",
+    "Because one team owns the whole journey, nothing gets lost in hand-offs. You get clear milestones, a demo you can try every two weeks, and a product built to grow with your business.",
   ],
   image: ASSETS.SERVICE_LISTING_TRANSFORMING_TECHNOLOGICAL,
 };

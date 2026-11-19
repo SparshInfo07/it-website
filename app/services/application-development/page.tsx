@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ServiceApplication from "@/components/Pages/ServicePages/Application_development";
+import CoreServicePage from "@/components/Pages/ServicePages/CoreServicePage";
 import { getMetatags } from "@/utils/seo.utils";
 import { applicationDevelopmentSeo } from "@/data/seo";
 
@@ -8,6 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return getMetatags(applicationDevelopmentSeo, baseUrl);
 }
 
-export default function ApplicationDevelopmentPage() {
-  return <ServiceApplication />;
+export default function AppDevelopmentPage() {
+  return <CoreServicePage service="app" />;
 }

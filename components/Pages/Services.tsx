@@ -28,7 +28,7 @@ export default function Services() {
         subtitleClassName="whitespace-pre-line"
       />
       <IntroContentSection data={SERVICES_INTRO_DATA} />
-      <Overview data={SERVICES_OVERVIEW_DATA} columns={3} />
+      <Overview data={SERVICES_OVERVIEW_DATA} columns={2} />
       <ClearApproach data={SERVICES_CLEAR_APPROACH_DATA} />
       <WhyBusinessesChoose data={SERVICES_WHY_CHOOSE_DATA} />
       <DifferentIndustries data={SERVICES_DIFFERENT_INDUSTRIES_DATA} />

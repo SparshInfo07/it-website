@@ -33,14 +33,11 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
               SERVICES
             </h4>
             <ul className="space-y-3.5 text-[14px] font-medium">
-              <li><Link href="/services/artificial-intelligence" className="text-[#9ca3af] hover:text-white transition-colors">AI &amp; Intelligent Engineering</Link></li>
-              <li><Link href="/services/devsecops" className="text-[#9ca3af] hover:text-white transition-colors">DevSecOps &amp; Platform</Link></li>
-              <li><Link href="/services/application-development" className="text-[#9ca3af] hover:text-white transition-colors">Application Development</Link></li>
-              <li><Link href="/services/data-engineering-analytics" className="text-[#9ca3af] hover:text-white transition-colors">Data Engineering &amp; Analytics</Link></li>
-              <li><Link href="/services/mobile-application-development" className="text-[#9ca3af] hover:text-white transition-colors">Mobile App Development</Link></li>
-              <li><Link href="/services/ui-ux-design-and-digital-experience" className="text-[#9ca3af] hover:text-white transition-colors">UI/UX &amp; Digital Experience</Link></li>
-              <li><Link href="/services/quality-engineering-and-software-testing" className="text-[#9ca3af] hover:text-white transition-colors">Quality Engineering &amp; QA</Link></li>
-              <li><Link href="/services/global-capability-centers" className="text-[#9ca3af] hover:text-white transition-colors">Global Capability Centers</Link></li>
+<li><Link href="/services/ui-ux-design-and-digital-experience" className="text-[#9ca3af] hover:text-white transition-colors">UI/UX Design</Link></li>
+              <li><Link href="/services/application-development" className="text-[#9ca3af] hover:text-white transition-colors">App Development</Link></li>
+              <li><Link href="/services/website-development" className="text-[#9ca3af] hover:text-white transition-colors">Website Development</Link></li>
+              <li><Link href="/services/artificial-intelligence" className="text-[#9ca3af] hover:text-white transition-colors">AI &amp; Intelligence</Link></li>
+              <li><Link href="/services" className="text-[#9ca3af] hover:text-white transition-colors">All Services</Link></li>
             </ul>
           </div>
 

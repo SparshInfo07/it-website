@@ -73,12 +73,12 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
       { value: "24/7", label: "Always-on digital showroom & lead capture" },
     ],
     overviewEyebrow: "EXPERIENCE ARCHITECTURES",
-    overviewTitle: "Four product concepts built around real business bottlenecks.",
+    overviewTitle: "Four concepts. One for each service we offer.",
     overviewLead:
       "Every business reaches a point where scattered WhatsApp messages, static PDF catalogues, and manual spreadsheets slow down growth. These four interactive blueprints demonstrate how we turn everyday friction into calm, high-converting software.",
     deliverables: [
       {
-        tag: "DIGITAL EXPERIENCE",
+        tag: "WEBSITE DEVELOPMENT",
         title: "The store that never closes.",
         description:
           "A high-craft digital product catalogue with structured specification filters, collection storytelling, and direct quotation capture.",
@@ -89,7 +89,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
         ],
       },
       {
-        tag: "BUSINESS SYSTEM",
+        tag: "APP DEVELOPMENT",
         title: "A calmer way to run the day.",
         description:
           "One centralized admin workspace for managing products, inbound enquiries, and pending customer quotations without developer dependency.",
@@ -100,7 +100,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
         ],
       },
       {
-        tag: "CUSTOM SOFTWARE",
+        tag: "AI & INTELLIGENCE",
         title: "From request to real business.",
         description:
           "A dedicated B2B Request-for-Quotation (RFQ) workflow that captures buyer quantities, custom finishes, and delivery locations in one step.",
@@ -141,30 +141,30 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
     ],
     galleryCards: [
       {
-        tag: "DIGITAL EXPERIENCE",
+        tag: "WEBSITE DEVELOPMENT",
         title: "The store that never closes.",
-        description: "A beautifully organised product catalogue with enquiries and a quotation journey.",
+        description: "A product catalogue website with enquiries and a quotation journey built in.",
         image: "/images/curated/showcase-01.jpg",
         href: "/selected-work",
       },
       {
-        tag: "BUSINESS SYSTEM",
+        tag: "APP DEVELOPMENT",
         title: "A calmer way to run the day.",
-        description: "Products, enquiries and quotations in one admin dashboard.",
+        description: "Products, enquiries and orders managed from one web app and dashboard.",
         image: "/images/curated/showcase-02.jpg",
         href: "/selected-work",
       },
       {
-        tag: "CUSTOM SOFTWARE",
+        tag: "AI & INTELLIGENCE",
         title: "From request to real business.",
-        description: "Buyer requirements, quantities and pricing presented as one workflow.",
+        description: "AI reads each buyer request and drafts the quotation for you to approve.",
         image: "/images/curated/showcase-03.jpg",
         href: "/selected-work",
       },
       {
-        tag: "LOCAL TO DIGITAL",
+        tag: "UI/UX DESIGN",
         title: "Your next chapter begins here.",
-        description: "A familiar offline business transformed into an easier digital experience.",
+        description: "A familiar offline business redesigned as a simple, modern digital experience.",
         image: "/images/curated/showcase-04.jpg",
         href: "/transformation",
       },
@@ -993,7 +993,7 @@ export const SINGLE_PAGES_DATA: Record<string, SinglePageConfig> = {
           "Clean modular code, automated CI/CD pipelines, and AI integrations so your internal team or our dedicated pod can iterate fast.",
         bullets: [
           "LLM, AI agent & intelligent workflow integration",
-          "Automated testing, DevSecOps & cloud deployment",
+          "Automated testing & secure cloud deployment",
           "Post-launch iteration roadmap & engineering support",
         ],
       },

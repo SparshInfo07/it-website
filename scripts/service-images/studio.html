@@ -1,0 +1,224 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--navy:#060b1c;--blue:#315dff;--peri:#8ea2ff;--ink:#0f172a;--mut:#64748b;--line:#e6eaf2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100vw;height:100vh;overflow:hidden;font-family:-apple-system,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink)}
+.abs{position:absolute}
+.stage{position:absolute;inset:0;overflow:hidden}
+.dark{background:radial-gradient(1100px 760px at 72% 46%,#1c3285 0%,#0c1638 42%,#060b1c 100%)}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1.2px,transparent 1.3px);background-size:30px 30px;-webkit-mask-image:radial-gradient(900px 700px at 70% 50%,#000 30%,transparent 80%)}
+.ldots{position:absolute;inset:0;background-image:radial-gradient(rgba(15,23,42,.08) 1.2px,transparent 1.3px);background-size:26px 26px}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.card{background:#fff;border-radius:18px;box-shadow:0 30px 70px -20px rgba(2,8,40,.45),0 2px 6px rgba(2,8,40,.08)}
+.solid{background:#111b46;border:1px solid rgba(255,255,255,.12);border-radius:18px;color:#fff;box-shadow:0 24px 60px -20px rgba(0,0,0,.65)}
+.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:18px;backdrop-filter:blur(10px);color:#fff}
+.phone{position:absolute;background:#0b1020;border-radius:46px;padding:11px;box-shadow:0 40px 80px -20px rgba(0,0,0,.6),inset 0 0 0 2px #2a3350}
+.phone .scr{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#f6f8fc;position:relative}
+.phone .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:34%;height:24px;background:#0b1020;border-radius:14px;z-index:3}
+.browser{position:absolute;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -25px rgba(2,8,40,.55),0 2px 8px rgba(2,8,40,.1)}
+.bar{height:40px;background:#f1f4f9;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 16px}
+.bar i{width:11px;height:11px;border-radius:50%;background:#d6dbe6;display:block}
+.bar i:nth-child(1){background:#ff6b6b}.bar i:nth-child(2){background:#ffc94d}.bar i:nth-child(3){background:#3ecf8e}
+.url{margin-left:18px;flex:1;max-width:46%;height:24px;border-radius:8px;background:#fff;border:1px solid var(--line);font-size:12px;color:var(--mut);display:flex;align-items:center;padding:0 12px}
+.ln{height:10px;border-radius:6px;background:#e3e8f1}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;font-weight:700;color:#fff}
+.dot{width:8px;height:8px;border-radius:50%}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.row{display:flex;align-items:center}
+.col{display:flex;flex-direction:column}
+.ic{display:inline-flex;align-items:center;justify-content:center;border-radius:12px}
+svg{display:block}
+</style></head>
+<body><div id="root"></div>
+<script>
+const P = new URLSearchParams(location.hash.slice(1));
+const scene = P.get("scene"), ind = P.get("ind");
+const root = document.getElementById("root");
+let target = root;
+const h = (s) => { target.insertAdjacentHTML("beforeend", s); };
+
+/* ---------- icons (stroke paths, 24 grid) ---------- */
+const I = {
+  check:'<path d="M20 6 9 17l-5-5"/>', spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>',
+  bot:'<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
+  mail:'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 6L2 7"/>', file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>', cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H6"/>',
+  cal:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>', chart:'<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/>',
+  cursor:'<path d="M4 3l7 17 2.5-7.5L21 10z" fill="currentColor"/>', layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/>',
+  zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>', shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', box:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  heart:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5V21h16"/>', wallet:'<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3v3a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5"/>',
+  tag:'<path d="M12 2H2v10l9.3 9.3a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7" cy="7" r="1.5"/>', gauge:'<path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/>',
+  pen:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/>',
+  phone:'<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>', send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+};
+const ic = (n, s = 20, c = "currentColor", w = 2) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
+
+/* ---------- industry themes ---------- */
+const T = {
+  manufacturing:{ cv:"₹35,400", c:"#2b59ff", c2:"#7fa0ff", tint:"#eaf0ff", tint2:"#dfe7ff", brand:"FORME Industrial", icon:"box",
+    h1:"Precision parts,<br>ready to quote.", items:[["Ball Valves","from ₹1,240"],["Pump Sets","from ₹18,900"],["Pipe Fittings","from ₹85"]],
+    tabs:["Catalogue","Quotes","Orders"], stat:["Open quotes","24"], note:"RFQ-1042 · 30 units requested", q:"Can you quote 30 ball valves, 2 inch, stainless?", a:"Yes. I've drafted RFQ-1042: 30 × SS ball valve 2\" at ₹1,180 each. Ready for your approval.", detail:["Ball Valve 2\"","SS 316 · PN40"], kpi:"₹4.8L" },
+  retail:{ cv:"₹2,490", c:"#e0663a", c2:"#f5a27f", tint:"#fff1ea", tint2:"#fde3d6", brand:"ATELIER & Co.", icon:"tag",
+    h1:"The new season<br>collection.", items:[["Linen Overshirt","₹2,490"],["Knit Polo","₹1,790"],["Relaxed Chino","₹2,190"]],
+    tabs:["Shop","Wishlist","Orders"], stat:["Orders today","186"], note:"Order #4821 is out for delivery", q:"Does the linen overshirt come in medium?", a:"It does! Medium is in stock in Sand and Olive. Want me to add one to your bag?", detail:["Linen Overshirt","Sand · M"], kpi:"₹2.1L" },
+  healthcare:{ cv:"Tomorrow", c:"#0f9f8c", c2:"#6fd3c4", tint:"#e7f7f4", tint2:"#d3f0ea", brand:"CareFirst Clinic", icon:"heart",
+    h1:"Care that fits<br>your schedule.", items:[["Cardiology","Dr. Mehta"],["Dental Care","Dr. Rao"],["Pediatrics","Dr. Iyer"]],
+    tabs:["Book","Reports","Doctors"], stat:["Visits booked","42"], note:"Appointment confirmed · 10:30 AM", q:"Can I see a cardiologist tomorrow morning?", a:"Dr. Mehta has a 10:30 AM slot tomorrow. Shall I book it and send a reminder?", detail:["Dr. A. Mehta","Cardiology · 10:30"], kpi:"98%" },
+  education:{ cv:"68%", c:"#7c4dff", c2:"#b9a2ff", tint:"#f2edff", tint2:"#e6dcff", brand:"BrightPath Academy", icon:"book",
+    h1:"Learn at your<br>own pace.", items:[["UX Foundations","12 lessons"],["Data Basics","9 lessons"],["Public Speaking","7 lessons"]],
+    tabs:["Courses","Schedule","Results"], stat:["Active learners","1,240"], note:"New lesson unlocked · Module 4", q:"When is the next admissions deadline?", a:"Applications for the July intake close on 15 June. I can send you the checklist now.", detail:["UX Foundations","Module 4 · 68%"], kpi:"68%" },
+  fintech:{ cv:"+32%", c:"#1463d6", c2:"#6ea5f2", tint:"#e9f2fd", tint2:"#d8e8fb", brand:"Northstar Finance", icon:"wallet",
+    h1:"Money, made<br>clear.", items:[["Savings","₹2,40,000"],["Investments","₹1,86,300"],["Credit","₹56,000"]],
+    tabs:["Home","Pay","Insights"], stat:["Balance","₹4.82L"], note:"Salary credited · ₹85,000", q:"Why was my spending higher this month?", a:"Travel was 32% above your average, mostly flights on 4 May. Everything else is on track.", detail:["Total balance","₹4,82,300"], kpi:"+12%" },
+};
+
+/* ---------- mini UI building blocks ---------- */
+const img = (t, h = 90, r = 12, k = 0) => `<div style="height:${h}px;border-radius:${r}px;background:linear-gradient(${135 + k * 40}deg,${t.c2},${t.c});position:relative;overflow:hidden"><div style="position:absolute;right:-18%;bottom:-40%;width:70%;height:120%;border-radius:50%;background:rgba(255,255,255,.22)"></div><div style="position:absolute;left:14%;top:22%;width:28%;height:46%;border-radius:10px;background:rgba(255,255,255,.35)"></div></div>`;
+const bars = (t, n = 7, h = 70) => `<div class="row" style="align-items:flex-end;gap:7px;height:${h}px">${Array.from({ length: n }, (_, i) => `<div style="flex:1;border-radius:5px 5px 2px 2px;height:${[45, 62, 38, 74, 58, 88, 70, 52, 80][i % 9]}%;background:${i === 5 ? t.c : t.tint2}"></div>`).join("")}</div>`;
+
+const appHome = (t, compact) => `
+  <div style="padding:46px 18px 18px;height:100%;display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,${t.tint} 0%,#fff 46%)">
+    <div class="row" style="justify-content:space-between"><div><div style="font-size:12px;color:var(--mut)">Good morning</div><div style="font-size:17px;font-weight:800">${t.brand}</div></div><div class="ic" style="width:36px;height:36px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)">${ic("bell", 17, t.c)}</div></div>
+    <div style="border-radius:20px;padding:16px;color:#fff;background:linear-gradient(135deg,${t.c},${t.c2})"><div style="font-size:12px;opacity:.85">${t.stat[0]}</div><div style="font-size:28px;font-weight:800;margin-top:4px">${t.stat[1]}</div><div style="margin-top:12px;height:6px;border-radius:4px;background:rgba(255,255,255,.3)"><div style="width:68%;height:100%;border-radius:4px;background:#fff"></div></div></div>
+    <div class="row" style="gap:8px">${t.tabs.map((x, i) => `<span class="chip" style="padding:7px 12px;font-size:12px;${i === 0 ? `background:${t.c};color:#fff` : "background:#fff;color:#334155;box-shadow:0 1px 4px rgba(0,0,0,.06)"}">${x}</span>`).join("")}</div>
+    ${t.items.slice(0, compact ? 2 : 3).map((x, i) => `<div class="row" style="gap:12px;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 10px rgba(15,23,42,.05)"><div style="width:48px;flex:none">${img(t, 48, 12, i)}</div><div style="flex:1"><div style="font-size:14px;font-weight:700">${x[0]}</div><div style="font-size:12px;color:var(--mut);margin-top:2px">${x[1]}</div></div><div class="ic" style="width:30px;height:30px;border-radius:10px;background:${t.tint}">${ic("check", 14, t.c, 2.6)}</div></div>`).join("")}
+    <div style="margin-top:auto" class="row"><div class="btn" style="flex:1;height:46px;border-radius:14px;background:#0f172a;font-size:14px">Continue</div></div>
+  </div>`;
+const appDetail = (t) => `
+  <div style="height:100%;display:flex;flex-direction:column">
+    <div style="height:46%;position:relative">${img(t, 9999, 0, 1).replace("height:9999px", "height:100%")}</div>
+    <div style="padding:18px;display:flex;flex-direction:column;gap:10px;flex:1;background:#fff;border-radius:24px 24px 0 0;margin-top:-22px;position:relative">
+      <div style="width:40px;height:4px;border-radius:3px;background:#e2e8f0;margin:0 auto 4px"></div>
+      <div style="font-size:19px;font-weight:800">${t.detail[0]}</div><div style="font-size:13px;color:var(--mut)">${t.detail[1]}</div>
+      <div class="ln" style="width:92%"></div><div class="ln" style="width:76%"></div>
+      <div class="row" style="gap:8px;margin-top:4px"><span class="chip" style="background:${t.tint};color:${t.c};font-size:12px">${ic("check", 13, t.c, 2.6)} Available</span><span class="chip" style="background:#f1f5f9;color:#334155;font-size:12px">${ic("zap", 13, "#334155")} Fast</span></div>
+      <div class="btn" style="margin-top:auto;height:48px;border-radius:14px;background:${t.c};font-size:15px">${t.tabs[0] === "Book" ? "Book now" : t.tabs[0] === "Courses" ? "Resume lesson" : t.tabs[0] === "Home" ? "View details" : t.tabs[0] === "Shop" ? "Add to bag" : "Request quote"}</div>
+    </div>
+  </div>`;
+const website = (t, big) => `
+  <div style="height:100%;display:flex;flex-direction:column;background:#fff">
+    <div class="row" style="justify-content:space-between;padding:${big ? "18px 34px" : "14px 24px"};border-bottom:1px solid #f0f2f7"><div class="row" style="gap:10px;font-weight:800;font-size:${big ? 17 : 15}px"><span class="ic" style="width:28px;height:28px;border-radius:8px;background:${t.c}">${ic(t.icon, 15, "#fff")}</span>${t.brand}</div><div class="row" style="gap:${big ? 26 : 18}px;font-size:13px;color:#475569">${t.tabs.map((x) => `<span>${x}</span>`).join("")}<span class="btn" style="height:32px;padding:0 14px;background:${t.c};font-size:12px">${t.tabs[0] === "Book" ? "Book visit" : "Get quote"}</span></div></div>
+    <div class="row" style="gap:${big ? 36 : 24}px;padding:${big ? "38px 34px 28px" : "26px 24px 20px"};background:linear-gradient(180deg,${t.tint},#fff)">
+      <div style="flex:1"><div class="lbl" style="color:${t.c};font-size:11px">${t.brand}</div><div style="font-size:${big ? 38 : 28}px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-top:10px">${t.h1}</div><div class="ln" style="width:80%;margin-top:16px"></div><div class="ln" style="width:62%;margin-top:8px"></div><div class="row" style="gap:10px;margin-top:18px"><span class="btn" style="height:38px;padding:0 18px;background:#0f172a;font-size:13px">Explore</span><span class="btn" style="height:38px;padding:0 18px;background:#fff;color:#0f172a;border:1px solid #e2e8f0;font-size:13px">Contact</span></div></div>
+      <div style="flex:1">${img(t, big ? 210 : 150, 18, 2)}</div>
+    </div>
+    <div class="row" style="gap:${big ? 18 : 14}px;padding:0 ${big ? 34 : 24}px">${t.items.map((x, i) => `<div style="flex:1;border:1px solid #eef1f6;border-radius:14px;padding:10px">${img(t, big ? 96 : 66, 10, i)}<div style="font-size:13px;font-weight:700;margin-top:10px">${x[0]}</div><div style="font-size:12px;color:var(--mut);margin-top:3px">${x[1]}</div></div>`).join("")}</div>
+  </div>`;
+const chat = (t, dark) => `
+  <div style="height:100%;display:flex;flex-direction:column;background:${dark ? "transparent" : "#fff"}">
+    <div class="row" style="gap:12px;padding:16px 20px;border-bottom:1px solid ${dark ? "rgba(255,255,255,.1)" : "#eef1f6"}"><span class="ic" style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,${t.c},${t.c2})">${ic("spark", 19, "#fff")}</span><div><div style="font-size:15px;font-weight:800;color:${dark ? "#fff" : "#0f172a"}">${t.brand} Assistant</div><div class="row" style="gap:6px;font-size:12px;color:${dark ? "#9fb0d6" : "#64748b"}"><span class="dot" style="background:#22c55e"></span>Online · replies instantly</div></div></div>
+    <div style="flex:1;padding:20px;display:flex;flex-direction:column;gap:14px">
+      <div style="align-self:flex-end;max-width:78%;padding:12px 16px;border-radius:18px 18px 4px 18px;background:${dark ? "rgba(255,255,255,.12)" : "#f1f5f9"};color:${dark ? "#fff" : "#0f172a"};font-size:14px;line-height:1.45">${t.q}</div>
+      <div class="row" style="gap:10px;align-items:flex-start"><span class="ic" style="flex:none;width:30px;height:30px;border-radius:10px;background:${t.c}">${ic("spark", 15, "#fff")}</span><div style="max-width:82%;padding:12px 16px;border-radius:18px 18px 18px 4px;background:${dark ? "#fff" : t.tint};color:#0f172a;font-size:14px;line-height:1.45">${t.a}</div></div>
+      <div class="row" style="gap:12px;margin-left:40px;padding:12px 14px;border-radius:14px;border:1px solid ${dark ? "rgba(255,255,255,.14)" : "#e8ecf3"};background:${dark ? "rgba(255,255,255,.05)" : "#fff"}"><span class="ic" style="width:38px;height:38px;background:${dark ? "rgba(255,255,255,.1)" : t.tint}">${ic("file", 18, dark ? "#fff" : t.c)}</span><div style="flex:1"><div style="font-size:13px;font-weight:700;color:${dark ? "#fff" : "#0f172a"}">${t.detail[0]}</div><div style="font-size:12px;color:${dark ? "#9fb0d6" : "#64748b"};margin-top:2px">${t.detail[1]}</div></div><div style="font-size:16px;font-weight:800;color:${dark ? "#fff" : t.c}">${t.cv}</div></div>
+      <div class="row" style="gap:8px;margin-left:40px"><span class="chip" style="background:${t.c};color:#fff;font-size:12px">${ic("check", 13, "#fff", 2.6)} Approve</span><span class="chip" style="background:${dark ? "rgba(255,255,255,.1)" : "#fff"};color:${dark ? "#fff" : "#334155"};border:1px solid ${dark ? "rgba(255,255,255,.16)" : "#e2e8f0"};font-size:12px">Edit</span></div>
+      <div style="align-self:flex-end;max-width:70%;padding:12px 16px;border-radius:18px 18px 4px 18px;background:${dark ? "rgba(255,255,255,.12)" : "#f1f5f9"};color:${dark ? "#fff" : "#0f172a"};font-size:14px">Perfect, thank you!</div>
+      <div class="row" style="gap:5px;margin-left:40px;padding:12px 16px;border-radius:18px;background:${dark ? "rgba(255,255,255,.08)" : t.tint};align-self:flex-start">${[0.9, 0.6, 0.35].map((o) => `<span class="dot" style="background:${dark ? "#fff" : t.c};opacity:${o}"></span>`).join("")}</div>
+    </div>
+    <div class="row" style="gap:10px;margin:0 16px 16px;padding:10px 10px 10px 16px;border-radius:14px;border:1px solid ${dark ? "rgba(255,255,255,.14)" : "#e2e8f0"};color:${dark ? "#8090b5" : "#94a3b8"};font-size:13px"><span style="flex:1">Ask anything…</span><span class="ic" style="width:32px;height:32px;border-radius:10px;background:${t.c}">${ic("send", 15, "#fff")}</span></div>
+  </div>`;
+const wireframe = () => `<div style="padding:16px;display:flex;flex-direction:column;gap:10px;height:100%"><div class="ln" style="width:40%;height:12px;background:#cfd6e4"></div><div style="height:90px;border-radius:10px;border:2px dashed #cfd6e4;display:flex;align-items:center;justify-content:center"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M2 2l36 36M38 2 2 38" stroke="#cfd6e4" stroke-width="2"/></svg></div><div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div><div class="row" style="gap:8px">${[1, 2].map(() => `<div style="flex:1;height:60px;border-radius:8px;background:#e8ecf3"></div>`).join("")}</div><div class="ln" style="width:80%"></div><div style="margin-top:auto;height:36px;border-radius:10px;background:#cfd6e4"></div></div>`;
+const components = (t) => `<div style="padding:16px;display:flex;flex-direction:column;gap:12px;height:100%">
+  <div class="lbl" style="font-size:10px;color:#94a3b8">Colour</div><div class="row" style="gap:8px">${[t.c, t.c2, t.tint2, "#0f172a", "#64748b"].map((c) => `<div style="width:30px;height:30px;border-radius:9px;background:${c};box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)"></div>`).join("")}</div>
+  <div class="lbl" style="font-size:10px;color:#94a3b8">Type</div><div class="row" style="gap:12px;align-items:flex-end"><span style="font-size:38px;font-weight:800;line-height:1">Aa</span><div class="col" style="gap:5px;flex:1"><div class="ln" style="height:8px;width:90%"></div><div class="ln" style="height:8px;width:60%"></div></div></div>
+  <div class="lbl" style="font-size:10px;color:#94a3b8">Buttons</div><div class="row" style="gap:8px"><span class="btn" style="height:32px;padding:0 14px;background:${t.c};font-size:12px">Primary</span><span class="btn" style="height:32px;padding:0 14px;background:#fff;color:#0f172a;border:1px solid #e2e8f0;font-size:12px">Secondary</span></div>
+  <div class="lbl" style="font-size:10px;color:#94a3b8">Inputs</div><div class="row" style="gap:8px;height:34px;border:1px solid #e2e8f0;border-radius:10px;padding:0 10px;font-size:12px;color:#94a3b8">${ic("search", 14, "#94a3b8")}Search</div>
+  <div class="row" style="gap:8px"><span class="chip" style="background:${t.tint};color:${t.c};font-size:11px;padding:6px 10px">Tag</span><span class="chip" style="background:#dcfce7;color:#15803d;font-size:11px;padding:6px 10px">Success</span><span class="chip" style="background:#fef3c7;color:#b45309;font-size:11px;padding:6px 10px">Pending</span></div>
+</div>`;
+const artboard = (label, w, hh, body, x, y, accent) => `<div class="abs" style="left:${x}px;top:${y}px;width:${w}px"><div class="row" style="gap:6px;font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px"><span class="dot" style="background:${accent || "#94a3b8"}"></span>${label}</div><div class="card" style="height:${hh}px;overflow:hidden;border-radius:14px;box-shadow:0 18px 40px -16px rgba(15,23,42,.25),0 0 0 1px rgba(15,23,42,.05)">${body}</div></div>`;
+const cursor = (name, color, x, y) => `<div class="abs" style="left:${x}px;top:${y}px;color:${color}">${ic("cursor", 26, color, 1)}<span class="chip" style="position:absolute;left:20px;top:22px;background:${color};color:#fff;font-size:12px;padding:5px 10px;white-space:nowrap">${name}</span></div>`;
+const toast = (t, text, x, y, iconName, w) => `<div class="abs card row" style="left:${x}px;top:${y}px;gap:12px;padding:14px 18px;border-radius:16px;${w ? `width:${w}px` : ""}"><span class="ic" style="width:38px;height:38px;background:${t.tint}">${ic(iconName || "bell", 18, t.c)}</span><div><div style="font-size:14px;font-weight:700">${text[0]}</div><div style="font-size:12px;color:var(--mut);margin-top:2px">${text[1]}</div></div></div>`;
+const ring = (v, c, s = 76, label = "") => `<div class="col" style="align-items:center;gap:6px"><div style="width:${s}px;height:${s}px;border-radius:50%;background:conic-gradient(${c} ${v * 3.6}deg,rgba(0,0,0,.08) 0);display:flex;align-items:center;justify-content:center"><div style="width:${s - 14}px;height:${s - 14}px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${s / 3.6}px;color:${c}">${v}</div></div><div style="font-size:11px;color:var(--mut);font-weight:600">${label}</div></div>`;
+
+/* ---------- industry images: 1200 x 825 ---------- */
+function industry(svc, t) {
+  h(`<div class="stage" style="background:radial-gradient(900px 600px at 70% 30%,${t.tint2} 0%,${t.tint} 45%,#f8fafc 100%)"><div class="ldots" style="opacity:.6"></div></div>`);
+  h(`<div class="orb" style="width:520px;height:520px;left:620px;top:-120px;background:${t.c2};opacity:.35"></div>`);
+  if (svc === "ui") {
+    h(artboard("Wireframe", 250, 470, wireframe(), 90, 190, "#94a3b8"));
+    h(artboard("Mobile UI", 290, 560, `<div style="height:100%">${appHome(t, true)}</div>`, 380, 120, t.c));
+    h(artboard("Components", 330, 400, components(t), 710, 230, t.c2));
+    h(`<svg class="abs" style="left:338px;top:390px" width="46" height="20"><path d="M2 10h38" stroke="${t.c}" stroke-width="2.5" stroke-dasharray="5 5"/><path d="m34 4 8 6-8 6" fill="none" stroke="${t.c}" stroke-width="2.5"/></svg>`);
+    h(cursor("Designer", t.c, 640, 560));
+    h(`<div class="abs card row" style="left:820px;top:120px;gap:10px;padding:12px 16px;border-radius:14px"><span class="ic" style="width:32px;height:32px;background:${t.tint}">${ic("layers", 16, t.c)}</span><div style="font-size:13px;font-weight:700">Design system<div style="font-size:11px;color:var(--mut);font-weight:500">48 components</div></div></div>`);
+  } else if (svc === "app") {
+    h(`<div class="phone" style="left:300px;top:70px;width:330px;height:690px"><div class="scr"><div class="notch"></div>${appHome(t)}</div></div>`);
+    h(`<div class="phone" style="left:640px;top:130px;width:300px;height:620px;transform:rotate(4deg)"><div class="scr"><div class="notch"></div>${appDetail(t)}</div></div>`);
+    h(toast(t, [t.note, "Just now"], 24, 300, "bell", 262));
+    h(`<div class="abs card" style="left:930px;top:470px;padding:16px 18px;width:210px;border-radius:16px"><div style="font-size:12px;color:var(--mut)">This week</div><div style="font-size:24px;font-weight:800;margin:4px 0 10px">${t.kpi}</div>${bars(t, 7, 54)}</div>`);
+  } else if (svc === "web") {
+    h(`<div class="browser" style="left:110px;top:90px;width:900px;height:630px"><div class="bar"><i></i><i></i><i></i><div class="url">${ic("shield", 12, "#22a06b")}&nbsp; ${t.brand.toLowerCase().replace(/[^a-z]+/g, "")}.com</div></div><div style="height:590px">${website(t, true)}</div></div>`);
+    h(`<div class="abs card row" style="left:880px;top:70px;gap:16px;padding:16px 20px;border-radius:18px">${ring(98, "#16a34a", 64, "Performance")}${ring(100, "#16a34a", 64, "SEO")}</div>`);
+    h(toast(t, ["New enquiry received", t.items[0][0] + " · 2 min ago"], 860, 600, "mail", 300));
+  } else {
+    h(`<div class="abs card" style="left:120px;top:110px;width:600px;height:610px;overflow:hidden;border-radius:22px">${chat(t)}</div>`);
+    h(`<div class="abs card" style="left:760px;top:150px;width:330px;padding:20px;border-radius:20px"><div class="row" style="gap:10px"><span class="ic" style="width:36px;height:36px;background:${t.tint}">${ic("bot", 18, t.c)}</span><div style="font-size:14px;font-weight:800">AI agent<div style="font-size:12px;color:var(--mut);font-weight:500">Working on 3 tasks</div></div></div>${["Read request", "Check data", "Draft reply"].map((s, i) => `<div class="row" style="gap:10px;margin-top:14px;font-size:13px;font-weight:600"><span class="ic" style="width:22px;height:22px;border-radius:50%;background:${i < 2 ? t.c : t.tint}">${i < 2 ? ic("check", 12, "#fff", 3) : `<span class="dot" style="background:${t.c}"></span>`}</span>${s}<span style="margin-left:auto;font-size:11px;color:${i < 2 ? "#16a34a" : t.c}">${i < 2 ? "Done" : "Now"}</span></div>`).join("")}</div>`);
+    h(`<div class="abs card" style="left:800px;top:470px;width:260px;padding:18px 20px;border-radius:18px"><div style="font-size:12px;color:var(--mut)">Hours saved this month</div><div style="font-size:30px;font-weight:800;margin:4px 0 10px;color:${t.c}">126 h</div>${bars(t, 8, 50)}</div>`);
+  }
+}
+
+/* ---------- hero banners: 1920 x 1000, visual on the right ---------- */
+function hero(svc) {
+  h(`<div class="stage dark"><div class="dots"></div></div>`);
+  h(`<div class="orb" style="width:700px;height:700px;left:1050px;top:120px;background:#315dff;opacity:.45"></div><div class="orb" style="width:420px;height:420px;left:1500px;top:-60px;background:#7c4dff;opacity:.35"></div>`);
+  const t = T[{ ui: "retail", app: "healthcare", web: "manufacturing", ai: "manufacturing" }[svc]];
+  h(`<div id="hv" class="abs" style="inset:0;transform:scale(.72);transform-origin:1890px 500px"></div>`);
+  target = document.getElementById("hv");
+  if (svc === "ui") {
+    h(`<div class="abs" style="left:980px;top:150px;width:860px;height:720px;border-radius:26px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)"></div>`);
+    h(artboard("Wireframe", 240, 450, wireframe(), 1020, 250, "#94a3b8").replace(/color:#64748b/, "color:#9fb0d6"));
+    h(artboard("Mobile UI", 290, 580, `<div style="height:100%">${appHome(t, true)}</div>`, 1300, 190, "#8ea2ff").replace(/color:#64748b/, "color:#9fb0d6"));
+    h(artboard("Components", 270, 400, components(t), 1630, 330, "#ff9a6b").replace(/color:#64748b/, "color:#9fb0d6"));
+    h(cursor("Designer", "#ff7a45", 1540, 690));
+    h(cursor("Developer", "#315dff", 1180, 760));
+  } else if (svc === "app") {
+    const t2 = T.fintech;
+    h(`<div class="phone" style="left:1060px;top:150px;width:350px;height:730px;transform:rotate(-6deg)"><div class="scr"><div class="notch"></div>${appHome(t2)}</div></div>`);
+    h(`<div class="phone" style="left:1420px;top:110px;width:350px;height:730px;transform:rotate(5deg)"><div class="scr"><div class="notch"></div>${appDetail(t)}</div></div>`);
+    h(`<div class="abs solid row" style="left:900px;top:650px;gap:14px;padding:16px 20px"><span class="ic" style="width:42px;height:42px;background:#315dff">${ic("zap", 20, "#fff")}</span><div><div style="font-size:15px;font-weight:700">Release 2.4 shipped</div><div style="font-size:13px;color:#9fb0d6">iOS · Android · Web</div></div></div>`);
+    h(`<div class="abs solid row" style="left:1660px;top:800px;gap:12px;padding:14px 18px"><span style="font-size:22px;font-weight:800">4.9</span><div style="font-size:12px;color:#9fb0d6">★★★★★<br>App rating</div></div>`);
+  } else if (svc === "web") {
+    h(`<div class="browser" style="left:960px;top:170px;width:900px;height:640px"><div class="bar"><i></i><i></i><i></i><div class="url">${ic("shield", 12, "#22a06b")}&nbsp; formeindustrial.com</div></div><div style="height:600px">${website(t, true)}</div></div>`);
+    h(`<div class="abs card row" style="left:1620px;top:110px;gap:16px;padding:16px 20px;border-radius:18px">${ring(99, "#16a34a", 66, "Performance")}${ring(100, "#16a34a", 66, "SEO")}</div>`);
+    h(toast(t, ["New quote request", "30 × Ball Valve 2\" · just now"], 880, 720, "mail", 330));
+  } else {
+    h(`<div class="abs solid" style="left:940px;top:140px;width:580px;height:700px;overflow:hidden;border-radius:24px;background:#0f1a44">${chat(t, true)}</div>`);
+    h(`<div class="abs card" style="left:1560px;top:220px;width:320px;padding:20px;border-radius:20px"><div class="row" style="gap:10px"><span class="ic" style="width:36px;height:36px;background:#eaf0ff">${ic("bot", 18, "#315dff")}</span><div style="font-size:14px;font-weight:800">Quote agent<div style="font-size:12px;color:var(--mut);font-weight:500">Running · 3 steps</div></div></div>${["Read buyer email", "Match catalogue & price", "Draft quotation"].map((s, i) => `<div class="row" style="gap:10px;margin-top:14px;font-size:13px;font-weight:600"><span class="ic" style="width:22px;height:22px;border-radius:50%;background:${i < 2 ? "#315dff" : "#eaf0ff"}">${i < 2 ? ic("check", 12, "#fff", 3) : '<span class="dot" style="background:#315dff"></span>'}</span>${s}</div>`).join("")}</div>`);
+    h(`<div class="abs solid" style="left:1580px;top:580px;width:290px;padding:18px 20px"><div style="font-size:12px;color:#9fb0d6">Hours saved this month</div><div style="font-size:32px;font-weight:800;margin:4px 0 10px">126 h</div>${bars({ c: "#8ea2ff", tint2: "rgba(255,255,255,.14)" }, 8, 46)}</div>`);
+  }
+}
+
+/* ---------- services overview hero: four tiles ---------- */
+function servicesHero() {
+  h(`<div class="stage dark"><div class="dots"></div></div><div class="orb" style="width:760px;height:760px;left:1100px;top:120px;background:#315dff;opacity:.4"></div>`);
+  h(`<div id="hv" class="abs" style="inset:0;transform:scale(.74);transform-origin:1880px 520px"></div>`);
+  target = document.getElementById("hv");
+  const tiles = [["UI/UX Design", "pen", "#ff7a45"], ["App Development", "phone", "#22c3a6"], ["Website Development", "globe", "#8ea2ff"], ["AI & Intelligence", "spark", "#b28cff"]];
+  tiles.forEach(([name, icn, c], i) => {
+    const x = 1010 + (i % 2) * 420, y = 170 + Math.floor(i / 2) * 340;
+    h(`<div class="abs glass" style="left:${x}px;top:${y}px;width:390px;height:310px;padding:28px;background:rgba(255,255,255,.06)"><div class="row" style="justify-content:space-between"><span class="ic" style="width:54px;height:54px;border-radius:16px;background:${c}">${ic(icn, 26, "#fff")}</span><span style="font-size:14px;color:#9fb0d6;font-weight:700">0${i + 1}</span></div><div style="font-size:26px;font-weight:800;margin-top:26px">${name}</div><div style="margin-top:18px" class="col"><div class="ln" style="background:rgba(255,255,255,.14);width:86%"></div><div class="ln" style="background:rgba(255,255,255,.1);width:64%;margin-top:9px"></div></div><div style="margin-top:26px;height:56px;border-radius:12px;background:linear-gradient(90deg,${c}55,transparent)"></div></div>`);
+  });
+}
+
+/* ---------- closing CTA banners: 1920 x 900, calm centre ---------- */
+function cta(svc) {
+  const pal = { ui: ["#ff7a45", "#7c4dff"], app: ["#22c3a6", "#315dff"], web: ["#315dff", "#8ea2ff"], ai: ["#7c4dff", "#22c3e6"], svc: ["#315dff", "#7c4dff"] }[svc];
+  h(`<div class="stage" style="background:linear-gradient(135deg,#071033 0%,#0d1d5c 55%,#14287a 100%)"><div class="dots" style="-webkit-mask-image:linear-gradient(90deg,#000,transparent 30%,transparent 70%,#000)"></div></div>`);
+  h(`<div class="orb" style="width:760px;height:760px;left:-200px;top:-260px;background:${pal[0]};opacity:.45"></div><div class="orb" style="width:820px;height:820px;left:1380px;top:300px;background:${pal[1]};opacity:.5"></div><div class="orb" style="width:600px;height:400px;left:660px;top:250px;background:#315dff;opacity:.18"></div>`);
+  const icons = { ui: ["pen", "layers", "cursor"], app: ["phone", "bell", "zap"], web: ["globe", "search", "gauge"], ai: ["spark", "bot", "file"], svc: ["pen", "phone", "spark"] }[svc];
+  const spots = [[150, 600, 110, -8], [1650, 170, 96, 10], [320, 180, 72, 6], [1540, 650, 78, -6]];
+  spots.forEach(([x, y, s, r], i) => h(`<div class="abs glass" style="left:${x}px;top:${y}px;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;border-radius:${s * 0.28}px;transform:rotate(${r}deg);opacity:.9">${ic(icons[i % 3], s * 0.42, "#fff", 1.8)}</div>`));
+  h(`<svg class="abs" style="left:0;top:0" width="1920" height="900"><path d="M-40 760 C 420 620, 700 880, 1100 720 S 1700 560, 1980 640" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/><path d="M-40 200 C 380 320, 760 120, 1160 220 S 1720 300, 1980 160" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2"/></svg>`);
+}
+
+if (scene === "industry") industry(P.get("svc"), T[ind]);
+else if (scene === "hero") hero(P.get("svc"));
+else if (scene === "services") servicesHero();
+else if (scene === "cta") cta(P.get("svc"));
+document.title = "ready";
+</script></body></html>

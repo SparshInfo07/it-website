@@ -3,8 +3,8 @@ import type { SeoData } from "@/types/seo.types";
 
 export const homeSeo: SeoData = {
   slug: "",
-  title: "Custom Software Development Company | Sparsh IT",
+  title: "Sparsh IT | UI/UX Design, App, Website & AI Development",
   description:
-    "Sparsh IT is a leading company dedicated to helping businesses transform their digital presence. We specialize in developing custom software solutions tailored to meet the unique needs of our clients.",
+    "Sparsh IT is a digital product studio for UI/UX design, mobile and web app development, website development and practical AI that grows your business.",
   image: IMAGE_URLS.HERO_BANNER_BG,
 };

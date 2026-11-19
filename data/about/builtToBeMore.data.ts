@@ -22,9 +22,9 @@ export interface AboutOverviewData {
 
 export const ABOUT_OVERVIEW_DATA: AboutOverviewData = {
   heading: "About Sparsh IT",
-  subheading: "Engineering Possibilities. Delivering Business Impact.",
+  subheading: "Design, Apps, Websites & AI. One Team.",
   paragraph:
-    "At Sparsh IT, we believe technology creates its greatest value when it advances business strategy. We partner with organizations to navigate digital complexity, modernize technology ecosystems, and transform ambitious ideas into practical, high-impact solutions. Our expertise spans technology consulting, software engineering, and digital transformation, enabling us to address complex business challenges with precision, agility, and a forward-looking perspective. By aligning engineering excellence with business objectives, we help organizations strengthen operational capabilities, accelerate innovation, and establish a foundation for sustainable growth. Our focus is simple: engineer meaningful change through technology.",
+    "Sparsh IT is a digital product studio focused on four things: UI/UX design, app development, website development, and AI & intelligence. We work with founders, growing businesses and established companies to design products people enjoy using, build websites and apps that perform, and add AI that takes repetitive work off their teams. One team covers the whole journey, from the first sketch to launch and every improvement after it, so nothing gets lost in hand-offs. Our focus is simple: build digital products that make a real difference to the way our clients do business.",
   image: {
     src: ASSETS.ABOUT_HANDS_STACKED,
     alt: "Sparsh IT engineering and leadership team hands stacked together in unity and partnership",

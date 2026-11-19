@@ -1,32 +1,32 @@
-import { ArrowRight, Cpu, Layers, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Palette, Smartphone, Sparkles } from "lucide-react";
 import Button from "@/components/Atoms/Button";
 import SiteFooter from "@/components/Organisms/SiteFooter/SiteFooter";
 import { siteFooterData } from "@/data/siteFooterData";
 
 const POPULAR_PAGES = [
   {
-    title: "AI & Intelligent Engineering",
-    description: "Next-gen AI solutions and predictive systems",
+    title: "UI/UX Design",
+    description: "Research, user flows, prototypes and design systems",
+    href: "/services/ui-ux-design-and-digital-experience",
+    icon: Palette,
+  },
+  {
+    title: "App Development",
+    description: "iOS, Android and web apps built to be used every day",
+    href: "/services/application-development",
+    icon: Smartphone,
+  },
+  {
+    title: "Website Development",
+    description: "Fast, SEO-ready websites, catalogues and online stores",
+    href: "/services/website-development",
+    icon: Globe,
+  },
+  {
+    title: "AI & Intelligence",
+    description: "AI assistants, agents and workflow automation",
     href: "/services/artificial-intelligence",
     icon: Sparkles,
-  },
-  {
-    title: "DevSecOps & Platform Engineering",
-    description: "Cloud-native infrastructure and resilient CI/CD pipelines",
-    href: "/services/devsecops",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Application Development",
-    description: "Scalable modern enterprise web & mobile architectures",
-    href: "/services/application-development",
-    icon: Layers,
-  },
-  {
-    title: "Data Engineering & Analytics",
-    description: "Turn raw datasets into actionable enterprise intelligence",
-    href: "/services/data-engineering-analytics",
-    icon: Cpu,
   },
 ];
 

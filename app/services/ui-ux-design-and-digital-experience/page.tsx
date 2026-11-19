@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import UiUxDesignAndDigitalExperience from "@/components/Pages/ServicePages/UiUxDesignAndDigitalExperience";
+import CoreServicePage from "@/components/Pages/ServicePages/CoreServicePage";
 import { getMetatags } from "@/utils/seo.utils";
 import { uiUxDesignSeo } from "@/data/seo";
 
@@ -8,6 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return getMetatags(uiUxDesignSeo, baseUrl);
 }
 
-export default function UiUxDesignAndDigitalExperiencePage() {
-  return <UiUxDesignAndDigitalExperience />;
+export default function UiUxDesignPage() {
+  return <CoreServicePage service="ui-ux" />;
 }

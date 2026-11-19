@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ArtificialIntelligence from "@/components/Pages/ServicePages/ArtificialIntelligence";
+import CoreServicePage from "@/components/Pages/ServicePages/CoreServicePage";
 import { getMetatags } from "@/utils/seo.utils";
 import { artificialIntelligenceSeo } from "@/data/seo";
 
@@ -8,6 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return getMetatags(artificialIntelligenceSeo, baseUrl);
 }
 
-export default function ArtificialIntelligencePageRoute() {
-  return <ArtificialIntelligence />;
+export default function ArtificialIntelligencePage() {
+  return <CoreServicePage service="ai" />;
 }

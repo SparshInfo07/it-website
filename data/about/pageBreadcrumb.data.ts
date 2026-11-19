@@ -11,7 +11,7 @@ export interface AboutHeroData {
 export const ABOUT_HERO_DATA: AboutHeroData = {
   title: "Transforming Business Ambition Into Digital Impact.",
   subtitle:
-    "Sparsh IT partners with organizations to translate business priorities into technology-driven outcomes. Through strategic consulting, precision-led engineering, and advanced digital capabilities, we enable operational excellence, accelerate transformation, and create lasting enterprise value.",
+    "Sparsh IT designs and builds digital products for growing businesses: thoughtful UI/UX, mobile and web apps, high-performing websites and practical AI, all from one focused team.",
   backgroundImage: ASSETS.ABOUT_US_BANNER,
   ctaText: "Connect with Our Team",
   ctaHref: "/contact-us"

@@ -13,7 +13,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Sparsh IT | Engineering What's Next",
   description:
-    "Strategy, software, cloud, data, AI and design-engineered into digital products that move businesses forward.",
+    "UI/UX design, app development, website development and AI & intelligence, from one focused digital product studio.",
   icons: {
     icon: "/sparshlogo_short.svg",
     shortcut: "/sparshlogo_short.svg",

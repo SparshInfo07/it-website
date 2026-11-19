@@ -3,10 +3,8 @@ import type { SeoData } from "@/types/seo.types";
 
 export const artificialIntelligenceSeo: SeoData = {
   slug: "services/artificial-intelligence",
-  title: "Artificial Intelligence Services & Solutions | Sparsh IT",
+  title: "AI & Intelligence Services | Chatbots, Agents & Automation | Sparsh IT",
   description:
-    "We specialize in AI services, providing tailored solutions to meet unique business needs, making it the trusted partner for unlocking AI's potential and obtaining a competitive edge.",
-  image: IMAGE_URLS.ARTIFICIAL_INTELLIGENCE,
- 
+    "Practical AI for growing businesses: AI assistants and chatbots, workflow automation, document extraction, knowledge search and smart features in your apps.",
+  image: IMAGE_URLS.SERVICE_LISTING_AI_INTELLIGENT_ENGINEERING,
 };
-

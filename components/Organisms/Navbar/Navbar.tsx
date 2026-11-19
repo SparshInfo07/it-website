@@ -22,6 +22,14 @@ const CURATED_SINGLE_ROUTES = new Set([
 ]);
 
 const HOMEPAGE_NAVBAR_CSS = `
+/* === FOUR SERVICES MENU === */
+.dd-col-svc { grid-column: span 2; }
+.dd-svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
+#header .dd-panel a.dd-svc { display: flex !important; flex-direction: column; align-items: flex-start !important; justify-content: flex-start !important; text-align: left; gap: 3px; }
+.dd-svc b { font-weight: 700; }
+.dd-svc small { font-size: 12.5px; font-weight: 500; color: #7a8aa8; letter-spacing: 0; }
+@media (max-width: 960px) { .dd-col-svc { grid-column: auto; } .dd-svc-grid { grid-template-columns: 1fr; } }
+
 #header {
   position: fixed !important;
   top: 0 !important;
@@ -615,20 +623,7 @@ export default function Navbar() {
               </button>
               <div className="dd-panel dd-mega" id="ddWhat">
                 <div className="dd-cols">
-                  <div className="dd-col">
-                    <span className="dd-h">Engineering</span>
-                    <a href="/services/artificial-intelligence">AI &amp; Intelligent Engineering</a>
-                    <a href="/services/application-development">Application Development</a>
-                    <a href="/services/mobile-application-development">Mobile App Development</a>
-                    <a href="/services/ui-ux-design-and-digital-experience">UI/UX &amp; Digital Experience</a>
-                  </div>
-                  <div className="dd-col">
-                    <span className="dd-h">Platform &amp; Data</span>
-                    <a href="/services/data-engineering-analytics">Data Engineering &amp; Analytics</a>
-                    <a href="/services/devsecops">DevSecOps &amp; Platform</a>
-                    <a href="/services/quality-engineering-and-software-testing">Quality Engineering &amp; QA</a>
-                    <a href="/services/global-capability-centers">Global Capability Centers</a>
-                  </div>
+                  <div className="dd-col dd-col-svc"><span className="dd-h">Services</span><div className="dd-svc-grid"><a className="dd-svc" href="/services/ui-ux-design-and-digital-experience"><b>UI/UX Design</b><small>Research, flows &amp; design systems</small></a><a className="dd-svc" href="/services/application-development"><b>App Development</b><small>iOS, Android &amp; web apps</small></a><a className="dd-svc" href="/services/website-development"><b>Website Development</b><small>Websites, catalogues &amp; stores</small></a><a className="dd-svc" href="/services/artificial-intelligence"><b>AI &amp; Intelligence</b><small>Assistants, agents &amp; automation</small></a></div></div>
                   <div className="dd-col">
                     <span className="dd-h">Packages</span>
                     <a href="/solutions/silver">Silver · Get Online</a>
@@ -646,7 +641,7 @@ export default function Navbar() {
                 <div className="dd-banner">
                   <div>
                     <b>Not sure where to start?</b>
-                    <span>Tell us what you&apos;re building and we&apos;ll recommend the right package.</span>
+                    <span>Tell us what you&apos;re building and we&apos;ll recommend the right service and package.</span>
                   </div>
                   <a className="dd-banner-btn" href="/contact-us">
                     Start a project
@@ -803,14 +798,10 @@ export default function Navbar() {
 
         <nav className="menu-mobile" id="mobileNav" data-lenis-prevent="">
           <span className="mm-h">What we do</span>
-          <a href="/services/artificial-intelligence">AI &amp; Intelligent Engineering</a>
-          <a href="/services/application-development">Application Development</a>
-          <a href="/services/mobile-application-development">Mobile App Development</a>
-          <a href="/services/ui-ux-design-and-digital-experience">UI/UX &amp; Digital Experience</a>
-          <a href="/services/data-engineering-analytics">Data Engineering &amp; Analytics</a>
-          <a href="/services/devsecops">DevSecOps &amp; Platform</a>
-          <a href="/services/quality-engineering-and-software-testing">Quality Engineering &amp; QA</a>
-          <a href="/services/global-capability-centers">Global Capability Centers</a>
+          <a href="/services/ui-ux-design-and-digital-experience">UI/UX Design</a>
+          <a href="/services/application-development">App Development</a>
+          <a href="/services/website-development">Website Development</a>
+          <a href="/services/artificial-intelligence">AI &amp; Intelligence</a>
           <a href="/packages">Packages</a>
           <a href="/industries/manufacturers-wholesale">Industries</a>
           <span className="mm-h">Our work</span>

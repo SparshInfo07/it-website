@@ -3,15 +3,14 @@ import type { SeoData } from "@/types/seo.types";
 
 export const servicesSeo: SeoData = {
   slug: "services",
-  title: "Services | Sparsh IT - Technology Expertise That Moves Business Forward",
+  title: "Services | UI/UX, Apps, Websites & AI | Sparsh IT",
   description:
-    "We design and develop scalable web, mobile, and enterprise applications that solve complex challenges and support long-term business growth.",
-  image: IMAGE_URLS.APPLICATION_DEV,
+    "Four services, one team: UI/UX design, app development, website development and AI & intelligence for growing businesses and startups.",
+  image: IMAGE_URLS.SERVICE_LISTING_BANNER,
   keywords: [
-    "Enterprise Software Services",
-    "Digital Transformation Services",
-    "Cloud & DevOps Consulting",
-    "AI Engineering Services",
+    "UI/UX Design Services",
+    "App Development Company",
+    "Website Development Services",
+    "AI Automation Services",
   ],
 };
-

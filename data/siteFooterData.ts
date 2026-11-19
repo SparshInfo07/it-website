@@ -31,7 +31,7 @@ export const siteFooterData: SiteFooterData = {
     name: "Sparsh IT",
     href: "/",
     logo: ASSETS.FOOTER_BRAND_LOGO,
-    tagline: "Sparsh IT | Digital Engineering & Transformation",
+    tagline: "Sparsh IT | UI/UX, Apps, Websites & AI",
     // description: "Engineering Intelligence. Orchestrating Digital Evolution.",
   },
   socials: [
@@ -44,14 +44,11 @@ export const siteFooterData: SiteFooterData = {
     {
       heading: "Services",
       links: [
-        { label: "AI & Intelligent Engineering", href: "/services/artificial-intelligence" },
-        { label: "DevSecOps & Platform Engineering", href: "/services/devsecops" },
-        { label: "Application Development & Modernization", href: "/services/application-development" },
-        { label: "Data Engineering & Analytics", href: "/services/data-engineering-analytics" },
-        { label: "Mobile Application Development", href: "/services/mobile-application-development" },
-        { label: "UI/UX Design & Digital Experience", href: "/services/ui-ux-design-and-digital-experience" },
-        { label: "Quality Engineering & Software Testing", href: "/services/quality-engineering-and-software-testing" },
-        { label: "Global Capability Centers (GCC)", href: "/services/global-capability-centers" },
+        { label: "UI/UX Design", href: "/services/ui-ux-design-and-digital-experience" },
+        { label: "App Development", href: "/services/application-development" },
+        { label: "Website Development", href: "/services/website-development" },
+        { label: "AI & Intelligence", href: "/services/artificial-intelligence" },
+        { label: "All Services", href: "/services" },
       ],
     },
     {

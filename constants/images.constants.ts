@@ -31,7 +31,7 @@ export const ASSETS = {
   PROMISES_DELIVERY_EXPERTISE:
     "/assets/images/home/PromisesDelivery/Strong Technical Expertise.svg",
   PROMISES_DELIVERY_QUALITY:
-    "/assets/images/home/PromisesDelivery/Quality & Reliable Delivery.svg",
+    "/assets/images/home/PromisesDelivery/Quality %26 Reliable Delivery.svg",
   PROMISES_DELIVERY_GROWTH:
     "/assets/images/home/PromisesDelivery/Solutions Built for Growth.svg",
   PROMISES_DELIVERY_COLLABORATIVE:
@@ -41,7 +41,7 @@ export const ASSETS = {
   PROMISES_DELIVERY_DESIGNED:
     "/assets/images/home/PromisesDelivery/Business-Focused Solutions.svg",
   PROMISES_DELIVERY_STRONGER:
-    "/assets/images/home/PromisesDelivery/Quality & Reliable Delivery.svg",
+    "/assets/images/home/PromisesDelivery/Quality %26 Reliable Delivery.svg",
   GOOD_SOFTWARE_RESPONSIVE:
     "/assets/images/home/GoodSoftware/Responsive to a changing digital landscape..svg",
   RIGHT_TECHNOLOGY: "/assets/images/home/Right-technology.webp",
@@ -69,7 +69,7 @@ export const ASSETS = {
   WORK_HOSPITALITY: "/assets/images/home/work-hospitality.jpg",
   WORK_EDUCATION: "/assets/images/home/work-education.jpg",
   ABOUT_HANDS_STACKED: "/assets/images/about/About_Optivent.webp",
-  ABOUT_MISSION_TABLET: "/assets/images/about/Our_Vision_&_Mission.webp",
+  ABOUT_MISSION_TABLET: "/assets/images/about/Our_Vision_%26_Mission.webp",
   ABOUT_VISION_FUTURE: "/assets/images/about/about-vision-future.jpg",
   ABOUT_VALUES_SERVERS: "/assets/images/about/Our_Values.webp",
   ABOUT_TEAM_ETHAN: "/assets/images/about/about-team-ethan.jpg",
@@ -144,19 +144,19 @@ export const ASSETS = {
     "/assets/images/service_application/our-tech/ee194005cc4499f09c23ca88933b24f00b3694f7.webp",
   DEVSECOPS_BG: "/assets/images/DevSecOps/Banner.webp",
   CUSTOM_APP_CUSTOM_SOFTWARE:
-    "/assets/images/application_development/CustomAppServices/Custom Software & Enterprise Application Engineering.svg",
+    "/assets/images/application_development/CustomAppServices/Custom Software %26 Enterprise Application Engineering.svg",
   CUSTOM_APP_FULL_STACK:
     "/assets/images/application_development/CustomAppServices/Full-Stack Application Development.svg",
   CUSTOM_APP_WEB_ARCHITECTURE:
-    "/assets/images/application_development/CustomAppServices/Web Application Architecture & Development.svg",
+    "/assets/images/application_development/CustomAppServices/Web Application Architecture %26 Development.svg",
   CUSTOM_APP_API_INTEGRATION:
-    "/assets/images/application_development/CustomAppServices/API Engineering & Enterprise Integration.svg",
+    "/assets/images/application_development/CustomAppServices/API Engineering %26 Enterprise Integration.svg",
   CUSTOM_APP_MICROSERVICES:
-    "/assets/images/application_development/CustomAppServices/Microservices & Distributed Systems Architecture.svg",
+    "/assets/images/application_development/CustomAppServices/Microservices %26 Distributed Systems Architecture.svg",
   CUSTOM_APP_LEGACY_MODERNIZATION:
     "/assets/images/application_development/CustomAppServices/Legacy Application Modernization.svg",
   CUSTOM_APP_RE_ENGINEERING:
-    "/assets/images/application_development/CustomAppServices/Application Re-Engineering & Refactoring.svg",
+    "/assets/images/application_development/CustomAppServices/Application Re-Engineering %26 Refactoring.svg",
   CUSTOM_APP_ENTERPRISE_PLATFORM:
     "/assets/images/application_development/CustomAppServices/Enterprise Platform Development.svg",
   CUSTOM_APP_PERFORMANCE:
@@ -164,15 +164,15 @@ export const ASSETS = {
   SOLUTIONS_ACCORDION_ENTERPRISE_ARCH:
     "/assets/images/application_development/SolutionsAccordion/01. Enterprise Application Architecture.svg",
   SOLUTIONS_ACCORDION_FULL_STACK:
-    "/assets/images/application_development/SolutionsAccordion/02. Full-Stack & Digital Product Engineering.svg",
+    "/assets/images/application_development/SolutionsAccordion/02. Full-Stack %26 Digital Product Engineering.svg",
   SOLUTIONS_ACCORDION_MICROSERVICES:
-    "/assets/images/application_development/SolutionsAccordion/03. Microservices & Distributed Systems.svg",
+    "/assets/images/application_development/SolutionsAccordion/03. Microservices %26 Distributed Systems.svg",
   SOLUTIONS_ACCORDION_LEGACY_RE_ENGINEERING:
-    "/assets/images/application_development/SolutionsAccordion/04. Legacy Re-Engineering & Modernization.svg",
+    "/assets/images/application_development/SolutionsAccordion/04. Legacy Re-Engineering %26 Modernization.svg",
   SOLUTIONS_ACCORDION_API_INTEGRATION:
-    "/assets/images/application_development/SolutionsAccordion/05. API & Enterprise Integration Engineering.svg",
+    "/assets/images/application_development/SolutionsAccordion/05. API %26 Enterprise Integration Engineering.svg",
   SOLUTIONS_ACCORDION_QUALITY_PERFORMANCE:
-    "/assets/images/application_development/SolutionsAccordion/06. Application Quality & Performance Engineering.svg",
+    "/assets/images/application_development/SolutionsAccordion/06. Application Quality %26 Performance Engineering.svg",
   MOBILE_APP_NATIVE_IOS:
     "/assets/images/Mobile_application/EnterpriseAISolutions/Native iOS Application Engineering.svg",
   MOBILE_APP_NATIVE_ANDROID:
@@ -184,44 +184,44 @@ export const ASSETS = {
   MOBILE_APP_ARCHITECTURE:
     "/assets/images/Mobile_application/EnterpriseAISolutions/Mobile Application Architecture.svg",
   MOBILE_APP_API_BACKEND:
-    "/assets/images/Mobile_application/EnterpriseAISolutions/API & Backend Integration.svg",
+    "/assets/images/Mobile_application/EnterpriseAISolutions/API %26 Backend Integration.svg",
   MOBILE_APP_MODERNIZATION:
     "/assets/images/Mobile_application/EnterpriseAISolutions/Mobile Application Modernization.svg",
   MOBILE_APP_PERFORMANCE:
-    "/assets/images/Mobile_application/EnterpriseAISolutions/Performance & Compatibility Engineering.svg",
+    "/assets/images/Mobile_application/EnterpriseAISolutions/Performance %26 Compatibility Engineering.svg",
   MOBILE_APP_SECURITY:
     "/assets/images/Mobile_application/EnterpriseAISolutions/Mobile Security Integration.svg",
   MOBILE_APP_WHY_ARCHITECTURE:
-    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Architecture & Platform Strategy.svg",
+    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Architecture %26 Platform Strategy.svg",
   MOBILE_APP_WHY_NATIVE:
-    "/assets/images/Mobile_application/WhyBusinessesChoose/Native iOS & Android Engineering.svg",
+    "/assets/images/Mobile_application/WhyBusinessesChoose/Native iOS %26 Android Engineering.svg",
   MOBILE_APP_WHY_CROSS_PLATFORM:
     "/assets/images/Mobile_application/WhyBusinessesChoose/Cross-Platform Application Engineering.svg",
   MOBILE_APP_WHY_API_BACKEND:
-    "/assets/images/Mobile_application/WhyBusinessesChoose/Enterprise API & Backend Integration.svg",
+    "/assets/images/Mobile_application/WhyBusinessesChoose/Enterprise API %26 Backend Integration.svg",
   MOBILE_APP_WHY_SECURITY_PERFORMANCE:
-    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Security & Performance Engineering.svg",
+    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Security %26 Performance Engineering.svg",
   MOBILE_APP_WHY_QUALITY_LIFECYCLE:
-    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Quality & Lifecycle Management.svg",
+    "/assets/images/Mobile_application/WhyBusinessesChoose/Mobile Quality %26 Lifecycle Management.svg",
   MOBILE_APP_FOOTER_BANNER: "/assets/images/Mobile_application/footer-1.webp",
   DEVSECOPS_CUSTOM_SERVICES_STRATEGY:
-    "/assets/images/DevSecOps/CustomServicesGrid/DevSecOps Strategy & Implementation.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/DevSecOps Strategy %26 Implementation.svg",
   DEVSECOPS_CUSTOM_SERVICES_CICD:
-    "/assets/images/DevSecOps/CustomServicesGrid/CD Architecture & Pipeline Automation.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/CD Architecture %26 Pipeline Automation.svg",
   DEVSECOPS_CUSTOM_SERVICES_IAC:
-    "/assets/images/DevSecOps/CustomServicesGrid/Infrastructure as Code & Cloud Automation.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Infrastructure as Code %26 Cloud Automation.svg",
   DEVSECOPS_CUSTOM_SERVICES_CONTAINERIZATION:
-    "/assets/images/DevSecOps/CustomServicesGrid/Containerization & Kubernetes Orchestration.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Containerization %26 Kubernetes Orchestration.svg",
   DEVSECOPS_CUSTOM_SERVICES_PLATFORM_ENGINEERING:
-    "/assets/images/DevSecOps/CustomServicesGrid/Platform Engineering & Developer Platforms.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Platform Engineering %26 Developer Platforms.svg",
   DEVSECOPS_CUSTOM_SERVICES_SECURITY_AUTOMATION:
-    "/assets/images/DevSecOps/CustomServicesGrid/Security Automation & Compliance Integration.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Security Automation %26 Compliance Integration.svg",
   DEVSECOPS_CUSTOM_SERVICES_SRE:
     "/assets/images/DevSecOps/CustomServicesGrid/Site Reliability Engineering.svg",
   DEVSECOPS_CUSTOM_SERVICES_OBSERVABILITY:
-    "/assets/images/DevSecOps/CustomServicesGrid/Observability, Monitoring & Incident Management.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Observability, Monitoring %26 Incident Management.svg",
   DEVSECOPS_CUSTOM_SERVICES_RELEASE_ENGINEERING:
-    "/assets/images/DevSecOps/CustomServicesGrid/Release Engineering & Deployment Automation.svg",
+    "/assets/images/DevSecOps/CustomServicesGrid/Release Engineering %26 Deployment Automation.svg",
   DEVSECOPS_WHY_CHOOSE_1: "/assets/images/DevSecOps/WhyBusinessesChoose/1.svg",
   DEVSECOPS_WHY_CHOOSE_2: "/assets/images/DevSecOps/WhyBusinessesChoose/2.svg",
   DEVSECOPS_WHY_CHOOSE_3: "/assets/images/DevSecOps/WhyBusinessesChoose/3.svg",
@@ -240,35 +240,35 @@ export const ASSETS = {
   QE_SOLUTIONS_STRATEGY:
     "/assets/images/Quality_Engineering/EnterpriseAISolutions/Enterprise Quality Engineering Strategy.svg",
   QE_SOLUTIONS_FUNCTIONAL_EXPLORATORY:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Functional & Exploratory Quality Assurance.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Functional %26 Exploratory Quality Assurance.svg",
   QE_SOLUTIONS_AUTOMATION:
     "/assets/images/Quality_Engineering/EnterpriseAISolutions/AI-Powered Quality Automation Engineering.svg",
   QE_SOLUTIONS_API_MICROSERVICES:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/API & Microservices Quality Assurance.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/API %26 Microservices Quality Assurance.svg",
   QE_SOLUTIONS_DATABASE_INTEGRITY:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Database Integrity & Data Validation.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Database Integrity %26 Data Validation.svg",
   QE_SOLUTIONS_PERFORMANCE_RESILIENCE:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Performance, Scalability & Resilience Engineering.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Performance, Scalability %26 Resilience Engineering.svg",
   QE_SOLUTIONS_INTEGRATION_REGRESSION:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Integration & Regression Quality Assurance.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Integration %26 Regression Quality Assurance.svg",
   QE_SOLUTIONS_CONTINUOUS_DEVSECOPS:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Continuous Quality Engineering & DevSecOps Integration.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Continuous Quality Engineering %26 DevSecOps Integration.svg",
   QE_SOLUTIONS_AI_DEFECT_INTELLIGENCE:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/AI-Driven Quality Optimization & Defect Intelligence.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/AI-Driven Quality Optimization %26 Defect Intelligence.svg",
   QE_SOLUTIONS_GENERATIVE_AI_DATA:
-    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Generative AI & Data Quality Assurance.svg",
+    "/assets/images/Quality_Engineering/EnterpriseAISolutions/Generative AI %26 Data Quality Assurance.svg",
   QE_WHY_CHOOSE_STRATEGY_ARCHITECTURE:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Enterprise Quality Strategy & Architecture.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Enterprise Quality Strategy %26 Architecture.svg",
   QE_WHY_CHOOSE_FUNCTIONAL_ASSURANCE:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Functional & Exploratory Quality Assurance.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Functional %26 Exploratory Quality Assurance.svg",
   QE_WHY_CHOOSE_API_INTEGRATION:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/API & Integration Quality Engineering.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/API %26 Integration Quality Engineering.svg",
   QE_WHY_CHOOSE_DATA_INTEGRITY:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Data Integrity & Intelligent Validation.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Data Integrity %26 Intelligent Validation.svg",
   QE_WHY_CHOOSE_AUTOMATION_CONTINUOUS:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/AI-Powered Automation & Continuous Quality Engineering.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/AI-Powered Automation %26 Continuous Quality Engineering.svg",
   QE_WHY_CHOOSE_PERFORMANCE_RESILIENCE:
-    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Performance, Resilience & Release Assurance.svg",
+    "/assets/images/Quality_Engineering/WhyBusinessesChoose/Performance, Resilience %26 Release Assurance.svg",
   GCC_SOLUTIONS_OFFSHORE_DEV:
     "/assets/images/GCC/EnterpriseAISolutions/offshore-software-engineering-development.svg",
   GCC_SOLUTIONS_DEDICATED_TEAMS:
@@ -476,34 +476,34 @@ export const ASSETS = {
   DATA_ENG_BANNER:
     "/assets/images/data-eng/Turn-Enterprise-Data-Into-Actionable-Analytics-and-Intelligence.webp",
   DATA_ENG_ARCHITECTURE:
-    "/assets/images/data-eng/Data-Architecture-&-Platform-Engineering.svg",
+    "/assets/images/data-eng/Data-Architecture-%26-Platform-Engineering.svg",
   DATA_ENG_LAKEHOUSE:
-    "/assets/images/data-eng/Data-Lakehouse-&-Data-Warehouse-Engineering.svg",
+    "/assets/images/data-eng/Data-Lakehouse-%26-Data-Warehouse-Engineering.svg",
   DATA_ENG_REALTIME:
-    "/assets/images/data-eng/Real-Time-Data-Processing-&-Streaming.svg",
+    "/assets/images/data-eng/Real-Time-Data-Processing-%26-Streaming.svg",
   DATA_ENG_BIG_DATA: "/assets/images/data-eng/Big-Data-Engineering.svg",
   DATA_ENG_DATABRICKS:
-    "/assets/images/data-eng/Databricks-&-Distributed-Data-Processing.svg",
+    "/assets/images/data-eng/Databricks-%26-Distributed-Data-Processing.svg",
   DATA_ENG_CLOUD: "/assets/images/data-eng/Cloud-Data-Engineering.svg",
   DATA_ENG_QUALITY:
-    "/assets/images/data-eng/Data-Quality-&-Validation-Frameworks.svg",
+    "/assets/images/data-eng/Data-Quality-%26-Validation-Frameworks.svg",
   DATA_ENG_INTEGRATION:
-    "/assets/images/data-eng/Data-Integration-&-Transformation.svg",
+    "/assets/images/data-eng/Data-Integration-%26-Transformation.svg",
   DATA_ENG_BI:
-    "/assets/images/data-eng/Business-Intelligence-&-Analytics-Enablement.svg",
+    "/assets/images/data-eng/Business-Intelligence-%26-Analytics-Enablement.svg",
   DATA_ENG_MODERNIZATION:
     "/assets/images/data-eng/Data-Platform-Modernization.svg",
   DATA_ENG_WHY_ARCHITECTURE:
-    "/assets/images/data-eng/Enterprise-Data-Architecture-&-Modelling.svg",
+    "/assets/images/data-eng/Enterprise-Data-Architecture-%26-Modelling.svg",
   DATA_ENG_WHY_ETL: "/assets/images/data-eng/etl.svg",
   DATA_ENG_WHY_LAKEHOUSE:
-    "/assets/images/data-eng/Lakehouse-&-Distributed-Data-Engineering.svg",
+    "/assets/images/data-eng/Lakehouse-%26-Distributed-Data-Engineering.svg",
   DATA_ENG_WHY_STREAMING:
-    "/assets/images/data-eng/Real-Time-Streaming-&-Event-Processing.svg",
+    "/assets/images/data-eng/Real-Time-Streaming-%26-Event-Processing.svg",
   DATA_ENG_WHY_GOVERNANCE:
-    "/assets/images/data-eng/Data-Governance,-Quality-&-Observability.svg",
+    "/assets/images/data-eng/Data-Governance,-Quality-%26-Observability.svg",
   DATA_ENG_WHY_PERFORMANCE:
-    "/assets/images/data-eng/Data-Performance-&-Platform-Modernization.svg",
+    "/assets/images/data-eng/Data-Performance-%26-Platform-Modernization.svg",
   DATA_ENG_ETL: "/assets/images/data-eng/etl.svg",
   DATA_ENG_CTA: "/assets/images/data-eng/CTA.webp",
   DATA_ENG_EDUCATION: "/assets/images/data-eng/Education.webp",
@@ -523,29 +523,29 @@ export const ASSETS = {
   TRUSTED_PARTNER_STRIPE: "/assets/images/home/Trusted_Partners/Stripe.svg",
   TRUSTED_PARTNER_WRIKE: "/assets/images/home/Trusted_Partners/Wrike.svg",
   TECH_SOLUTIONS_AI:
-    "/assets/images/home/TechnologySolutions/AI-&-intelligent-engineering.webp",
+    "/assets/images/home/TechnologySolutions/AI-%26-intelligent-engineering.webp",
   TECH_SOLUTIONS_DEVSECOPS:
-    "/assets/images/home/TechnologySolutions/DevSecOps-&-Platform-Engineering.webp",
+    "/assets/images/home/TechnologySolutions/DevSecOps-%26-Platform-Engineering.webp",
   TECH_SOLUTIONS_APP_DEV:
-    "/assets/images/home/TechnologySolutions/Application-development-&-modernization.webp",
+    "/assets/images/home/TechnologySolutions/Application-development-%26-modernization.webp",
   TECH_SOLUTIONS_DATA_ENG:
-    "/assets/images/home/TechnologySolutions/Data-engineering-&-analytics.webp",
+    "/assets/images/home/TechnologySolutions/Data-engineering-%26-analytics.webp",
   TECH_SOLUTIONS_MOBILE_APP:
     "/assets/images/home/TechnologySolutions/Mobile application development a.webp",
   TECH_SOLUTIONS_UX_DESIGN:
-    "/assets/images/home/TechnologySolutions/UX design & digital experience 3.webp",
+    "/assets/images/home/TechnologySolutions/UX design %26 digital experience 3.webp",
   TECH_SOLUTIONS_QUALITY_ENG:
-    "/assets/images/home/TechnologySolutions/Quality engineering & software testing a.webp",
+    "/assets/images/home/TechnologySolutions/Quality engineering %26 software testing a.webp",
   HOME_INDUSTRY_BANKING:
-    "/assets/images/home/DifferentIndustriesData/Banking & Financial Services.webp",
+    "/assets/images/home/DifferentIndustriesData/Banking %26 Financial Services.webp",
   HOME_INDUSTRY_EDUCATION:
-    "/assets/images/home/DifferentIndustriesData/Education & Learning.webp",
+    "/assets/images/home/DifferentIndustriesData/Education %26 Learning.webp",
   HOME_INDUSTRY_HEALTHCARE:
-    "/assets/images/home/DifferentIndustriesData/Healthcare & Life Sciences.webp",
+    "/assets/images/home/DifferentIndustriesData/Healthcare %26 Life Sciences.webp",
   HOME_INDUSTRY_HOSPITALITY:
     "/assets/images/home/DifferentIndustriesData/Hospitality.webp",
   HOME_INDUSTRY_RETAIL:
-    "/assets/images/home/DifferentIndustriesData/Retail & E-Commerce.webp",
+    "/assets/images/home/DifferentIndustriesData/Retail %26 E-Commerce.webp",
   HOME_INDUSTRY_TRAVEL:
     "/assets/images/home/DifferentIndustriesData/Travel.webp",
   ABOUT_WHY_CHOOSE_BUSINESS_ALIGNED:

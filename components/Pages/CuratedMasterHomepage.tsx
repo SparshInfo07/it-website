@@ -78,7 +78,7 @@ export default function CuratedMasterHomepage() {
     const srLine = $<HTMLElement>("#hero-panel-b .sr-l2");
     const srStage = $<HTMLElement>("#hero-panel-b .sr-stage");
     const srButtons = $$<HTMLButtonElement>("#hero-panel-b .sr-idx button");
-    const SR_WORDS = ["WEBSITES", "STORES", "DASHBOARDS", "APPS", "WHAT'S NEXT"];
+    const SR_WORDS = ["UI/UX", "APPS", "WEBSITES", "AI AGENTS", "WHAT'S NEXT"];
     const SR_HOLD = 2600;
     const srReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let srPrev = "";
@@ -532,94 +532,60 @@ export default function CuratedMasterHomepage() {
     });
     const cap3Items = [
       {
-        badge: "WEB ARCHITECTURE",
+        badge: "DESIGN STUDIO",
+        title: "Design people understand.",
+        desc: "We research your users, map every journey and design clear, beautiful screens, then hand developers a system they can build from.",
+        pipe: [
+          ["INPUT", "Your Users & Goals"],
+          ["PROCESS", "Flows, Prototypes & UI"],
+          ["OUTCOME", "Developer-Ready Design"],
+        ],
+        deliv: ["UX Research & User Flows", "Clickable Figma Prototype", "Visual UI & Brand Language", "Reusable Design System"],
+        stat: "Weeks 2–3",
+        sub: "Clickable prototype ready to test",
+        href: "/services/ui-ux-design-and-digital-experience",
+      },
+      {
+        badge: "PRODUCT ENGINEERING",
+        title: "Apps people open every day.",
+        desc: "Native and cross-platform mobile apps, web apps and dashboards, built in short sprints and launched with a plan for what comes next.",
+        pipe: [
+          ["INPUT", "Your Idea or Workflow"],
+          ["PROCESS", "iOS · Android · Web"],
+          ["OUTCOME", "A Launched, Scalable App"],
+        ],
+        deliv: ["iOS & Android Apps", "Web Apps, Portals & SaaS", "Secure APIs & Integrations", "Store Launch & Support"],
+        stat: "Every 2 weeks",
+        sub: "A working demo you can try",
+        href: "/services/application-development",
+      },
+      {
+        badge: "WEB DEVELOPMENT",
         title: "Websites that work harder.",
-        desc: "Brand-first, high-performance websites built for search discovery, enterprise credibility, and qualified customer enquiries.",
+        desc: "Fast, search-friendly websites, catalogues and online stores that look the part, bring in enquiries and are easy for your team to update.",
         pipe: [
           ["INPUT", "Search & Brand Discovery"],
-          ["ENGINE", "Next.js 16 + GSAP UX"],
-          ["OUTCOME", "Qualified Lead Inbox"],
+          ["PROCESS", "Fast, SEO-Ready Build"],
+          ["OUTCOME", "Qualified Enquiries"],
         ],
-        deliv: [
-          "Custom UI/UX Design System",
-          "99/100 Core Web Vitals",
-          "Technical SEO & Schema",
-          "WhatsApp & RFQ Lead Capture",
-        ],
-        stat: "+3.4× Enquiries",
-        sub: "Average conversion lift post-launch",
+        deliv: ["Custom Responsive Design", "Catalogue, CMS or Online Store", "Technical SEO & Core Web Vitals", "WhatsApp & Enquiry Capture"],
+        stat: "3 packages",
+        sub: "Start simple, upgrade without a rebuild",
+        href: "/services/website-development",
       },
       {
-        badge: "DIGITAL COMMERCE",
-        title: "Digital catalogues & commerce.",
-        desc: "Product pages, technical specification filters, bulk RFQ quotation workflows, and online payment checkout.",
+        badge: "APPLIED AI",
+        title: "AI that does real work.",
+        desc: "Assistants that answer customers, agents that draft quotes and update records, and smart features inside the products you already run.",
         pipe: [
-          ["INPUT", "Multi-SKU Exploration"],
-          ["ENGINE", "RFQ Cart & Checkout"],
-          ["OUTCOME", "Approved Bulk Orders"],
+          ["INPUT", "Enquiries, Docs & Data"],
+          ["PROCESS", "Assistants & AI Agents"],
+          ["OUTCOME", "Hours Saved Every Week"],
         ],
-        deliv: [
-          "Category & Spec Filters",
-          "Multi-Item RFQ Builder",
-          "Payment Gateway Sync",
-          "Inventory & Stock Rules",
-        ],
-        stat: "4.2× Faster",
-        sub: "Buyer lookup to quotation speed",
-      },
-      {
-        badge: "OWNER WORKSPACE",
-        title: "CMS, admin & enquiry systems.",
-        desc: "Update products, high-res images, website copy, and respond to buyer quotations from one intuitive workspace.",
-        pipe: [
-          ["INPUT", "Owner Content Edits"],
-          ["ENGINE", "Self-Service CMS Core"],
-          ["OUTCOME", "Instant Live Publishing"],
-        ],
-        deliv: [
-          "Visual Product & Page CMS",
-          "Centralized Enquiry CRM",
-          "1-Click Quote Approvals",
-          "Role-Based Team Access",
-        ],
-        stat: "100% Autonomy",
-        sub: "Zero developer dependency for edits",
-      },
-      {
-        badge: "PRODUCT STUDIO",
-        title: "Custom web & mobile apps.",
-        desc: "Build scalable SaaS MVPs, internal operations portals, and native iOS/Android applications around your business.",
-        pipe: [
-          ["INPUT", "Custom Business Logic"],
-          ["ENGINE", "Cloud API + Mobile SDK"],
-          ["OUTCOME", "Scalable Digital Product"],
-        ],
-        deliv: [
-          "Web & Native Mobile Apps",
-          "REST / GraphQL API Layer",
-          "Secure Cloud Deployment",
-          "Real-Time Analytics",
-        ],
-        stat: "99.98% Uptime",
-        sub: "Enterprise-grade cloud reliability",
-      },
-      {
-        badge: "AI AUTOMATION",
-        title: "AI & business automation.",
-        desc: "Connect repetitive tasks, smart lead qualification, automated quotation drafting, and ERP/CRM synchronization.",
-        pipe: [
-          ["INPUT", "Inbound Customer Event"],
-          ["ENGINE", "AI Agent & Workflow"],
-          ["OUTCOME", "Automated Execution"],
-        ],
-        deliv: [
-          "AI Product Finder & Chat",
-          "Automated Quote Drafting",
-          "WhatsApp / Email Triggers",
-          "Bi-Directional ERP Sync",
-        ],
-        stat: "-68% Overhead",
-        sub: "Reduction in manual admin work",
+        deliv: ["AI Chatbots & Assistants", "Workflow & Quote Automation", "Document Data Extraction", "Human Approval & Guardrails"],
+        stat: "24/7",
+        sub: "Instant answers for your customers",
+        href: "/services/artificial-intelligence",
       },
     ];
 
@@ -695,6 +661,8 @@ export default function CuratedMasterHomepage() {
         if (descEl) descEl.textContent = d.desc;
         if (statEl) statEl.textContent = d.stat;
         if (subEl) subEl.textContent = d.sub;
+        const linkEl = $<HTMLAnchorElement>("#inspLink");
+        if (linkEl) linkEl.href = d.href;
         if (pipeEl) {
           pipeEl.innerHTML = d.pipe
             .map((p) => `<div class="pipe-node"><small>${p[0]}</small><b>${p[1]}</b></div>`)
