@@ -13,6 +13,8 @@ for (const svc of ["ui", "app", "web", "ai"]) {
   jobs.push({ name: `${svc}-cta`, w: 1920, h: 900, hash: `scene=cta&svc=${svc}` });
   for (const ind of ["manufacturing", "retail", "healthcare", "education", "fintech"]) jobs.push({ name: `${svc}-${ind}`, w: 1200, h: 825, hash: `scene=industry&svc=${svc}&ind=${ind}` });
 }
+// Homepage artwork (written with the "home-" prefix; render into public/images/home-v2).
+for (const [k, w, hh] of [["show-web", 1200, 669], ["show-app", 1200, 669], ["show-ai", 1200, 669], ["show-ui", 1200, 669], ["tr-1", 1920, 1080], ["tr-2", 1920, 1080], ["tr-3", 1920, 1080], ["tr-4", 1920, 1080], ["case-forme", 1000, 860], ["case-atelier", 1000, 860], ["case-flow", 1000, 860], ["menu-showcase", 900, 600], ["menu-transform", 900, 600], ["menu-work", 900, 600], ["menu-process", 900, 600], ["menu-about", 900, 600], ["menu-philosophy", 900, 600], ["menu-faq", 900, 600]]) jobs.push({ name: `home-${k}`, w, h: hh, hash: `scene=home&k=${k}` });
 jobs.push({ name: "services-hero", w: 1920, h: 1000, hash: "scene=services" });
 jobs.push({ name: "services-cta", w: 1920, h: 900, hash: "scene=cta&svc=svc" });
 

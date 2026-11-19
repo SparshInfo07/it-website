@@ -684,19 +684,19 @@ export default function Navbar() {
                 </div>
                 <div className="dd-preview" aria-hidden="true">
                   <figure className="on">
-                    <img src="/assets/images/home/Engineering%20Possibilities.webp" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-showcase.webp" alt="" loading="lazy" />
                     <figcaption>Four product concepts built for real businesses.</figcaption>
                   </figure>
                   <figure>
-                    <img src="/assets/images/home/retail-bags.jpg" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-transform.webp" alt="" loading="lazy" />
                     <figcaption>How an offline business becomes a digital one.</figcaption>
                   </figure>
                   <figure>
-                    <img src="/assets/images/home/work-hospitality.jpg" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-work.webp" alt="" loading="lazy" />
                     <figcaption>Concept work made to be used and to stand out.</figcaption>
                   </figure>
                   <figure>
-                    <img src="/assets/images/home/Right-technology.webp" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-process.webp" alt="" loading="lazy" />
                     <figcaption>Four clear stages from first call to launch.</figcaption>
                   </figure>
                 </div>
@@ -733,15 +733,15 @@ export default function Navbar() {
                 </div>
                 <div className="dd-preview" aria-hidden="true">
                   <figure className="on">
-                    <img src="/assets/images/about/Banner.webp" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-about.webp" alt="" loading="lazy" />
                     <figcaption>The team and story behind Sparsh IT.</figcaption>
                   </figure>
                   <figure>
-                    <img src="/assets/images/about/about-vision-future.jpg" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-philosophy.webp" alt="" loading="lazy" />
                     <figcaption>Technology that feels like progress.</figcaption>
                   </figure>
                   <figure>
-                    <img src="/assets/images/about/about-mission-tablet.jpg" alt="" loading="lazy" />
+                    <img src="/images/home-v2/home-menu-faq.webp" alt="" loading="lazy" />
                     <figcaption>Packages, pricing, content and support.</figcaption>
                   </figure>
                 </div>
