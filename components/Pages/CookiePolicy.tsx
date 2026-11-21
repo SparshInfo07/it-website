@@ -143,7 +143,7 @@ export default function CookiePolicy() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <a
-                    href="mailto:info@sparshit.com"
+                    href="mailto:info@sparshinfosystem.com"
                     className="flex items-start gap-3.5 p-4 rounded-xl bg-[#F8FAFC] border border-slate-200 hover:border-[#0D9488]/60 hover:shadow-sm transition-all group"
                   >
                     <Mail className="w-5 h-5 text-[#0D9488] shrink-0 mt-0.5" />
@@ -152,13 +152,13 @@ export default function CookiePolicy() {
                         Email us at
                       </div>
                       <div className="text-sm font-semibold text-[#061826] group-hover:text-[#0D9488] transition-colors break-all">
-                        info@sparshit.com
+                        info@sparshinfosystem.com
                       </div>
                     </div>
                   </a>
 
                   <a
-                    href="tel:8728036987"
+                    href="tel:+919212517322"
                     className="flex items-start gap-3.5 p-4 rounded-xl bg-[#F8FAFC] border border-slate-200 hover:border-[#0D9488]/60 hover:shadow-sm transition-all group"
                   >
                     <Phone className="w-5 h-5 text-[#0D9488] shrink-0 mt-0.5" />
@@ -167,7 +167,7 @@ export default function CookiePolicy() {
                         Call us at
                       </div>
                       <div className="text-sm font-semibold text-[#061826] group-hover:text-[#0D9488] transition-colors">
-                        (872) 803-6987
+                        +91 92125 17322
                       </div>
                     </div>
                   </a>

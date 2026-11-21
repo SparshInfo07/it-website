@@ -82,20 +82,8 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Sales &amp; Enquiries</small>
-                  <a href={`mailto:${data.contact?.email || "info@sparshit.com"}`} className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    {data.contact?.email || "info@sparshit.com"}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 text-[#10b981]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </span>
-                <div>
-                  <small className="block text-[11.5px] text-[#6b7280] font-semibold">Careers &amp; Support</small>
-                  <a href="mailto:careers@sparshit.com" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    careers@sparshit.com
+                  <a href={`mailto:${data.contact?.email || "info@sparshinfosystem.com"}`} className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    {data.contact?.email || "info@sparshinfosystem.com"}
                   </a>
                 </div>
               </div>
@@ -106,8 +94,8 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Phone</small>
-                  <a href="tel:+18728036987" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    {data.contact?.phone || "(872) 803-6987"}
+                  <a href="tel:+919212517322" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    {data.contact?.phone || "+91 92125 17322"}
                   </a>
                 </div>
               </div>

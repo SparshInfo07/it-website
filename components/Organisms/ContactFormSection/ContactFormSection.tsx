@@ -51,17 +51,17 @@ export default function ContactFormSection() {
                 <ContactDetail icon={Phone} label="Phone">
                   <a
                     className="transition hover:text-[#0D9488]"
-                    href="tel:+18728036987"
+                    href="tel:+919212517322"
                   >
-                    (872) 803-6987
+                    +91 92125 17322
                   </a>
                 </ContactDetail>
                 <ContactDetail icon={Mail} label="Email Address">
                   <a
                     className="transition hover:text-[#0D9488]"
-                    href="mailto:info@sparshit.com"
+                    href="mailto:info@sparshinfosystem.com"
                   >
-                    info@sparshit.com
+                    info@sparshinfosystem.com
                   </a>
                 </ContactDetail>
               </div>

@@ -767,8 +767,8 @@ export default function Navbar() {
                     <span>Careers at Sparsh IT</span>
                     <i aria-hidden="true">→</i>
                   </a>
-                  <a href="mailto:careers@sparshit.com">
-                    <span>careers@sparshit.com</span>
+                  <a href="mailto:info@sparshinfosystem.com">
+                    <span>info@sparshinfosystem.com</span>
                     <i aria-hidden="true">→</i>
                   </a>
                 </div>
