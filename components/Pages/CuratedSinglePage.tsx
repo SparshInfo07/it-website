@@ -1194,82 +1194,82 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
 
     // 12. How We Work (#process): pinned horizontal journey
     const jrSec = $<HTMLElement>("#process");
+    const jrHead = $<HTMLElement>(".jr-head", root);
     const jrTrack = $<HTMLElement>("#jrTrack");
-    const jrPanels = jrTrack ? $$<HTMLElement>(".jr-panel", jrTrack) : [];
+    const jrSvg = $<SVGSVGElement>("#jrSvg");
     const jrBase = $<SVGPathElement>("#jrBase");
     const jrDone = $<SVGPathElement>("#jrDone");
     const jrDot = $<SVGCircleElement>("#jrDot");
     const jrRing = $<SVGCircleElement>("#jrRing");
-    const jrBars = jrSec ? $$<HTMLElement>(".jr-progress b", jrSec) : [];
+    const jrPanels = jrTrack ? $$<HTMLElement>(".jr-panel", jrTrack) : [];
+    const jrBars = $$<HTMLElement>(".jr-progress b");
     const jrMM = gsap.matchMedia();
 
-    if (jrSec && jrTrack && jrPanels.length && jrBase && jrDone && jrDot && jrRing) {
-      let pathLen = 1;
+    if (jrSec && jrHead && jrTrack && jrSvg && jrBase && jrDone && jrDot && jrRing && jrPanels.length) {
+      let pathLen = 0;
+      const HOLD = 0.18; // last stretch of the pin where the finished journey stays on screen
 
+      const distance = () => Math.max(0, jrTrack.scrollWidth - window.innerWidth);
+
+      // Line the first stage up with the heading's left edge.
       const alignTrack = () => {
-        const vw = jrTrack.parentElement?.clientWidth || window.innerWidth;
-        const firstW = jrPanels[0].offsetWidth;
-        const lastW = jrPanels[jrPanels.length - 1].offsetWidth;
-        jrTrack.style.paddingLeft = `${Math.max(24, Math.round((vw - firstW) / 2))}px`;
-        jrTrack.style.paddingRight = `${Math.max(24, Math.round((vw - lastW) / 2))}px`;
+        const left = jrHead.getBoundingClientRect().left;
+        jrTrack.style.paddingLeft = `${Math.round(left)}px`;
+        jrTrack.style.paddingRight = `${Math.round(left)}px`;
       };
 
+      // A wave through points just above each step number, drawn in the track's own coordinates.
       const buildPath = () => {
-        const pts = jrPanels.map((p) => ({
-          x: p.offsetLeft + p.offsetWidth * 0.5,
-          y: p.offsetTop + p.offsetHeight * 0.5,
-        }));
-        let d = `M ${pts[0].x} ${pts[0].y}`;
-        for (let i = 0; i < pts.length - 1; i++) {
-          const a = pts[i];
-          const b = pts[i + 1];
-          const mx = (a.x + b.x) / 2;
-          d += ` C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}`;
-        }
+        const w = jrTrack.scrollWidth;
+        const h = jrTrack.offsetHeight;
+        jrSvg.setAttribute("width", String(w));
+        jrSvg.setAttribute("height", String(h));
+        jrSvg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        const pts = jrPanels.map((p) => [p.offsetLeft + 6, p.offsetTop + (p.classList.contains("jr-high") ? 0 : 88) - 22]);
+        let d = `M ${pts[0][0] - 80} ${pts[0][1]}`;
+        pts.forEach(([x, y], i) => {
+          const [px, py] = i === 0 ? [pts[0][0] - 80, pts[0][1]] : pts[i - 1];
+          const mx = (px + x) / 2;
+          d += ` C ${mx} ${py}, ${mx} ${y}, ${x} ${y}`;
+        });
+        const last = pts[pts.length - 1];
+        d += ` L ${last[0] + 360} ${last[1]}`;
         jrBase.setAttribute("d", d);
         jrDone.setAttribute("d", d);
-        pathLen = jrDone.getTotalLength() || 1;
-        jrDone.style.strokeDasharray = `${pathLen}`;
+        pathLen = jrDone.getTotalLength();
+        jrDone.style.strokeDasharray = String(pathLen);
       };
 
-      const distance = () => Math.max(0, jrTrack.scrollWidth - (jrTrack.parentElement?.clientWidth || window.innerWidth));
-      const HOLD = 0.2;
-
-      const render = (raw: number) => {
-        const p = Math.max(0, Math.min(1, raw / (1 - HOLD)));
-        jrTrack.style.transform = `translate3d(${(-p * distance()).toFixed(1)}px,0,0)`;
-        jrDone.style.strokeDashoffset = `${(pathLen * (1 - p)).toFixed(1)}`;
-        const pt = jrDone.getPointAtLength(pathLen * p);
+      const render = (p: number) => {
+        const k = Math.min(1, p / (1 - HOLD)); // journey progress, finished before the pin releases
+        jrTrack.style.transform = `translate3d(${(-k * distance()).toFixed(1)}px, 0, 0)`;
+        const at = k * pathLen;
+        jrDone.style.strokeDashoffset = (pathLen - at).toFixed(1);
+        const pt = jrDone.getPointAtLength(at);
         jrDot.setAttribute("cx", pt.x.toFixed(1));
         jrDot.setAttribute("cy", pt.y.toFixed(1));
         jrRing.setAttribute("cx", pt.x.toFixed(1));
         jrRing.setAttribute("cy", pt.y.toFixed(1));
-
-        const last = jrPanels.length - 1;
-        const active = Math.round(p * last);
-        jrPanels.forEach((panel, i) => {
-          panel.classList.toggle("is-active", i === active);
-          panel.classList.toggle("is-past", i < active);
-        });
-        jrBars.forEach((bar, i) => {
-          const fill = Math.max(0, Math.min(1, p * jrPanels.length - i));
-          bar.style.transform = `scaleX(${fill.toFixed(3)})`;
+        const seg = k * jrPanels.length;
+        jrPanels.forEach((el, i) => el.classList.toggle("on", i === 0 || seg >= i + 0.1));
+        jrBars.forEach((b, i) => {
+          b.style.width = `${(Math.max(0, Math.min(1, seg - i)) * 100).toFixed(1)}%`;
         });
       };
 
-      jrMM.add("(min-width: 861px) and (prefers-reduced-motion: no-preference)", () => {
+      jrMM.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
         jrSec.classList.add("jr-live");
         const journey = { p: 0 };
         alignTrack();
         buildPath();
         render(0);
-
         gsap.to(journey, {
           p: 1,
           ease: "none",
           onUpdate: () => render(journey.p),
           scrollTrigger: {
             trigger: jrSec,
+            // Measured after the showcase pin above it.
             refreshPriority: -1,
             start: "top top",
             end: () => `+=${Math.round(distance() / (1 - HOLD))}`,
