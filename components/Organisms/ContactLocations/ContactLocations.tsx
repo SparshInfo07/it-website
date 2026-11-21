@@ -23,10 +23,10 @@ export default function ContactLocations({
       <div className="container">
         <header className="mx-auto mb-12 max-w-5xl text-center sm:mb-14">
           <h2 className="text-5xl font-medium tracking-tight text-[#111] sm:text-4xl lg:text-[45px]">
-            Our Presence Across the United States
+            Visit Our Office
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-6 text-[#858585]">
-            With offices across the United States, Sparsh IT stays closer to clients, enabling stronger collaboration, responsive support, and seamless business engagement.
+            Our team works from Ghaziabad, close to clients across India and available to businesses worldwide.
           </p>
         </header>
 
@@ -56,7 +56,7 @@ export default function ContactLocations({
           </div>
 
           <div className="divide-y divide-[#dedede]">
-            {["USA Offices", "India Offices"].map((region) => (
+            {["India Office"].map((region) => (
               <section key={region} className="py-6 first:pt-0 last:pb-0">
                 <h3 className="mb-4 text-[22px] font-medium tracking-tight text-[#111] sm:text-2xl">
                   {region}

@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
     const adminToAddress =
       getCleanEnv("MAIL_TO_ADDRESS") ||
       getCleanEnv("MAIL_FROM_CAREER") ||
-      "info@sparshinfosystem.com";
+      "support@sparshinfosystem.com";
 
     // 4. Dual email configurations
     const mailOptionsAdmin = {

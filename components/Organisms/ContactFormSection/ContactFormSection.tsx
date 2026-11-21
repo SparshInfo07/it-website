@@ -44,24 +44,31 @@ export default function ContactFormSection() {
 
               <div className="mt-10 grid gap-5 md:mt-auto md:pt-12">
                 <ContactDetail icon={MapPin} label="Address">
-                  650 Warrenville Rd Suite
+                  F-405, Oxy Homez, Sahibabad,
                   <br />
-                  #1001 Lisle, IL 60532
+                  Ghaziabad, UP 201005
                 </ContactDetail>
                 <ContactDetail icon={Phone} label="Phone">
                   <a
                     className="transition hover:text-[#0D9488]"
-                    href="tel:+919212517322"
+                    href="tel:+918287203828"
                   >
-                    +91 92125 17322
+                    +91 8287203828
+                  </a>
+                  <br />
+                  <a
+                    className="transition hover:text-[#0D9488]"
+                    href="tel:+918178901219"
+                  >
+                    +91 8178901219
                   </a>
                 </ContactDetail>
                 <ContactDetail icon={Mail} label="Email Address">
                   <a
                     className="transition hover:text-[#0D9488]"
-                    href="mailto:info@sparshinfosystem.com"
+                    href="mailto:support@sparshinfosystem.com"
                   >
-                    info@sparshinfosystem.com
+                    support@sparshinfosystem.com
                   </a>
                 </ContactDetail>
               </div>

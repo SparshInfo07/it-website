@@ -82,8 +82,8 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Sales &amp; Enquiries</small>
-                  <a href={`mailto:${data.contact?.email || "info@sparshinfosystem.com"}`} className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    {data.contact?.email || "info@sparshinfosystem.com"}
+                  <a href={`mailto:${data.contact?.email || "support@sparshinfosystem.com"}`} className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    {data.contact?.email || "support@sparshinfosystem.com"}
                   </a>
                 </div>
               </div>
@@ -94,8 +94,11 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Phone</small>
-                  <a href="tel:+919212517322" className="text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    {data.contact?.phone || "+91 92125 17322"}
+                  <a href="tel:+918287203828" className="block text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    {data.contact?.phone || "+91 8287203828"}
+                  </a>
+                  <a href="tel:+918178901219" className="block text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    +91 8178901219
                   </a>
                 </div>
               </div>
@@ -105,8 +108,9 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 </span>
                 <div>
-                  <small className="block text-[11.5px] text-[#6b7280] font-semibold">Company</small>
-                  <span className="text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
+                  <small className="block text-[11.5px] text-[#6b7280] font-semibold">Address</small>
+                  <span className="block text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
+                  <span className="block text-[13px] leading-5 text-[#9ca3af]">F-405, Oxy Homez, Sahibabad,<br />Ghaziabad, UP 201005</span>
                 </div>
               </div>
             </div>

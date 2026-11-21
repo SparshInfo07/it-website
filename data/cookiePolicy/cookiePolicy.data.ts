@@ -89,9 +89,9 @@ export const COOKIE_POLICY_DATA: CookiePolicyData = {
         "If you have any questions about Sparsh IT’s privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.",
       ],
       contactDetails: {
-        email: "info@sparshinfosystem.com",
-        phone: "+91 92125 17322",
-        address: "650 Warrenville Rd| Suite#100| Lisle, IL 60532",
+        email: "support@sparshinfosystem.com",
+        phone: "+91 8287203828",
+        address: "F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005",
       },
     },
   ],

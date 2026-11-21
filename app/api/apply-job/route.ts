@@ -210,7 +210,7 @@ export async function POST(request: NextRequest) {
       getCleanEnv("MAIL_FROM_CAREER") ||
       getCleanEnv("MAIL_TO_ADDRESS") ||
       getCleanEnv("MAIL_FROM_ADDRESS") ||
-      "info@sparshinfosystem.com";
+      "support@sparshinfosystem.com";
 
     // Testing CC: Only if SPARSH_APPLICATION_ENV === 'development'
     const appEnv = getCleanEnv("SPARSH_APPLICATION_ENV");

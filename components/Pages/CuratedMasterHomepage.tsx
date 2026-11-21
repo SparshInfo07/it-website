@@ -398,7 +398,7 @@ export default function CuratedMasterHomepage() {
           throw new Error(
             res.status === 400 && data.error
               ? data.error
-              : "We couldn't send your enquiry right now. Please try again in a minute, or email info@sparshinfosystem.com.",
+              : "We couldn't send your enquiry right now. Please try again in a minute, or email support@sparshinfosystem.com.",
           );
         }
 
@@ -415,7 +415,7 @@ export default function CuratedMasterHomepage() {
         setStatus(
           err instanceof Error && err.message
             ? err.message
-            : "We couldn't send your enquiry right now. Please try again in a minute, or email info@sparshinfosystem.com.",
+            : "We couldn't send your enquiry right now. Please try again in a minute, or email support@sparshinfosystem.com.",
           true,
         );
         if (submitBtn) {

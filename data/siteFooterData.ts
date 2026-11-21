@@ -64,8 +64,8 @@ export const siteFooterData: SiteFooterData = {
   ],
   contact: {
     heading: "Contact",
-    email: "info@sparshinfosystem.com",
-    phone: "+91 92125 17322",
+    email: "support@sparshinfosystem.com",
+    phone: "+91 8287203828",
   },
   copyright: "\u00a9 Sparsh Info System Pvt Ltd. All rights reserved.",
   legalLinks: [

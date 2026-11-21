@@ -116,13 +116,13 @@ export function contactFormEmailUser(firstName: string): string {
       <p>Hi ${firstName},</p>
       <p>Thank you for reaching out to <strong>Sparsh IT</strong>. We have received your inquiry and our engineering and strategy team is reviewing your requirements.</p>
       <p>A member of our team will get in touch with you within <strong>24 to 48 business hours</strong> to discuss how we can assist you.</p>
-      <p>If you have any urgent questions or updates in the meantime, please reply directly to this email or reach us at <a href="mailto:info@sparshinfosystem.com" style="color: #0D9488;">info@sparshinfosystem.com</a>.</p>
+      <p>If you have any urgent questions or updates in the meantime, please reply directly to this email or reach us at <a href="mailto:support@sparshinfosystem.com" style="color: #0D9488;">support@sparshinfosystem.com</a>.</p>
       
       <div class="signature">
         <strong>The Sparsh IT Team</strong><br>
         Engineering What's Next<br>
-        650 Warrenville Rd Suite #1001, Lisle, IL 60532<br>
-        Phone: +91 92125 17322
+        F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005<br>
+        Phone: +91 8287203828, +91 8178901219
       </div>
     </div>
     <div class="footer">
@@ -278,13 +278,13 @@ export function jobApplicationEmailUser(data: {
 
       <p>Our talent acquisition team will carefully review your qualifications, background, and resume. If your profile matches our requirements, a member of our recruiting team will reach out to you with details regarding the next steps.</p>
       
-      <p>If you have any questions in the meantime, please feel free to contact us at <a href="mailto:info@sparshinfosystem.com" style="color: #0D9488; text-decoration: none;">info@sparshinfosystem.com</a>.</p>
+      <p>If you have any questions in the meantime, please feel free to contact us at <a href="mailto:support@sparshinfosystem.com" style="color: #0D9488; text-decoration: none;">support@sparshinfosystem.com</a>.</p>
       
       <div class="signature">
         <strong>Sparsh IT Careers Team</strong><br>
         Engineering What's Next<br>
-        650 Warrenville Rd., Ste #100, Lisle, IL 60532<br>
-        Phone: +91 92125 17322
+        F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005<br>
+        Phone: +91 8287203828, +91 8178901219
       </div>
     </div>
     <div class="footer">
