@@ -126,7 +126,7 @@ export function contactFormEmailUser(firstName: string): string {
       </div>
     </div>
     <div class="footer">
-      &copy; ${new Date().getFullYear()} Sparsh IT. All rights reserved.
+      &copy; ${new Date().getFullYear()} Sparsh Info System Pvt Ltd. All rights reserved.
     </div>
   </div>
 </body>
@@ -288,7 +288,7 @@ export function jobApplicationEmailUser(data: {
       </div>
     </div>
     <div class="footer">
-      &copy; ${new Date().getFullYear()} Sparsh IT Inc. All rights reserved.
+      &copy; ${new Date().getFullYear()} Sparsh Info System Pvt Ltd. All rights reserved.
     </div>
   </div>
 </body>

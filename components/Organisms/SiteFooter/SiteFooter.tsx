@@ -106,7 +106,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Company</small>
-                  <span className="text-[14px] font-semibold text-[#d1d5db]">Sparsh IT Private Limited</span>
+                  <span className="text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
 
         {/* Bottom Copyright */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-[#6b7280]">
-          <span>© 2026 Sparsh IT Private Limited. All rights reserved.</span>
+          <span>© 2026 Sparsh Info System Pvt Ltd. All rights reserved.</span>
           <div className="flex items-center gap-6">
             {data.legalLinks.map((link) => (
               <Link key={link.label} href={link.href} className="hover:text-white transition-colors font-semibold">
