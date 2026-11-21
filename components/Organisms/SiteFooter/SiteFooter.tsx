@@ -2,6 +2,9 @@ import React from "react";
 import Link from "next/link";
 import type { SiteFooterData } from "@/data/siteFooterData";
 
+// "Follow Us" social icons are hidden until the real profile links are ready.
+const SHOW_SOCIAL_LINKS = false;
+
 export default function SiteFooter({ data }: { data: SiteFooterData }) {
   return (
     <footer
@@ -117,8 +120,8 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
           </div>
         </div>
 
-        {/* Centered Follow Us Social Row */}
-        <div className="border-t border-white/10 py-7 flex items-center justify-center gap-4">
+        {/* Centered Follow Us Social Row (hidden for now: set SHOW_SOCIAL_LINKS to true to bring it back) */}
+        <div hidden={!SHOW_SOCIAL_LINKS} className={`${SHOW_SOCIAL_LINKS ? "flex" : "hidden"} border-t border-white/10 py-7 items-center justify-center gap-4`}>
           <span className="text-white text-[13.5px] font-bold">Follow Us</span>
           <div className="flex items-center gap-3">
             <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-white/15 bg-white/[0.03] text-[#9ca3af] hover:text-white hover:border-[#10b981] flex items-center justify-center transition-all">
