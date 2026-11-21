@@ -121,7 +121,8 @@ export function contactFormEmailUser(firstName: string): string {
       <div class="signature">
         <strong>The Sparsh IT Team</strong><br>
         Engineering What's Next<br>
-        F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005<br>
+        A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005<br>
+        CIN: U82990UW2026PTC249281<br>
         Phone: +91 8287203828, +91 8178901219
       </div>
     </div>
@@ -283,7 +284,8 @@ export function jobApplicationEmailUser(data: {
       <div class="signature">
         <strong>Sparsh IT Careers Team</strong><br>
         Engineering What's Next<br>
-        F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005<br>
+        A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005<br>
+        CIN: U82990UW2026PTC249281<br>
         Phone: +91 8287203828, +91 8178901219
       </div>
     </div>

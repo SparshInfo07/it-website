@@ -108,9 +108,11 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 </span>
                 <div>
-                  <small className="block text-[11.5px] text-[#6b7280] font-semibold">Address</small>
+                  <small className="block text-[11.5px] text-[#6b7280] font-semibold">Office Address</small>
                   <span className="block text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
-                  <span className="block text-[13px] leading-5 text-[#9ca3af]">F-405, Oxy Homez, Sahibabad,<br />Ghaziabad, UP 201005</span>
+                  <span className="block text-[13px] leading-5 text-[#9ca3af]">A-121, Sahni Tower, Block-A, Sector-5,<br />Rajendra Nagar, Sahibabad, Ghaziabad,<br />Uttar Pradesh - 201005</span>
+                  <small className="mt-3 block text-[11.5px] text-[#6b7280] font-semibold">Registered Address</small>
+                  <span className="block text-[13px] leading-5 text-[#9ca3af]">F-405, Oxy Homez, Behta Hazipur,<br />Bhopura Tilla Road, Loni, Ghaziabad,<br />Uttar Pradesh - 201102</span>
                 </div>
               </div>
             </div>
@@ -200,7 +202,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
 
         {/* Bottom Copyright */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-[#6b7280]">
-          <span>© 2026 Sparsh Info System Pvt Ltd. All rights reserved.</span>
+          <span className="text-center sm:text-left">© 2026 Sparsh Info System Pvt Ltd. All rights reserved. <span className="whitespace-nowrap">CIN: U82990UW2026PTC249281</span></span>
           <div className="flex items-center gap-6">
             {data.legalLinks.map((link) => (
               <Link key={link.label} href={link.href} className="hover:text-white transition-colors font-semibold">

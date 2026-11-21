@@ -30,7 +30,7 @@ export const JOB_OPENINGS_DATA: JobOpening[] = [
       "• Bachelor’s Degree in Computer Science or related field or equivalent experience• 4+ years of experience developing code in JavaScript and familiarity with Vue/React/Angular• Understanding of development best practices• Experience with HTML Markup standards and CSS• Awareness of coding with accessibility in mind",
     fullDetails:
       "• Bachelor’s Degree in Computer Science or related field or equivalent experience\n• 4+ years of experience developing code in JavaScript and familiarity with Vue/React/Angular\n• Understanding of development best practices\n• Experience with HTML Markup standards and CSS\n• Awareness of coding with accessibility in mind",
-    mailAddress: "F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005",
+    mailAddress: "A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005",
   },
   {
     id: "OQE24",
@@ -43,11 +43,11 @@ export const JOB_OPENINGS_DATA: JobOpening[] = [
     location: "India, U.S.",
     education: "Master’s only/equiv. Foreign equiv. accepted.",
     description:
-      "Sparsh IT Inc. has multiple openings for the following position:Master’s only/equiv.: QA Engineer (OQE24): Produce test plans covering functional, acceptance, and performance test domains. Mail resume with job ID # to F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005. Reference job ID # OQE24. Unanticipated work site locations throughout U.S. Foreign equiv. accepted.",
+      "Sparsh IT Inc. has multiple openings for the following position:Master’s only/equiv.: QA Engineer (OQE24): Produce test plans covering functional, acceptance, and performance test domains. Mail resume with job ID # to A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005. Reference job ID # OQE24. Unanticipated work site locations throughout U.S. Foreign equiv. accepted.",
     fullDetails:
-      "Sparsh IT Inc. has multiple openings for the following position:Master’s only/equiv.: QA Engineer (OQE24): Produce test plans covering functional, acceptance, and performance test domains. Mail resume with job ID # to F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005. Reference job ID # OQE24. Unanticipated work site locations throughout U.S. Foreign equiv. accepted.",
+      "Sparsh IT Inc. has multiple openings for the following position:Master’s only/equiv.: QA Engineer (OQE24): Produce test plans covering functional, acceptance, and performance test domains. Mail resume with job ID # to A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005. Reference job ID # OQE24. Unanticipated work site locations throughout U.S. Foreign equiv. accepted.",
     workSite: "Unanticipated work site locations throughout U.S.",
-    mailAddress: "F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005",
+    mailAddress: "A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005",
   },
   {
     id: "software-engineer",
@@ -64,7 +64,7 @@ export const JOB_OPENINGS_DATA: JobOpening[] = [
       "• Knowledge of Service Oriented Architecture, Complex Event Processing or Micro services and APIs preferred• Strong understanding of architectural principles, design patterns and common methodologies across a variety of technologies preferred.• Build experience including Jenkins, Gradle, GIT, BitBucket, and Stash preferred.• 5 years of progressive experience in enterprise software development using Java, J2EE, Spring, Spring Boot, Spring integration, Oracle, Hibernate, Struts, XML/XSLT/JAXB, SOAP and REST web services preferred.• Experience with Azure Cloud, Elastic, Kotlin• Experience with Java and related technologies preferred.• Experience working with or building applications using Micro services architecture",
     fullDetails:
       "• Knowledge of Service Oriented Architecture, Complex Event Processing or Micro services and APIs preferred\n• Strong understanding of architectural principles, design patterns and common methodologies across a variety of technologies preferred.\n• Build experience including Jenkins, Gradle, GIT, BitBucket, and Stash preferred.\n• 5 years of progressive experience in enterprise software development using Java, J2EE, Spring, Spring Boot, Spring integration, Oracle, Hibernate, Struts, XML/XSLT/JAXB, SOAP and REST web services preferred.\n• Experience with Azure Cloud, Elastic, Kotlin\n• Experience with Java and related technologies preferred.\n• Experience working with or building applications using Micro services architecture",
-    mailAddress: "F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005",
+    mailAddress: "A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005",
   },
 ];
 

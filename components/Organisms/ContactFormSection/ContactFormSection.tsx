@@ -43,10 +43,19 @@ export default function ContactFormSection() {
               </div>
 
               <div className="mt-10 grid gap-5 md:mt-auto md:pt-12">
-                <ContactDetail icon={MapPin} label="Address">
-                  F-405, Oxy Homez, Sahibabad,
+                <ContactDetail icon={MapPin} label="Office Address">
+                  A-121, Sahni Tower, Block-A, Sector-5,
                   <br />
-                  Ghaziabad, UP 201005
+                  Rajendra Nagar, Sahibabad, Ghaziabad,
+                  <br />
+                  Uttar Pradesh - 201005
+                </ContactDetail>
+                <ContactDetail icon={MapPin} label="Registered Address">
+                  F-405, Oxy Homez, Behta Hazipur, Bhopura Tilla Road,
+                  <br />
+                  Loni, Ghaziabad, Uttar Pradesh - 201102
+                  <br />
+                  <span className="text-[0.9em] opacity-80">CIN: U82990UW2026PTC249281</span>
                 </ContactDetail>
                 <ContactDetail icon={Phone} label="Phone">
                   <a

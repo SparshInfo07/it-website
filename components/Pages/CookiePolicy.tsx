@@ -179,8 +179,12 @@ export default function CookiePolicy() {
                         Address
                       </div>
                       <div className="text-sm font-semibold text-[#061826]">
-                        F-405, Oxy Homez, Sahibabad, Ghaziabad, UP 201005
+                        A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005
                       </div>
+                      <div className="mt-2 text-xs text-slate-500">
+                        Registered: F-405, Oxy Homez, Behta Hazipur, Bhopura Tilla Road, Loni, Ghaziabad, Uttar Pradesh - 201102
+                      </div>
+                      <div className="mt-1 text-xs text-slate-500">CIN: U82990UW2026PTC249281</div>
                     </div>
                   </div>
                 </div>
