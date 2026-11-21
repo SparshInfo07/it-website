@@ -158,7 +158,7 @@ export default function CookiePolicy() {
                   </a>
 
                   <a
-                    href="tel:+918287203828"
+                    href="tel:+911204458701"
                     className="flex items-start gap-3.5 p-4 rounded-xl bg-[#F8FAFC] border border-slate-200 hover:border-[#0D9488]/60 hover:shadow-sm transition-all group"
                   >
                     <Phone className="w-5 h-5 text-[#0D9488] shrink-0 mt-0.5" />
@@ -167,7 +167,7 @@ export default function CookiePolicy() {
                         Call us at
                       </div>
                       <div className="text-sm font-semibold text-[#061826] group-hover:text-[#0D9488] transition-colors">
-                        +91 8287203828
+                        +91-120-4458701
                       </div>
                     </div>
                   </a>
@@ -181,10 +181,7 @@ export default function CookiePolicy() {
                       <div className="text-sm font-semibold text-[#061826]">
                         A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005
                       </div>
-                      <div className="mt-2 text-xs text-slate-500">
-                        Registered: F-405, Oxy Homez, Behta Hazipur, Bhopura Tilla Road, Loni, Ghaziabad, Uttar Pradesh - 201102
-                      </div>
-                      <div className="mt-1 text-xs text-slate-500">CIN: U82990UW2026PTC249281</div>
+                      <div className="mt-2 text-xs text-slate-500">CIN: U82990UW2026PTC249281</div>
                     </div>
                   </div>
                 </div>

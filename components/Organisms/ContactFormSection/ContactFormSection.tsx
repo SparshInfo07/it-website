@@ -49,27 +49,22 @@ export default function ContactFormSection() {
                   Rajendra Nagar, Sahibabad, Ghaziabad,
                   <br />
                   Uttar Pradesh - 201005
-                </ContactDetail>
-                <ContactDetail icon={MapPin} label="Registered Address">
-                  F-405, Oxy Homez, Behta Hazipur, Bhopura Tilla Road,
-                  <br />
-                  Loni, Ghaziabad, Uttar Pradesh - 201102
                   <br />
                   <span className="text-[0.9em] opacity-80">CIN: U82990UW2026PTC249281</span>
                 </ContactDetail>
                 <ContactDetail icon={Phone} label="Phone">
                   <a
-                    className="transition hover:text-[#0D9488]"
-                    href="tel:+918287203828"
+                    className="tabular-nums transition hover:text-[#0D9488]"
+                    href="tel:+911204458701"
                   >
-                    +91 8287203828
+                    +91-120-4458701 <span className="text-[0.85em] opacity-60">(Landline)</span>
                   </a>
                   <br />
                   <a
-                    className="transition hover:text-[#0D9488]"
-                    href="tel:+918178901219"
+                    className="tabular-nums transition hover:text-[#0D9488]"
+                    href="tel:+919212517322"
                   >
-                    +91 8178901219
+                    +91-9212517322 <span className="text-[0.85em] opacity-60">(Mobile)</span>
                   </a>
                 </ContactDetail>
                 <ContactDetail icon={Mail} label="Email Address">

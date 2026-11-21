@@ -123,7 +123,7 @@ export function contactFormEmailUser(firstName: string): string {
         Engineering What's Next<br>
         A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005<br>
         CIN: U82990UW2026PTC249281<br>
-        Phone: +91 8287203828, +91 8178901219
+        Landline: +91-120-4458701 | Mobile: +91-9212517322
       </div>
     </div>
     <div class="footer">
@@ -286,7 +286,7 @@ export function jobApplicationEmailUser(data: {
         Engineering What's Next<br>
         A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005<br>
         CIN: U82990UW2026PTC249281<br>
-        Phone: +91 8287203828, +91 8178901219
+        Landline: +91-120-4458701 | Mobile: +91-9212517322
       </div>
     </div>
     <div class="footer">

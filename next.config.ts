@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle in .next/standalone, used by the Dockerfile.
+  output: "standalone",
   // Retired services now point to the closest of the four current ones.
   async redirects() {
     return [

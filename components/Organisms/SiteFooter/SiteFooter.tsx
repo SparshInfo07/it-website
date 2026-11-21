@@ -94,11 +94,11 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 </span>
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Phone</small>
-                  <a href="tel:+918287203828" className="block text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    {data.contact?.phone || "+91 8287203828"}
+                  <a href="tel:+911204458701" className="block text-[14px] font-semibold tabular-nums tracking-[0.01em] leading-6 text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    +91-120-4458701 <span className="ml-1.5 text-[11.5px] font-medium text-[#6b7280]">Landline</span>
                   </a>
-                  <a href="tel:+918178901219" className="block text-[14px] font-semibold text-[#d1d5db] hover:text-[#10b981] transition-colors">
-                    +91 8178901219
+                  <a href="tel:+919212517322" className="block text-[14px] font-semibold tabular-nums tracking-[0.01em] leading-6 text-[#d1d5db] hover:text-[#10b981] transition-colors">
+                    +91-9212517322 <span className="ml-1.5 text-[11.5px] font-medium text-[#6b7280]">Mobile</span>
                   </a>
                 </div>
               </div>
@@ -111,8 +111,6 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Office Address</small>
                   <span className="block text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
                   <span className="block text-[13px] leading-5 text-[#9ca3af]">A-121, Sahni Tower, Block-A, Sector-5,<br />Rajendra Nagar, Sahibabad, Ghaziabad,<br />Uttar Pradesh - 201005</span>
-                  <small className="mt-3 block text-[11.5px] text-[#6b7280] font-semibold">Registered Address</small>
-                  <span className="block text-[13px] leading-5 text-[#9ca3af]">F-405, Oxy Homez, Behta Hazipur,<br />Bhopura Tilla Road, Loni, Ghaziabad,<br />Uttar Pradesh - 201102</span>
                 </div>
               </div>
             </div>

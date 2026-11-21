@@ -90,7 +90,7 @@ export const COOKIE_POLICY_DATA: CookiePolicyData = {
       ],
       contactDetails: {
         email: "support@sparshinfosystem.com",
-        phone: "+91 8287203828",
+        phone: "+91-120-4458701",
         address: "A-121, Sahni Tower, Block-A, Sector-5, Rajendra Nagar, Sahibabad, Ghaziabad, Uttar Pradesh - 201005",
       },
     },
