@@ -79,7 +79,7 @@ export default function ContactLocations({
                       <button
                         type="button"
                         onClick={() => setActiveOffice(office)}
-                        className="ml-[25px] mt-1 inline-block text-xs text-[#202b50] underline decoration-[#aaa] underline-offset-4 transition hover:text-[#0D9488] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0D9488]"
+                        className="ml-[25px] mt-1 inline-block py-2 text-[13px] text-[#202b50] underline decoration-[#aaa] underline-offset-4 transition hover:text-[#0D9488] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0D9488]"
                       >
                         Show on Map
                       </button>

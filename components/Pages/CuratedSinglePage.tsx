@@ -820,7 +820,40 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
         }
       };
 
-      zmMM.add("(prefers-reduced-motion: no-preference)", () => {
+      // Phones: no pinned zoom. The chapters stay a list of cards (the :not(.zm-live) layout);
+      // each card slides up as it arrives and its image eases out of a slight zoom while you scroll.
+      zmMM.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+        zmSec.classList.add("zm-cards");
+        zmSlides.forEach((slide) => {
+          gsap.fromTo(
+            slide,
+            { y: 56, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: { trigger: slide, start: "top 90%", once: true },
+            }
+          );
+          const img = $<HTMLElement>(".zm-sc", slide);
+          if (img) {
+            gsap.fromTo(
+              img,
+              { scale: 1.18 },
+              {
+                scale: 1,
+                ease: "none",
+                scrollTrigger: { trigger: slide, start: "top bottom", end: "bottom 40%", scrub: 0.6 },
+              }
+            );
+          }
+        });
+        return () => zmSec.classList.remove("zm-cards");
+      });
+
+      // Wider screens: the pinned cinematic zoom.
+      zmMM.add("(min-width: 761px) and (prefers-reduced-motion: no-preference)", () => {
         zmSec.classList.add("zm-live");
         const zoom = { p: 0 };
         zmCur = -1;
@@ -919,12 +952,64 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
           { scale: 0.97, opacity: 0.72 },
           { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", overwrite: "auto" }
         );
+        // The new content rises in, so the change reads clearly.
+        gsap.fromTo(
+          $$<HTMLElement>(".tag, h3, p, .preview-row, .industry-float", p),
+          { y: 12, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out", stagger: 0.045, overwrite: "auto" }
+        );
       }
     };
-    $$<HTMLElement>("[data-industry]").forEach((b) => {
-      b.addEventListener("mouseenter", () => activateIndustry(b));
-      b.addEventListener("focus", () => activateIndustry(b));
-      b.addEventListener("click", () => activateIndustry(b));
+    // Phones: the industry changes as you scroll. The chips and preview lock below the navbar and step
+    // through the four industries; tapping a chip scrolls to that industry's step.
+    const indGrid = $<HTMLElement>(".industries-grid");
+    const indMenu = $<HTMLElement>(".industry-menu");
+    const indBtns = $$<HTMLElement>("[data-industry]");
+    const indMM = gsap.matchMedia();
+    let indST: ScrollTrigger | undefined;
+    const centreChip = (b: HTMLElement) => {
+      if (indMenu) {
+        indMenu.scrollTo({ left: b.offsetLeft - (indMenu.clientWidth - b.offsetWidth) / 2, behavior: "smooth" });
+      }
+    };
+    if (indGrid && indBtns.length > 1) {
+      indMM.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+        const n = indBtns.length;
+        indST = ScrollTrigger.create({
+          trigger: indGrid,
+          start: "top 84px",
+          end: () => `+=${Math.round(window.innerHeight * 0.55 * n)}`,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const b = indBtns[Math.min(n - 1, Math.floor(self.progress * n))];
+            if (!b.classList.contains("active")) {
+              activateIndustry(b);
+              centreChip(b);
+            }
+          },
+        });
+        return () => {
+          indST = undefined;
+        };
+      });
+    }
+    indBtns.forEach((b, i) => {
+      b.addEventListener("mouseenter", () => {
+        if (!indST) activateIndustry(b);
+      });
+      b.addEventListener("focus", () => {
+        if (!indST) activateIndustry(b);
+      });
+      b.addEventListener("click", () => {
+        if (indST) {
+          const top = indST.start + ((i + 0.5) / indBtns.length) * (indST.end - indST.start);
+          window.scrollTo({ top, behavior: "smooth" });
+        } else {
+          activateIndustry(b);
+        }
+      });
     });
 
     // Pre-select matching industry tab when on an industry route
@@ -1076,6 +1161,7 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
     const track = $<HTMLElement>("#featureTrack");
     const cards = track ? $$<HTMLElement>(".feature-card", track) : [];
     let onResizeFeature: (() => void) | undefined;
+    const featMM = gsap.matchMedia();
 
     if (featSection && v && track && cards.length > 1) {
       const n = cards.length;
@@ -1130,35 +1216,96 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
       };
 
       let st: ScrollTrigger | undefined;
-      if (!reduceMotion) {
-        measure();
-        render(0);
-
-        const tween = gsap.to(spiral, {
-          pos: n - 1,
-          ease: "none",
-          onUpdate: () => render(spiral.pos),
-          scrollTrigger: {
-            trigger: v,
-            start: "top top",
-            end: () => `+=${Math.round(window.innerHeight * (n - 1) * 0.85)}`,
-            pin: true,
-            scrub: 0.6,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onRefresh: () => {
-              measure();
-              render(spiral.pos);
-            },
-          },
+      const clearCardStyles = () => {
+        cards.forEach((card) => {
+          ["transform", "opacity", "filter", "z-index", "pointer-events", "visibility"].forEach((k) =>
+            card.style.removeProperty(k)
+          );
         });
-        st = tween.scrollTrigger;
-
-        onResizeFeature = () => {
+      };
+      if (!reduceMotion) {
+        // Wider screens: the pinned 3D spiral.
+        featMM.add("(min-width: 761px)", () => {
           measure();
-          render(spiral.pos);
-        };
-        window.addEventListener("resize", onResizeFeature);
+          render(0);
+
+          const tween = gsap.to(spiral, {
+            pos: n - 1,
+            ease: "none",
+            onUpdate: () => render(spiral.pos),
+            scrollTrigger: {
+              trigger: v,
+              start: "top top",
+              end: () => `+=${Math.round(window.innerHeight * (n - 1) * 0.85)}`,
+              pin: true,
+              scrub: 0.6,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onRefresh: () => {
+                measure();
+                render(spiral.pos);
+              },
+            },
+          });
+          st = tween.scrollTrigger;
+
+          onResizeFeature = () => {
+            measure();
+            render(spiral.pos);
+          };
+          window.addEventListener("resize", onResizeFeature);
+
+          return () => {
+            if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
+            onResizeFeature = undefined;
+            st = undefined;
+            spiral.pos = 0;
+            activeIdx = -1;
+            clearCardStyles();
+          };
+        });
+
+        // Phones: plain cards that stack (same as the homepage).
+        featMM.add("(max-width: 760px)", () => {
+          v.classList.add("is-cards");
+          clearCardStyles();
+          cards.forEach((card, i) => {
+            gsap.fromTo(
+              card,
+              { y: 48, autoAlpha: 0 },
+              {
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                ease: "power3.out",
+                scrollTrigger: { trigger: card, start: "top 92%", once: true },
+              }
+            );
+            const next = cards[i + 1];
+            if (next) {
+              gsap.fromTo(
+                card,
+                { scale: 1, "--stack-dim": 0 },
+                {
+                  scale: 0.92,
+                  "--stack-dim": 0.45,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: next,
+                    start: "top bottom",
+                    end: () => `top ${96 + (i + 1) * 12}px`,
+                    scrub: 0.6,
+                    invalidateOnRefresh: true,
+                  },
+                }
+              );
+            }
+          });
+          return () => {
+            v.classList.remove("is-cards");
+            clearCardStyles();
+          };
+        });
       }
 
       const featureTitles = [
@@ -1360,6 +1507,8 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
       window.removeEventListener("scroll", onHeaderScroll);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
       jrMM.revert();
+      indMM.revert();
+      featMM.revert();
       zmMM.revert();
       stObserver?.disconnect();
       if (ddCloseTimer) clearTimeout(ddCloseTimer);

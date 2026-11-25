@@ -44,24 +44,21 @@ export default function ContactFormSection() {
 
               <div className="mt-10 grid gap-5 md:mt-auto md:pt-12">
                 <ContactDetail icon={MapPin} label="Office Address">
-                  A-121, Sahni Tower, Block-A, Sector-5,
-                  <br />
-                  Rajendra Nagar, Sahibabad, Ghaziabad,
-                  <br />
-                  Uttar Pradesh - 201005
-                  <br />
-                  <span className="text-[0.9em] opacity-80">CIN: U82990UW2026PTC249281</span>
+                  {/* Block lines rather than <br />: line breaks are hidden on phones site-wide. */}
+                  <span className="block">A-121, Sahni Tower, Block-A, Sector-5,</span>
+                  <span className="block">Rajendra Nagar, Sahibabad, Ghaziabad,</span>
+                  <span className="block">Uttar Pradesh - 201005</span>
+                  <span className="mt-1 block text-[0.9em] opacity-80">CIN: U82990UW2026PTC249281</span>
                 </ContactDetail>
                 <ContactDetail icon={Phone} label="Phone">
                   <a
-                    className="tabular-nums transition hover:text-[#0D9488]"
+                    className="block tabular-nums transition hover:text-[#0D9488]"
                     href="tel:+911204458701"
                   >
                     +91-120-4458701 <span className="text-[0.85em] opacity-60">(Landline)</span>
                   </a>
-                  <br />
                   <a
-                    className="tabular-nums transition hover:text-[#0D9488]"
+                    className="block tabular-nums transition hover:text-[#0D9488]"
                     href="tel:+919212517322"
                   >
                     +91-9212517322 <span className="text-[0.85em] opacity-60">(Mobile)</span>

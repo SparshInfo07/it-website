@@ -40,7 +40,7 @@ export default function WhyBusinessesChoose({
         : Math.max(20, (window.innerWidth - 1280) / 2 + 24);
       if (track) {
         track.style.paddingLeft = `${containerLeft}px`;
-        track.style.paddingRight = `${containerLeft + (isMobile ? 40 : 80)}px`;
+        track.style.paddingRight = `${isMobile ? containerLeft : containerLeft + 80}px`;
       }
       return containerLeft;
     };
@@ -86,40 +86,42 @@ export default function WhyBusinessesChoose({
       tl.to({}, { duration: 0.25 });
     });
 
-    // Horizontal pinned scrub on mobile (< 768px)
+    // Phones (< 768px): the cards stack instead of sliding sideways. Each card sticks below the
+    // navbar, slides up on its way in, and the one underneath eases back and dims as the next covers it.
     mm.add("(max-width: 767px)", () => {
-      const getScrollAmount = () => {
-        if (!track) return 0;
-        return Math.max(0, track.scrollWidth - window.innerWidth + 32);
-      };
-
-      const getPinDistance = () => {
-        const scrollAmount = getScrollAmount();
-        return Math.max(scrollAmount * 1.4, 1300);
-      };
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: carousel,
-          start: "center center",
-          end: () => `+=${getPinDistance()}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-        },
+      const items = Array.from(track.children) as HTMLElement[];
+      items.forEach((item, i) => {
+        gsap.fromTo(
+          item,
+          { y: 48, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: item, start: "top 92%", once: true },
+          }
+        );
+        const next = items[i + 1];
+        if (next) {
+          gsap.fromTo(
+            item,
+            { scale: 1, "--stack-dim": 0 },
+            {
+              scale: 0.93,
+              "--stack-dim": 0.18,
+              ease: "none",
+              scrollTrigger: {
+                trigger: next,
+                start: "top bottom",
+                end: () => `top ${88 + (i + 1) * 12}px`,
+                scrub: 0.6,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        }
       });
-
-      // 1. Smooth horizontal scrub across all cards
-      tl.to(track, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        duration: 0.8,
-      });
-
-      // 2. Resting buffer before unpinning
-      tl.to({}, { duration: 0.2 });
     });
 
     const handleResize = () => {
@@ -147,7 +149,7 @@ export default function WhyBusinessesChoose({
       ref={sectionRef}
       id={id}
       aria-label={data.heading.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()}
-      className={`sec_padding relative w-full bg-white text-slate-900 overflow-hidden z-10 ${className}`}
+      className={`sec_padding relative w-full bg-white text-slate-900 overflow-hidden max-md:overflow-clip z-10 ${className}`}
     >
       {/* Centered Section Header */}
       <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-12 lg:mb-14 px-4 sm:px-6">
@@ -170,14 +172,14 @@ export default function WhyBusinessesChoose({
       </div>
 
       {/* Horizontal Carousel Area with Pinned Scroll */}
-      <div ref={carouselRef} className="relative w-full overflow-hidden cursor-default">
+      <div ref={carouselRef} className="relative w-full overflow-hidden max-md:overflow-visible cursor-default">
         <div
           ref={trackRef}
           style={{
             paddingLeft: "max(1rem, calc((100vw - 1280px) / 2 + 1.5rem))",
             paddingRight: "max(1.5rem, calc((100vw - 1280px) / 2 + 5rem))",
           }}
-          className="flex items-stretch gap-5 sm:gap-7 lg:gap-8 w-max will-change-transform"
+          className="flex flex-col md:flex-row items-stretch gap-4 md:gap-7 lg:gap-8 w-full md:w-max will-change-transform"
         >
           {data.cards.map((card: WhyChooseItem, index: number) => {
             const isLast = index === data.cards.length - 1;
@@ -185,10 +187,11 @@ export default function WhyBusinessesChoose({
             return (
               <div
                 key={card.id}
-                className="flex flex-col w-[290px] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0"
+                style={{ top: `${88 + index * 12}px`, transformOrigin: "50% 0" }}
+                className="flex flex-col w-full md:w-[380px] lg:w-[400px] shrink-0 max-md:sticky"
               >
 
-                <div className="relative flex items-center gap-3.5 mb-7 sm:mb-8 w-full">
+                <div className="relative hidden md:flex items-center gap-3.5 mb-7 sm:mb-8 w-full">
                   {card.number && (
                     <span className="text-[15px] sm:text-[16px] font-medium text-slate-500 tracking-tight select-none shrink-0">
                       {card.number}
@@ -203,7 +206,7 @@ export default function WhyBusinessesChoose({
                 </div>
 
                 {/* Good Software Card Style Container */}
-                <div className="good-software-card group relative flex flex-col justify-between h-full min-h-[340px] sm:min-h-[360px] rounded-[24px] sm:rounded-[28px] bg-white p-6 sm:p-7 md:p-8 border border-slate-200/90 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:-translate-y-2 hover:border-transparent transition-all duration-500 ease-out select-none cursor-pointer overflow-hidden">
+                <div className="good-software-card group relative flex flex-col justify-between h-full md:min-h-[360px] rounded-[22px] sm:rounded-[28px] bg-white p-6 sm:p-7 md:p-8 border border-slate-200/90 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:-translate-y-2 hover:border-transparent transition-all duration-500 ease-out select-none cursor-pointer overflow-hidden">
                   {/* Exact Signature Hover Gradient: linear-gradient(180deg, #061826 0%, #0D9488 55%, #06B6D4 100%) */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none rounded-[inherit]"
@@ -212,6 +215,19 @@ export default function WhyBusinessesChoose({
                         "linear-gradient(180deg, #061826 0%, #0D9488 55%, #06B6D4 100%)",
                     }}
                   />
+
+                  {/* Phones: dims as the next card stacks over this one. */}
+                  <div
+                    aria-hidden="true"
+                    className="md:hidden absolute inset-0 z-20 bg-[#061826] pointer-events-none rounded-[inherit]"
+                    style={{ opacity: "var(--stack-dim, 0)" }}
+                  />
+                  {/* Phones: the step number moves into the card. */}
+                  {card.number && (
+                    <span className="md:hidden absolute top-6 right-6 z-10 text-[13px] font-semibold tracking-[0.08em] text-[#0D9488] bg-[#0D9488]/10 rounded-full px-2.5 py-1">
+                      {card.number}
+                    </span>
+                  )}
 
                   {/* Card Content */}
                   <div className="relative z-10 flex flex-col h-full">

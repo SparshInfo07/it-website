@@ -707,7 +707,7 @@ export default function CuratedMasterHomepage() {
     // Hover waits a moment so sweeping across several tiles doesn't flicker the inspector.
     const onCapHover = (e: Event) => {
       const tile = capTileFrom(e);
-      if (!tile) return;
+      if (!tile || capST) return;
       if (capHoverTimer) clearTimeout(capHoverTimer);
       capHoverTimer = setTimeout(() => setCap(Number(tile.dataset.capTile || 0)), 120);
     };
@@ -715,7 +715,16 @@ export default function CuratedMasterHomepage() {
       const tile = capTileFrom(e);
       if (!tile) return;
       if (capHoverTimer) clearTimeout(capHoverTimer);
-      setCap(Number(tile.dataset.capTile || 0));
+      const idx = Number(tile.dataset.capTile || 0);
+      // Phones: the scroll position decides the service, so a tap scrolls to that service's step.
+      if (capST) {
+        if (e.type === "click") {
+          const top = capST.start + ((idx + 0.5) / capTiles.length) * (capST.end - capST.start);
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+        return;
+      }
+      setCap(idx);
     };
     // Soft light that follows the cursor inside a tile.
     const onCapMove = (e: PointerEvent) => {
@@ -725,6 +734,38 @@ export default function CuratedMasterHomepage() {
       tile.style.setProperty("--mx", `${e.clientX - r.left}px`);
       tile.style.setProperty("--my", `${e.clientY - r.top}px`);
     };
+    // Phones: the service chips and blueprint lock below the navbar and the service changes as you scroll.
+    const capMatrix = $<HTMLElement>(".bento-matrix");
+    const capGrid = $<HTMLElement>(".tile-grid");
+    const capTiles = $$<HTMLElement>("[data-cap-tile]");
+    const capMM = gsap.matchMedia();
+    let capST: ScrollTrigger | undefined;
+    if (capMatrix && capTiles.length > 1) {
+      capMM.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+        const n = capTiles.length;
+        capST = ScrollTrigger.create({
+          trigger: capMatrix,
+          start: "top 84px",
+          end: () => `+=${Math.round(window.innerHeight * 0.55 * n)}`,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const idx = Math.min(n - 1, Math.floor(self.progress * n));
+            if (idx !== activeCapIdx) {
+              setCap(idx);
+              const chip = capTiles[idx];
+              if (capGrid && chip) {
+                capGrid.scrollTo({ left: chip.offsetLeft - (capGrid.clientWidth - chip.offsetWidth) / 2, behavior: "smooth" });
+              }
+            }
+          },
+        });
+        return () => {
+          capST = undefined;
+        };
+      });
+    }
     root.addEventListener("pointerover", onCapHover);
     root.addEventListener("pointermove", onCapMove);
     root.addEventListener("click", onCapInteract);
@@ -780,7 +821,40 @@ export default function CuratedMasterHomepage() {
         }
       };
 
-      zmMM.add("(prefers-reduced-motion: no-preference)", () => {
+      // Phones: no pinned zoom. The chapters stay a list of cards (the :not(.zm-live) layout);
+      // each card slides up as it arrives and its image eases out of a slight zoom while you scroll.
+      zmMM.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+        zmSec.classList.add("zm-cards");
+        zmSlides.forEach((slide) => {
+          gsap.fromTo(
+            slide,
+            { y: 56, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: { trigger: slide, start: "top 90%", once: true },
+            }
+          );
+          const img = $<HTMLElement>(".zm-sc", slide);
+          if (img) {
+            gsap.fromTo(
+              img,
+              { scale: 1.18 },
+              {
+                scale: 1,
+                ease: "none",
+                scrollTrigger: { trigger: slide, start: "top bottom", end: "bottom 40%", scrub: 0.6 },
+              }
+            );
+          }
+        });
+        return () => zmSec.classList.remove("zm-cards");
+      });
+
+      // Wider screens: the pinned cinematic zoom.
+      zmMM.add("(min-width: 761px) and (prefers-reduced-motion: no-preference)", () => {
         zmSec.classList.add("zm-live");
         const zoom = { p: 0 };
         zmCur = -1;
@@ -880,12 +954,64 @@ export default function CuratedMasterHomepage() {
           { scale: 0.97, opacity: 0.72 },
           { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", overwrite: "auto" }
         );
+        // The new content rises in, so the change reads clearly.
+        gsap.fromTo(
+          $$<HTMLElement>(".tag, h3, p, .preview-row, .industry-float", p),
+          { y: 12, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out", stagger: 0.045, overwrite: "auto" }
+        );
       }
     };
-    $$<HTMLElement>("[data-industry]").forEach((b) => {
-      b.addEventListener("mouseenter", () => activateIndustry(b));
-      b.addEventListener("focus", () => activateIndustry(b));
-      b.addEventListener("click", () => activateIndustry(b));
+    // Phones: the industry changes as you scroll. The chips and preview lock below the navbar and step
+    // through the four industries; tapping a chip scrolls to that industry's step.
+    const indGrid = $<HTMLElement>(".industries-grid");
+    const indMenu = $<HTMLElement>(".industry-menu");
+    const indBtns = $$<HTMLElement>("[data-industry]");
+    const indMM = gsap.matchMedia();
+    let indST: ScrollTrigger | undefined;
+    const centreChip = (b: HTMLElement) => {
+      if (indMenu) {
+        indMenu.scrollTo({ left: b.offsetLeft - (indMenu.clientWidth - b.offsetWidth) / 2, behavior: "smooth" });
+      }
+    };
+    if (indGrid && indBtns.length > 1) {
+      indMM.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+        const n = indBtns.length;
+        indST = ScrollTrigger.create({
+          trigger: indGrid,
+          start: "top 84px",
+          end: () => `+=${Math.round(window.innerHeight * 0.55 * n)}`,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const b = indBtns[Math.min(n - 1, Math.floor(self.progress * n))];
+            if (!b.classList.contains("active")) {
+              activateIndustry(b);
+              centreChip(b);
+            }
+          },
+        });
+        return () => {
+          indST = undefined;
+        };
+      });
+    }
+    indBtns.forEach((b, i) => {
+      b.addEventListener("mouseenter", () => {
+        if (!indST) activateIndustry(b);
+      });
+      b.addEventListener("focus", () => {
+        if (!indST) activateIndustry(b);
+      });
+      b.addEventListener("click", () => {
+        if (indST) {
+          const top = indST.start + ((i + 0.5) / indBtns.length) * (indST.end - indST.start);
+          window.scrollTo({ top, behavior: "smooth" });
+        } else {
+          activateIndustry(b);
+        }
+      });
     });
 
     // 8. FAQ Accordion: only one answer open at a time
@@ -1517,6 +1643,8 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
       jrMM.revert();
+      capMM.revert();
+      indMM.revert();
       featMM.revert();
       zmMM.revert();
       stObserver?.disconnect();
