@@ -1059,6 +1059,7 @@ export default function CuratedMasterHomepage() {
     const track = $<HTMLElement>("#featureTrack");
     const cards = track ? $$<HTMLElement>(".feature-card", track) : [];
     let onResizeFeature: (() => void) | undefined;
+    const featMM = gsap.matchMedia();
 
     if (featSection && v && track && cards.length > 1) {
       const n = cards.length;
@@ -1118,36 +1119,99 @@ export default function CuratedMasterHomepage() {
         window.scrollTo({ top, behavior: "smooth" });
       };
 
-      if (reduceMotion) {
+      const clearCardStyles = () => {
         cards.forEach((card) => {
           card.style.removeProperty("transform");
           card.style.removeProperty("opacity");
+          card.style.removeProperty("visibility");
+          card.style.removeProperty("--ring-dim");
         });
-      } else {
-        measure();
-        render(0);
-        const tween = gsap.to(spiral, {
-          pos: n - 1,
-          ease: "none",
-          onUpdate: () => render(spiral.pos),
-          scrollTrigger: {
-            trigger: v,
-            start: "top top",
-            end: () => `+=${Math.round(window.innerHeight * 0.9 * (n - 1))}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            // No snapping: the cards stay exactly where the visitor stops scrolling.
-          },
-        });
-        spiralTrigger = tween.scrollTrigger;
+      };
 
-        onResizeFeature = () => {
+      if (reduceMotion) {
+        clearCardStyles();
+      } else {
+        // Wider screens: the pinned 3D spiral.
+        featMM.add("(min-width: 761px)", () => {
           measure();
-          render(spiral.pos);
-        };
-        window.addEventListener("resize", onResizeFeature);
+          render(0);
+          const tween = gsap.to(spiral, {
+            pos: n - 1,
+            ease: "none",
+            onUpdate: () => render(spiral.pos),
+            scrollTrigger: {
+              trigger: v,
+              start: "top top",
+              end: () => `+=${Math.round(window.innerHeight * 0.9 * (n - 1))}`,
+              pin: true,
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              // No snapping: the cards stay exactly where the visitor stops scrolling.
+            },
+          });
+          spiralTrigger = tween.scrollTrigger;
+
+          onResizeFeature = () => {
+            measure();
+            render(spiral.pos);
+          };
+          window.addEventListener("resize", onResizeFeature);
+
+          return () => {
+            if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
+            onResizeFeature = undefined;
+            spiralTrigger = undefined;
+            spiral.pos = 0;
+            activeIdx = -1;
+            clearCardStyles();
+          };
+        });
+
+        // Phones: plain cards that stack. Each card sticks below the navbar, slides up on its
+        // way in, and the one underneath eases back and dims as the next card covers it.
+        featMM.add("(max-width: 760px)", () => {
+          v.classList.add("is-cards");
+          clearCardStyles();
+          cards.forEach((card, i) => {
+            card.tabIndex = 0;
+            card.removeAttribute("aria-current");
+            gsap.fromTo(
+              card,
+              { y: 48, autoAlpha: 0 },
+              {
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                ease: "power3.out",
+                scrollTrigger: { trigger: card, start: "top 92%", once: true },
+              }
+            );
+            const next = cards[i + 1];
+            if (next) {
+              gsap.fromTo(
+                card,
+                { scale: 1, "--stack-dim": 0 },
+                {
+                  scale: 0.92,
+                  "--stack-dim": 0.45,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: next,
+                    start: "top bottom",
+                    end: () => `top ${96 + (i + 1) * 12}px`,
+                    scrub: 0.6,
+                    invalidateOnRefresh: true,
+                  },
+                }
+              );
+            }
+          });
+          return () => {
+            v.classList.remove("is-cards");
+            clearCardStyles();
+          };
+        });
       }
 
       const titles = [
@@ -1162,7 +1226,7 @@ export default function CuratedMasterHomepage() {
       cards.forEach((card, i) => {
         // A card that isn't in front turns the spiral to itself; the front card opens its details.
         card.addEventListener("click", () => {
-          if (!reduceMotion && i !== activeIdx) goTo(i);
+          if (spiralTrigger && i !== activeIdx) goTo(i);
           else showInfo(titles[i] ?? "Sparsh IT Concept", desc, "SPARSH IT · INTERACTIVE CONCEPT");
         });
         card.addEventListener("keydown", (e) => {
@@ -1276,6 +1340,45 @@ export default function CuratedMasterHomepage() {
           jrTrack.style.removeProperty("padding-right");
         };
       });
+
+      // Phones: the stages become cards on a vertical rail. The rail fills as you scroll,
+      // each card slides in, and its dot and number light up once it reaches the reading line.
+      jrMM.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+        jrSec.classList.add("jr-mob");
+        gsap.fromTo(
+          jrTrack,
+          { "--jr-fill": "0%" },
+          {
+            "--jr-fill": "100%",
+            ease: "none",
+            scrollTrigger: { trigger: jrTrack, start: "top 65%", end: "bottom 65%", scrub: 0.6 },
+          }
+        );
+        jrPanels.forEach((panel) => {
+          gsap.fromTo(
+            panel,
+            { y: 40, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: { trigger: panel, start: "top 90%", once: true },
+            }
+          );
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top 65%",
+            end: "max",
+            toggleClass: { targets: panel, className: "on" },
+          });
+        });
+        return () => {
+          jrSec.classList.remove("jr-mob");
+          jrPanels.forEach((panel) => panel.classList.remove("on"));
+          jrTrack.style.removeProperty("--jr-fill");
+        };
+      });
     }
 
     // 12. Bottom Curation Source File Filter Dock
@@ -1373,7 +1476,9 @@ export default function CuratedMasterHomepage() {
         }
 
         // Feature cards internal visual parallax
+        const cardsMode = $<HTMLElement>("#featureViewport")?.classList.contains("is-cards");
         $$<HTMLElement>(".feature-card").forEach((card, i) => {
+          if (cardsMode) return;
           const rect = card.getBoundingClientRect();
           if (rect.top < vh && rect.bottom > 0) {
             const prog = (vh - rect.top) / (vh + rect.height);
@@ -1412,6 +1517,7 @@ export default function CuratedMasterHomepage() {
       window.removeEventListener("scroll", onScrollChoreography);
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
       jrMM.revert();
+      featMM.revert();
       zmMM.revert();
       stObserver?.disconnect();
       if (ddCloseTimer) clearTimeout(ddCloseTimer);

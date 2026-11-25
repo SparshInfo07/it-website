@@ -17,7 +17,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
     >
       <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 flex-1 flex flex-col justify-between">
         {/* Top 5-Column Menu Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.35fr_1.15fr_1fr_1.25fr] gap-10 xl:gap-14 pb-12 pt-4">
+        <div className="grid grid-cols-2 lg:grid-cols-[1fr_1.35fr_1.15fr_1fr_1.25fr] gap-x-6 gap-y-10 sm:gap-10 xl:gap-14 pb-12 pt-4">
           <div>
             <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               QUICK LINKS
@@ -75,7 +75,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h4 className="text-white text-[12px] font-extrabold tracking-[0.14em] uppercase mb-6">
               CONTACT US
             </h4>
@@ -114,7 +114,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
                 <div>
                   <small className="block text-[11.5px] text-[#6b7280] font-semibold">Office Address</small>
                   <span className="block text-[14px] font-semibold text-[#d1d5db]">Sparsh Info System Pvt Ltd</span>
-                  <span className="block text-[13px] leading-5 text-[#9ca3af]">A-121, Sahni Tower, Block-A, Sector-5,<br />Rajendra Nagar, Sahibabad, Ghaziabad,<br />Uttar Pradesh - 201005</span>
+                  <span className="block text-[13px] leading-5 text-[#9ca3af]">A-121, Sahni Tower, Block-A, Sector-5, <br />Rajendra Nagar, Sahibabad, Ghaziabad, <br />Uttar Pradesh - 201005</span>
                 </div>
               </div>
             </div>

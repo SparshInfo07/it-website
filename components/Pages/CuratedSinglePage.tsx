@@ -1291,6 +1291,45 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
           jrTrack.style.removeProperty("padding-right");
         };
       });
+
+      // Phones: the stages become cards on a vertical rail. The rail fills as you scroll,
+      // each card slides in, and its dot and number light up once it reaches the reading line.
+      jrMM.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+        jrSec.classList.add("jr-mob");
+        gsap.fromTo(
+          jrTrack,
+          { "--jr-fill": "0%" },
+          {
+            "--jr-fill": "100%",
+            ease: "none",
+            scrollTrigger: { trigger: jrTrack, start: "top 65%", end: "bottom 65%", scrub: 0.6 },
+          }
+        );
+        jrPanels.forEach((panel) => {
+          gsap.fromTo(
+            panel,
+            { y: 40, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: { trigger: panel, start: "top 90%", once: true },
+            }
+          );
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top 65%",
+            end: "max",
+            toggleClass: { targets: panel, className: "on" },
+          });
+        });
+        return () => {
+          jrSec.classList.remove("jr-mob");
+          jrPanels.forEach((panel) => panel.classList.remove("on"));
+          jrTrack.style.removeProperty("--jr-fill");
+        };
+      });
     }
 
     // 13. Reveal animations
