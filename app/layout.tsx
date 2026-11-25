@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Organisms/Navbar/Navbar";
+import ScrollToTop from "@/components/Atoms/ScrollToTop";
 import ContextProvider from "@/providers/ContextProvider";
 import "./globals.css";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       className={`${manrope.variable} antialiased`}
     >
       <body suppressHydrationWarning className="">
+        <ScrollToTop />
         <ContextProvider>
           <Navbar />
           <main>

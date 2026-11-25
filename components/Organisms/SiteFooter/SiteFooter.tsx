@@ -6,9 +6,10 @@ import type { SiteFooterData } from "@/data/siteFooterData";
 const SHOW_SOCIAL_LINKS = false;
 
 export default function SiteFooter({ data }: { data: SiteFooterData }) {
+  // pb-[140px] keeps the bottom row clear of the chat widget, which covers the bottom 120px of the screen.
   return (
     <footer
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#070a0f] text-[#94a3b8] pt-16 sm:pt-20 pb-8 sm:pb-10 border-t border-white/10"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#070a0f] text-[#94a3b8] pt-16 sm:pt-20 pb-[140px] border-t border-white/10"
       style={{
         background:
           "radial-gradient(circle at 88% 8%, rgba(16, 185, 129, 0.08) 0%, transparent 38%), radial-gradient(circle at 12% 85%, rgba(49, 93, 255, 0.07) 0%, transparent 42%), #070a0f",

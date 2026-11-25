@@ -22,7 +22,7 @@ export const CONTACT_CARDS_DATA: ContactCardItem[] = [
     title: "See Ideas in Action",
     description:
       "Discover how strategy, technology, and execution come together in our work.",
-    href: "#",
+    href: "/selected-work",
     icon: ASSETS.CONTACT_RESOURCE_IDEAS_ACTION,
   },
   {
