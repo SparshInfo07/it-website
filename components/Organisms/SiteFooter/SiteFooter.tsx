@@ -9,7 +9,7 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
   // pb-[140px] keeps the bottom row clear of the chat widget, which covers the bottom 120px of the screen.
   return (
     <footer
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#070a0f] text-[#94a3b8] pt-16 sm:pt-20 pb-[140px] border-t border-white/10"
+      className="relative w-full flex flex-col justify-between overflow-hidden bg-[#070a0f] text-[#94a3b8] pt-16 sm:pt-20 pb-[140px] border-t border-white/10"
       style={{
         background:
           "radial-gradient(circle at 88% 8%, rgba(16, 185, 129, 0.08) 0%, transparent 38%), radial-gradient(circle at 12% 85%, rgba(49, 93, 255, 0.07) 0%, transparent 42%), #070a0f",
@@ -140,70 +140,9 @@ export default function SiteFooter({ data }: { data: SiteFooterData }) {
           </div>
         </div>
 
-        {/* Monumental Edge-to-Edge Full-Screen Sparsh IT All-White Logo Design */}
-        <div className="py-6 sm:py-8 flex-1 flex justify-center items-center select-none overflow-hidden w-full">
-          <svg
-            className="w-full max-w-none h-auto block mx-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="18 8 1325 444"
-            role="img"
-            aria-label="Sparsh IT"
-          >
-            <g transform="translate(-80 -50)">
-              <path
-                d="M367 249 C402 267 425 292 424 323 C423 354 406 372 373 393 C329 418 230 465 160 489 C144 495 134 492 129 477 C121 454 132 432 157 409 C179 387 219 366 259 342 C316 318 359 294 375 271 C383 260 378 254 367 249 Z"
-                fill="#F3F4F6"
-                fillOpacity="0.78"
-              />
-              <path
-                d="M253 206 C287 217 334 239 366 250 C379 255 385 262 378 273 C363 299 320 323 260 342 C228 330 184 313 152 299 C135 292 135 281 150 263 C171 242 206 224 253 206 Z"
-                fill="#F3F4F6"
-                fillOpacity="0.9"
-              />
-              <path
-                d="M358 63 C370 59 378 73 376 95 C375 140 344 169 289 197 C242 222 186 243 157 264 C141 276 134 289 145 297 C119 289 104 269 103 239 C102 206 120 186 150 164 C192 135 268 101 344 67 C351 64 355 63 358 63 Z"
-                fill="#F3F4F6"
-              />
-            </g>
-            <g fill="#F3F4F6">
-              <path
-                d="M689 -24C1073 -24 1301 153 1301 453C1301 683 1158 814 828 880L697 906C527 941 456 986 456 1067C456 1160 551 1225 687 1225C829 1225 924 1149 934 1026H1267C1258 1331 1039 1514 682 1514C332 1514 96 1327 96 1050C96 833 245 689 536 629L689 598C868 561 945 512 945 427C945 329 844 265 692 265C520 265 415 349 410 492H67C67 163 292 -24 689 -24Z"
-                transform="translate(410.000 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M96 -418H440V157H444C499 40 603 -23 742 -23C1019 -23 1198 196 1198 530C1198 853 1012 1079 745 1079C608 1079 504 1025 441 918H436V1056H96ZM645 252C515 252 426 361 426 530C426 697 515 805 645 805C772 805 850 702 850 530C850 356 772 252 645 252Z"
-                transform="translate(555.085 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M419 -18C568 -18 663 34 726 148H730V0H1066V711C1066 944 897 1079 590 1079C284 1079 111 943 96 714H416C423 786 482 832 578 832C669 832 725 789 725 726V721C725 658 656 643 467 627C242 609 57 532 57 295C57 85 208 -18 419 -18ZM524 207C440 207 383 246 383 311C383 380 449 418 541 432C626 446 691 459 728 476V380C728 276 639 207 524 207Z"
-                transform="translate(687.659 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M96 0H440V541C440 691 525 777 648 777C698 777 759 775 784 774V1058C756 1059 727 1060 690 1060C549 1060 470 1004 432 870H429V1056H96Z"
-                transform="translate(810.716 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M562 -26C858 -26 1058 120 1058 337C1058 494 956 585 739 625L527 664C454 678 413 707 413 751C413 803 465 842 555 842C646 842 712 787 714 713H1031C1025 938 838 1078 543 1078C249 1078 70 944 70 735C70 568 181 461 389 424L580 390C664 375 708 347 708 301C708 248 652 211 557 211C456 211 395 260 385 338H46C65 113 270 -26 562 -26Z"
-                transform="translate(895.704 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M440 574C440 718 510 785 619 785C728 785 791 717 791 592V0H1135V664C1135 924 1001 1079 772 1079C617 1079 511 1009 440 893V1490H96V0H440Z"
-                transform="translate(1012.452 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M456 1490H96V0H456Z"
-                transform="translate(1142.887 307) scale(0.106933594 -0.106933594)"
-              />
-              <path
-                d="M42 1184H481V0H841V1184H1279V1490H42Z"
-                transform="translate(1200.715 307) scale(0.106933594 -0.106933594)"
-              />
-            </g>
-          </svg>
-        </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-[#6b7280]">
+        <div className="mt-12 sm:mt-16 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-[#6b7280]">
           <span className="text-center sm:text-left">© 2026 Sparsh Info System Pvt Ltd. All rights reserved. <span className="whitespace-nowrap">CIN: U82990UW2026PTC249281</span></span>
           <div className="flex items-center gap-6">
             {data.legalLinks.map((link) => (

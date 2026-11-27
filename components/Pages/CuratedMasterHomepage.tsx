@@ -88,7 +88,7 @@ export default function CuratedMasterHomepage() {
     const srLine = $<HTMLElement>("#hero-panel-b .sr-l2");
     const srStage = $<HTMLElement>("#hero-panel-b .sr-stage");
     const srButtons = $$<HTMLButtonElement>("#hero-panel-b .sr-idx button");
-    const SR_WORDS = ["UI/UX", "APPS", "WEBSITES", "AI AGENTS", "WHAT'S NEXT"];
+    const SR_WORDS = ["WHAT'S NEXT", "AI AGENTS", "WEBSITES", "MOBILE APPS", "UI/UX"];
     const SR_HOLD = 2600;
     const srReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let srPrev = "";
@@ -108,7 +108,13 @@ export default function CuratedMasterHomepage() {
       });
       m.remove();
       if (!widest) return;
-      const size = Math.min(180, Math.floor(((srStage.clientWidth * 0.98) / widest) * 100));
+      // Fit the widest word to the width, but also cap it by the viewport height so
+      // hero + the ticker ribbon below it always fit in the first screen.
+      const size = Math.min(
+        180,
+        Math.floor(((srStage.clientWidth * 0.98) / widest) * 100),
+        Math.max(44, Math.floor(window.innerHeight * 0.18)),
+      );
       srLine.style.fontSize = `${size}px`;
       srSlot.style.transition = "none";
       srSlot.style.width = "auto";
@@ -192,31 +198,6 @@ export default function CuratedMasterHomepage() {
       toastTimer = setTimeout(() => e.classList.remove("show"), 2400);
     };
 
-    const fallbackCopy = (txt: string) => {
-      const el = document.createElement("textarea");
-      el.value = txt;
-      document.body.append(el);
-      el.select();
-      try {
-        document.execCommand("copy");
-        toast("Brief copied to clipboard ✓");
-      } catch {
-        toast("Select and copy the brief");
-      }
-      el.remove();
-    };
-
-    const safeCopy = (txt: string) => {
-      if (navigator.clipboard?.writeText) {
-        navigator.clipboard
-          .writeText(txt)
-          .then(() => toast("Brief copied to clipboard ✓"))
-          .catch(() => fallbackCopy(txt));
-      } else {
-        fallbackCopy(txt);
-      }
-    };
-
     // 3. Modals & 3-Step Interactive Project Explorer Wizard
     const modalOpen = (selector: string) => {
       const e = $<HTMLElement>(selector);
@@ -240,7 +221,8 @@ export default function CuratedMasterHomepage() {
 
     let quotePlan = "Gold";
     let wizStep = 0;
-    let readyBrief = "";
+    let briefSending = false;
+    let briefSubmitted = false;
 
     const updateChoices = () => {
       $$<HTMLElement>("[data-choice]").forEach((e) =>
@@ -249,6 +231,15 @@ export default function CuratedMasterHomepage() {
     };
 
     const renderWizard = () => {
+      // Re-opening after a successful submit starts a fresh brief.
+      if (briefSubmitted) {
+        briefSubmitted = false;
+        wizStep = 0;
+        const biz = $<HTMLInputElement>("#wizBusiness");
+        const mail = $<HTMLInputElement>("#wizEmail");
+        if (biz) biz.value = "";
+        if (mail) mail.value = "";
+      }
       $$<HTMLElement>("[data-wstep]").forEach((e) =>
         e.classList.toggle("active", Number(e.dataset.wstep) === wizStep)
       );
@@ -258,15 +249,15 @@ export default function CuratedMasterHomepage() {
       const brief = $<HTMLElement>("#wizardBrief");
       if (backBtn) {
         backBtn.textContent = "Back";
+        backBtn.disabled = false;
         backBtn.style.visibility = wizStep === 0 ? "hidden" : "visible";
       }
       if (bar) bar.style.width = ((wizStep + 1) / 3) * 100 + "%";
       if (nextBtn) {
-        nextBtn.textContent = wizStep === 2 ? "Generate brief" : "Continue";
+        nextBtn.textContent = wizStep === 2 ? "Submit brief" : "Continue";
         nextBtn.disabled = false;
       }
-      brief?.classList.remove("show");
-      readyBrief = "";
+      brief?.classList.remove("show", "is-error");
     };
 
     $$<HTMLElement>(".open-quote").forEach((b) =>
@@ -312,19 +303,19 @@ export default function CuratedMasterHomepage() {
     );
 
     $("#wizardBack")?.addEventListener("click", () => {
-      if (readyBrief) {
-        safeCopy(readyBrief);
-        return;
-      }
+      if (briefSending || briefSubmitted) return;
       if (wizStep > 0) {
         wizStep--;
         renderWizard();
       }
     });
 
-    $("#wizardNext")?.addEventListener("click", () => {
-      if (readyBrief) {
-        safeCopy(readyBrief);
+    // Step 3 submits the brief (→ /api/project-brief → sparsh-backend → admin
+    // "Sparshit → Project Briefs"). After success the button closes the modal.
+    $("#wizardNext")?.addEventListener("click", async () => {
+      if (briefSending) return;
+      if (briefSubmitted) {
+        modalClose();
         return;
       }
       if (wizStep < 2) {
@@ -345,33 +336,64 @@ export default function CuratedMasterHomepage() {
         e.focus();
         return;
       }
+      const company = b.value.trim();
+      const email = e.value.trim();
       const extras = $$<HTMLInputElement>('input[name="extra"]:checked').map((x) => x.value);
       const indSel = $<HTMLSelectElement>("#industrySelect")?.value || "";
       const timeSel = $<HTMLSelectElement>("#timeline")?.value || "";
-      readyBrief = `SPARSH IT — PROJECT ENQUIRY BRIEF\nCompany: ${b.value.trim()}\nEmail: ${e.value.trim()}\nPackage: ${quotePlan}\nIndustry: ${indSel}\nCapabilities: ${extras.join(", ") || "To be discussed"}\nTimeline: ${timeSel}\nPrepared via Sparsh IT Interactive Project Explorer.`;
-      const briefEl = $<HTMLElement>("#wizardBrief");
-      if (briefEl) {
-        briefEl.textContent = readyBrief;
-        briefEl.classList.add("show");
-      }
+      const briefText = `SPARSH IT — PROJECT ENQUIRY BRIEF\nCompany: ${company}\nEmail: ${email}\nPackage: ${quotePlan}\nIndustry: ${indSel}\nCapabilities: ${extras.join(", ") || "To be discussed"}\nTimeline: ${timeSel}\nPrepared via Sparsh IT Interactive Project Explorer.`;
+
       const backBtn = $<HTMLButtonElement>("#wizardBack");
       const nextBtn = $<HTMLButtonElement>("#wizardNext");
-      if (backBtn) backBtn.textContent = "Copy brief";
-      if (nextBtn) nextBtn.textContent = "Copy brief";
-      // Send the brief to the team (admin → Sparshit → Project Briefs); copying still works either way.
-      toast("Sending your brief…");
-      submitRef.current
-        .submitBrief({
-          company: b.value.trim(),
-          email: e.value.trim(),
+      const briefEl = $<HTMLElement>("#wizardBrief");
+      const showMessage = (text: string, isError: boolean) => {
+        if (!briefEl) return;
+        briefEl.textContent = text;
+        briefEl.classList.add("show");
+        briefEl.classList.toggle("is-error", isError);
+        briefEl.style.color = isError ? "#b42318" : "";
+      };
+
+      briefSending = true;
+      if (nextBtn) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = "Submitting…";
+      }
+      if (backBtn) backBtn.disabled = true;
+      briefEl?.classList.remove("show", "is-error");
+
+      try {
+        await submitRef.current.submitBrief({
+          company,
+          email,
           package: quotePlan,
           industry: indSel,
           capabilities: extras,
           timeline: timeSel,
-          brief: readyBrief,
-        })
-        .then(() => toast("Brief sent to our team — click to copy"))
-        .catch(() => toast("Brief ready — we couldn't send it, so please copy it and email us"));
+          brief: briefText,
+        });
+        briefSubmitted = true;
+        showMessage(
+          `Thank you, ${company}! Your project brief has been submitted.\nOur team will get back to you at ${email} within one business day.`,
+          false,
+        );
+        if (backBtn) backBtn.style.visibility = "hidden";
+        if (nextBtn) nextBtn.textContent = "Close";
+        toast("Project brief submitted");
+      } catch (err) {
+        showMessage(
+          websiteFormErrorMessage(
+            err,
+            "We couldn't submit your brief right now. Please try again in a minute, or email support@sparshinfosystem.com.",
+          ),
+          true,
+        );
+        if (nextBtn) nextBtn.textContent = "Submit brief";
+      } finally {
+        briefSending = false;
+        if (nextBtn) nextBtn.disabled = false;
+        if (backBtn) backBtn.disabled = false;
+      }
     });
 
     // 4. Contact form: sends the enquiry to /api/contact-form (emails the team and the visitor)
@@ -419,9 +441,7 @@ export default function CuratedMasterHomepage() {
         done.className = "contact-done";
         const title = document.createElement("b");
         title.textContent = `Thanks, ${payload.firstName}. Your enquiry is on its way.`;
-        const note = document.createElement("span");
-        note.textContent = `We've sent a confirmation to ${payload.email}.`;
-        done.append(title, note);
+        done.append(title);
         contactForm.replaceChildren(done);
         toast("Enquiry sent");
       } catch (err) {
