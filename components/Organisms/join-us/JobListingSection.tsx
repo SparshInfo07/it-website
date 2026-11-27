@@ -95,8 +95,8 @@ export default function JobListingSection() {
       toast.error("Please upload your CV/Resume (.pdf, .doc, .docx).");
       return;
     }
-    if (formFile.size > 20 * 1024 * 1024) {
-      toast.error("Resume file exceeds the 20MB limit. Please upload a smaller file.");
+    if (formFile.size > 10 * 1024 * 1024) {
+      toast.error("Resume file exceeds the 10MB limit. Please upload a smaller file.");
       return;
     }
     if (!selectedJob) return;
@@ -461,8 +461,8 @@ export default function JobListingSection() {
                         accept=".pdf,.doc,.docx"
                         onChange={(e) => {
                           const file = e.target.files?.[0] || null;
-                          if (file && file.size > 20 * 1024 * 1024) {
-                            toast.error("Resume file exceeds the 20MB limit. Please choose a smaller file.");
+                          if (file && file.size > 10 * 1024 * 1024) {
+                            toast.error("Resume file exceeds the 10MB limit. Please choose a smaller file.");
                             e.target.value = "";
                             setFormFile(null);
                             return;
@@ -473,7 +473,7 @@ export default function JobListingSection() {
                       />
                     </div>
                     <p className="pl-1 text-[11px] font-medium text-[#4B5563]">
-                      Allowed Type(s): .pdf, .doc, .docx (Max 20MB)
+                      Allowed Type(s): .pdf, .doc, .docx (Max 10MB)
                     </p>
                   </div>
                 </div>

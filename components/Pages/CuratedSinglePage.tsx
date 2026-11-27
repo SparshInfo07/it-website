@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
+import { useSubmitEnquiry, useSubmitProjectBrief, websiteFormErrorMessage } from "@/hooks/useWebsiteForms";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CURATED_HOMEPAGE_MARKUP } from "@/data/HomePage/curatedHomepageMarkup";
 import SiteFooter from "@/components/Organisms/SiteFooter/SiteFooter";
@@ -421,6 +422,15 @@ ${singlePageHeroCss}
 
 export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
   const rootRef = useRef<HTMLDivElement>(null);
+  // Form submissions go through TanStack Query mutations (→ /api → sparsh-backend).
+  // The DOM listeners below are bound once, so they read the latest mutate
+  // functions through this ref rather than closing over a stale one.
+  const { mutateAsync: submitEnquiry } = useSubmitEnquiry();
+  const { mutateAsync: submitBrief } = useSubmitProjectBrief();
+  const submitRef = useRef({ submitEnquiry, submitBrief });
+  useEffect(() => {
+    submitRef.current = { submitEnquiry, submitBrief };
+  }, [submitEnquiry, submitBrief]);
   const config = SINGLE_PAGES_DATA[pageKey];
 
   const markupObj = useMemo(() => {
@@ -648,7 +658,20 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
       const nextBtn = $<HTMLButtonElement>("#wizardNext");
       if (backBtn) backBtn.textContent = "Copy brief";
       if (nextBtn) nextBtn.textContent = "Copy brief";
-      toast("Brief generated — click to copy");
+      // Send the brief to the team (admin → Sparshit → Project Briefs); copying still works either way.
+      toast("Sending your brief…");
+      submitRef.current
+        .submitBrief({
+          company: b.value.trim(),
+          email: e.value.trim(),
+          package: quotePlan,
+          industry: indSel,
+          capabilities: extras,
+          timeline: timeSel,
+          brief: readyBrief,
+        })
+        .then(() => toast("Brief sent to our team — click to copy"))
+        .catch(() => toast("Brief ready — we couldn't send it, so please copy it and email us"));
     });
 
     // 4. Contact Form submission
@@ -668,7 +691,10 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
         phone: val("phone"),
         referral: val("referral"),
         service: val("need"),
-        requirement: business ? `Company: ${business}\n\n${message}` : message,
+        company: business,
+        requirement: message,
+        // Hidden honeypot. Deliberately not named like a real field, so browser autofill never fills it.
+        website: val("sit_hp_ref"),
       };
 
       const submitBtn = $<HTMLButtonElement>("#contactSubmit", contactForm);
@@ -687,19 +713,7 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
       setStatus("");
 
       try {
-        const res = await fetch("/api/contact-form", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
-        if (!res.ok) {
-          throw new Error(
-            res.status === 400 && data.error
-              ? data.error
-              : "We couldn't send your enquiry right now. Please try again in a minute, or email support@sparshinfosystem.com."
-          );
-        }
+        await submitRef.current.submitEnquiry(payload);
 
         const done = document.createElement("div");
         done.className = "contact-done";
@@ -712,10 +726,11 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
         toast("Enquiry sent");
       } catch (err) {
         setStatus(
-          err instanceof Error && err.message
-            ? err.message
-            : "We couldn't send your enquiry right now. Please try again in a minute, or email support@sparshinfosystem.com.",
-          true
+          websiteFormErrorMessage(
+            err,
+            "We couldn't send your enquiry right now. Please try again in a minute, or email support@sparshinfosystem.com.",
+          ),
+          true,
         );
         if (submitBtn) {
           submitBtn.disabled = false;

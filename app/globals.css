@@ -70,3 +70,19 @@ html.lenis body {
 @media (prefers-reduced-motion: reduce) {
   .page-hero-in > * { animation: none; }
 }
+
+/*
+ * Myntics chat widget. Its closed frame is sized to fit the message bar exactly
+ * (80px on phones, bar height + 16px elsewhere) and clips anything outside it,
+ * which cut off the close (x) button that sits above the bar's top edge. The
+ * frame is anchored bottom-right and grows upward, so extra minimum height just
+ * gives the button room; the bar does not move and the open panel is taller anyway.
+ */
+#myntics-widget-frame {
+  min-height: 116px !important;
+}
+@media (min-width: 481px) {
+  #myntics-widget-frame {
+    min-height: 140px !important;
+  }
+}

@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import type { UseFormReset } from "react-hook-form";
 import type { ContactFormValues } from "@/validation/contact.schema";
+import { currentPagePath } from "@/hooks/useWebsiteForms";
 
 interface ApiResponse {
   success: boolean;
@@ -35,7 +36,7 @@ export function useContactForm(options?: UseContactFormOptions) {
     mutationFn: async (payload: ContactFormValues) => {
       const response = await axios.post<ApiResponse>(
         "/api/contact-form",
-        payload,
+        { ...payload, sourcePage: payload.sourcePage || currentPagePath() },
         {
           headers: {
             "Content-Type": "application/json",

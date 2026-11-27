@@ -10,6 +10,8 @@ export interface SanitizedContactData {
   designation?: string;
   service?: string;
   agreeToMarketing?: boolean;
+  company?: string;
+  sourcePage?: string;
 }
 
 /**
@@ -69,6 +71,8 @@ export function contactFormEmailAdmin(data: SanitizedContactData): string {
         ${data.country ? `<tr><th>Country</th><td>${data.country}</td></tr>` : ""}
         ${data.designation ? `<tr><th>Designation</th><td>${data.designation}</td></tr>` : ""}
         ${data.service ? `<tr><th>Service</th><td>${data.service}</td></tr>` : ""}
+        ${data.company ? `<tr><th>Company</th><td>${data.company}</td></tr>` : ""}
+        ${data.sourcePage ? `<tr><th>Submitted from</th><td>${data.sourcePage}</td></tr>` : ""}
       </table>
 
       <div class="message-box">

@@ -3,6 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
+import { currentPagePath } from "@/hooks/useWebsiteForms";
 
 export interface ApplyJobPayload {
   fullName: string;
@@ -55,6 +56,7 @@ export async function applyJobApi(
     formData.append("agreedToPolicy", String(payload.agreedToPolicy));
     if (payload.resume) formData.append("resume", payload.resume);
   }
+  if (!formData.has("sourcePage")) formData.append("sourcePage", currentPagePath());
 
   const response = await axios.post<ApplyJobResponse>(
     "/api/apply-job",

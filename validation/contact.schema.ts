@@ -19,6 +19,12 @@ export interface ContactFormValues {
   designation?: string;
   service?: string;
   agreeToMarketing?: boolean;
+  /** Company / business name (homepage + inner-page forms). */
+  company?: string;
+  /** Page the form was submitted from, e.g. "/solutions/gold". */
+  sourcePage?: string;
+  /** Honeypot: hidden from people, filled in by bots. */
+  website?: string;
 }
 
 export const contactSchema: yup.ObjectSchema<ContactFormValues> = yup.object({
@@ -88,4 +94,7 @@ export const contactSchema: yup.ObjectSchema<ContactFormValues> = yup.object({
   designation: yup.string().optional(),
   service: yup.string().optional(),
   agreeToMarketing: yup.boolean().optional(),
+  company: yup.string().trim().max(255, "Company name is too long").optional(),
+  sourcePage: yup.string().trim().max(255).optional(),
+  website: yup.string().optional(),
 });
