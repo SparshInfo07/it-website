@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Check, Code2, Layers3, Menu, Plus, ShoppingBag, Sparkles, X } from "lucide-react";
 import gsap from "gsap";
+import Image from 'next/image';
 import { Universe, RestoredSections } from "./CosmicExperience";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
