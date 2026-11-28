@@ -994,12 +994,13 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
     // 10. Identical Homepage Navbar Dropdowns, Mobile Navigation & Sticky Header
     const menu = $<HTMLElement>("#mobileNav");
     const hamb = $<HTMLElement>("#hamburger");
-    hamb?.addEventListener("click", () => {
-      if (!menu) return;
+    const onHambClick = () => {
+      if (!menu || !hamb) return;
       const is = menu.classList.toggle("open");
       hamb.setAttribute("aria-expanded", String(is));
       hamb.textContent = is ? "×" : "☰";
-    });
+    };
+    hamb?.addEventListener("click", onHambClick);
     if (menu && hamb) {
       $$<HTMLElement>("a", menu).forEach((a) =>
         a.addEventListener("click", () => {
@@ -1322,6 +1323,7 @@ export default function CuratedSinglePage({ pageKey }: CuratedSinglePageProps) {
       if (onResizeFeature) window.removeEventListener("resize", onResizeFeature);
       jrMM.revert();
       zmMM.revert();
+      hamb?.removeEventListener("click", onHambClick);
       stObserver?.disconnect();
       if (ddCloseTimer) clearTimeout(ddCloseTimer);
       document.removeEventListener("click", onDdDocClick);

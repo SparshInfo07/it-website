@@ -1,0 +1,156 @@
+/* Shared light palette, inspired by Infisical. Keep motion in the components. */
+:root,
+html body,
+html body.orbit,
+html body.atelier,
+html body.blueprint {
+  --ink: #111111;
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --muted: #555555;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f3f3;
+  --secondary-foreground: #111111;
+  --deep: #111111;
+  --accent: #efff5e;
+  --accent-foreground: #111111;
+  --line: #e5e5e5;
+  --border: #e5e5e5;
+  --ring: #111111;
+  --shadow: none;
+  background: #ffffff;
+  color: #111111;
+}
+
+::selection { background: #efff5e; color: #111111; }
+html body :focus-visible { outline: 2px solid #111111; outline-offset: 4px; }
+
+/* Flat white navigation, including the scrolled and mobile states. */
+html body #header,
+html body #header.scrolled {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+  padding-top: 0 !important;
+  box-shadow: none !important;
+}
+html body #header .nav.container,
+html body #header.scrolled .nav.container {
+  background: #ffffff !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+html body #header :is(.brand, .dd-btn, .dd-link, .dd-h, .dd-panel a, .hamburger, .menu-mobile a) {
+  color: #111111 !important;
+  text-shadow: none;
+}
+html body #header .brand-logo-svg { filter: grayscale(1) brightness(0); }
+html body #header :is(.dd-panel, .menu-mobile, .dd-preview, .hamburger) {
+  background: #ffffff !important;
+  border-color: #e5e5e5 !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+}
+html body #header :is(.dd-btn:hover, .dd-link:hover, .dd-list a.on, .dd-panel a:hover) {
+  background: #f1ff73 !important;
+  color: #111111 !important;
+}
+html body #header :is(.dd-banner, .dd-preview-copy) { background: #f5f5f5 !important; color: #111111 !important; }
+html body #header .dd-banner span { color: #555555 !important; }
+html body #header .menu-mobile.open {
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 2px !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Simple rectangular actions with a yellow hover and visible keyboard focus. */
+html body :is(.btn-primary, .btn-secondary),
+html body #header .nav-cta,
+html body .sparsh-curated-root :is(.btn.primary, .btn.dark, .btn.white, .st-btn, .insp-btn, .quote-pill, .zm-go) {
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid #111111 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+html body .sparsh-curated-root .btn.ghost {
+  background: #f3f3f3 !important;
+  color: #111111 !important;
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 2px !important;
+}
+html body :is(.btn-primary:hover, .btn-secondary:hover),
+html body #header .nav-cta:hover,
+html body .sparsh-curated-root :is(.btn:hover, .st-btn:hover, .insp-btn:hover) {
+  background: #efff5e !important;
+  color: #111111 !important;
+  border-color: #111111 !important;
+  box-shadow: none !important;
+}
+
+/* White canvas and restrained yellow emphasis across the shared templates. */
+html body .sparsh-curated-root :is(section, .zm-stage) {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+html body .sparsh-curated-root :is(.heading em, .philo-heading em, .sp-h1-accent) {
+  color: #111111 !important;
+  background: #efff5e;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-inline: 0.08em;
+}
+html body .sparsh-curated-root :is(.heading, .philo-heading) { font-weight: 500; letter-spacing: -0.045em; }
+html body .sparsh-curated-root :is(.section-intro, .philo-lead, .contact-note, .contact-status) { color: #555555 !important; }
+html body .sparsh-curated-root :is(.eyebrow, .sr-over) { color: #555555 !important; }
+html body .sparsh-curated-root .sr-over a { color: #111111 !important; }
+html body .sparsh-curated-root :is(.service-card, .case-card, .cap-tile, .inspector, .feature-card, .contact-card, .modal-card, .st-card, .sp-hero-frame, .sp-metric-card) {
+  border-color: #e5e5e5 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+html body .sparsh-curated-root :is(.service-card, .case-card, .feature-card, .contact-card, .modal-card, .sp-hero-frame, .sp-metric-card) {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+html body .sparsh-curated-root :is(.cap-tile.active::before, .st-gold .st-card, .radio-tile.active, .industry-choice.active) { background: #efff5e !important; color: #111111 !important; }
+html body .sparsh-curated-root .cap-tile::after { background: transparent !important; }
+html body .sparsh-curated-root .st-gold .st-step { background: #e4ed9c !important; }
+html body .sparsh-curated-root :is(.st-pop, .tile-badge, .insp-status, .demo-caption) { background: #f1ff99 !important; color: #111111 !important; }
+html body .sparsh-curated-root :is(.philo-bottom-banner, .insp-head, .insp-foot, .cta-band) { background: #f6f6f6 !important; color: #111111 !important; }
+html body .sparsh-curated-root .cta-band { border-block: 1px solid #e5e5e5; }
+
+/* The existing rolling word now reads as a highlighter, with a neutral backdrop. */
+html body .sparsh-curated-root #hero-panel-b :is(.sr-h, .sr-l2, .sr-dot, .sr-idx button.on) { color: #111111 !important; }
+html body .sparsh-curated-root #hero-panel-b .sr-slot { background: #efff5e; }
+html body .sparsh-curated-root #hero-panel-b :is(.sr-sub, .sr-idx button) { color: #555555 !important; }
+html body .sparsh-curated-root #hero-panel-b .sr-ghost { opacity: 0.35; -webkit-text-stroke-color: #e5e5e5; }
+html body .sparsh-curated-root #hero-panel-b .sr-idx i { background: #e5e5e5; }
+html body .sparsh-curated-root #hero-panel-b .sr-idx i::after { background: #111111; }
+html body .sparsh-curated-root :is(.sp-hero-h1, .sp-h1-main, .sp-metric-card strong) { color: #111111 !important; }
+html body .sparsh-curated-root :is(.sp-metric-card span, .sp-hero-frame-bar small) { color: #555555 !important; }
+
+html body .sparsh-curated-root :is(input, select, textarea) {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #d4d4d4 !important;
+  border-radius: 2px !important;
+  accent-color: #111111;
+}
+html body .sparsh-curated-root :is(input, textarea)::placeholder { color: #737373 !important; }
+html body .sparsh-curated-root .contact-card label { color: #111111 !important; }
+html body .sparsh-curated-root :is(.contact-status.is-error, .contact-card select:invalid) { color: #a12b20 !important; }
+html body .sparsh-curated-root .modal { background: rgba(0, 0, 0, 0.35); }
+html body .sparsh-curated-root #transformation .zm-card { background: rgba(255, 255, 255, 0.96); border-color: #e5e5e5; }
+
+/* Footer shares the light canvas; the original brand artwork stays intact. */
+html body .site-footer { background: #ffffff !important; color: #555555 !important; border-color: #e5e5e5 !important; }
+html body .site-footer :is(h4, a, strong, p) { color: #111111 !important; }
+html body .site-footer :is(small, span) { color: #555555; }
+html body .site-footer a:hover { background: #efff5e; color: #111111 !important; }
+html body .site-footer img { filter: grayscale(1) brightness(0); }
+html body .site-footer svg[aria-label="Sparsh IT"] path { fill: #111111; }

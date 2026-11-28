@@ -3,6 +3,8 @@ import { Manrope } from "next/font/google";
 import Navbar from "@/components/Organisms/Navbar/Navbar";
 import ContextProvider from "@/providers/ContextProvider";
 import "./globals.css";
+import "@/styles/reference-theme.css";
+import "@/styles/studio-home.css";
 
 const manrope = Manrope({
   variable: "--font-manrope",
